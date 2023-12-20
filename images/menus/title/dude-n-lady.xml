@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="dude-n-lady.png" width="774" height="325">
+	<SubTexture name="spr_menugf_0" x="583" y="1" width="190" height="106" frameX="-2" frameY="-94" frameWidth="200" frameHeight="200"/>
+	<SubTexture name="spr_menugf_1" x="191" y="220" width="186" height="104" frameX="-4" frameY="-96" frameWidth="200" frameHeight="200"/>
+	<SubTexture name="spr_menugf_2" x="388" y="111" width="187" height="106" frameX="-2" frameY="-94" frameWidth="200" frameHeight="200"/>
+	<SubTexture name="spr_menugf_3" x="578" y="219" width="188" height="105" frameX="-2" frameY="-95" frameWidth="200" frameHeight="200"/>
+	<SubTexture name="spr_menugf_4" x="1" y="114" width="187" height="107" frameX="-3" frameY="-93" frameWidth="200" frameHeight="200"/>
+	<SubTexture name="spr_menugf_5" x="196" y="111" width="189" height="106" frameX="-2" frameY="-94" frameWidth="200" frameHeight="200"/>
+	<SubTexture name="spr_menugf_6" x="583" y="110" width="190" height="106" frameX="-2" frameY="-94" frameWidth="200" frameHeight="200"/>
+	<SubTexture name="spr_menugf_7" x="196" y="1" width="191" height="107" frameX="-2" frameY="-93" frameWidth="200" frameHeight="200"/>
+	<SubTexture name="spr_menugf_8" x="390" y="1" width="190" height="107" frameX="-2" frameY="-93" frameWidth="200" frameHeight="200"/>
+	<SubTexture name="spr_menugfyeah_0" x="1" y="1" width="192" height="110" frameX="-1" frameY="-90" frameWidth="200" frameHeight="200"/>
+</TextureAtlas>

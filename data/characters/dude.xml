@@ -1,4 +1,5 @@
-<character x="0" y="0">
+<!DOCTYPE codename-engine-character>
+<character x="0" y="0" isPlayer="true" flipX="true" holdTime="4">
 	<anim name="idle" anim="spr_dudeidle" x="0" y="0" loop="false" fps="12"/>
 
 	<anim name="singLEFT" anim="spr_dudeleft" x="0" y="0" loop="false" fps="12"/>
