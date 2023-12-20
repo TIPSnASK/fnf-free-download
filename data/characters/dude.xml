@@ -1,0 +1,13 @@
+<character x="0" y="0">
+	<anim name="idle" anim="spr_dudeidle" x="0" y="0" loop="false" fps="12"/>
+
+	<anim name="singLEFT" anim="spr_dudeleft" x="0" y="0" loop="false" fps="12"/>
+	<anim name="singDOWN" anim="spr_dudedown" x="0" y="0" loop="false" fps="12"/>
+	<anim name="singUP" anim="spr_dudeup" x="0" y="0" loop="false" fps="12"/>
+	<anim name="singRIGHT" anim="spr_duderight" x="0" y="0" loop="false" fps="12"/>
+
+	<anim name="singLEFTmiss" anim="spr_dudeleftmiss" x="0" y="0" loop="false" fps="12"/>
+	<anim name="singDOWNmiss" anim="spr_dudedownmiss" x="0" y="0" loop="false" fps="12"/>
+	<anim name="singUPmiss" anim="spr_dudeupmiss" x="0" y="0" loop="false" fps="12"/>
+	<anim name="singRIGHTmiss" anim="spr_duderightmiss" x="0" y="0" loop="false" fps="12"/>
+</character>
