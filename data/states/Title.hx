@@ -87,7 +87,7 @@ function update(elapsed:Float) {
 		people.playAnim('yeah', true, 'LOCK');
 		if (FlxG.save.data.freeFLASH) FlxG.camera.flash(0xFFFFFFFF, 0.25, null, true);
 		new FlxTimer().start(1, () -> {
-			FlxG.switchState(new ModState('menus/MainMenu'));
+			FlxG.switchState(new ModState('MainMenu'));
 		});
 	}
 }

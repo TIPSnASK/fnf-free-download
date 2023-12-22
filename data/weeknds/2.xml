@@ -1,0 +1,8 @@
+<week name="WEEKND 2" color="#15A67C" rating="normal">
+	<banner file="2" type="normal"/>
+	<banner file="2_pre" type="pre"/>
+	<banner file="2_post" type="post"/>
+
+	<song name="girl-next-door" display="girl next door"/>
+	<song name="gamejack" pre="gameboy"/>
+</week>

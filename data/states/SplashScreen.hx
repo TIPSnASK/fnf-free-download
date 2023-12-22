@@ -6,6 +6,6 @@ function create() {
 
 	new FlxTimer().start(2, function() {
 		MusicBeatState.skipTransIn = MusicBeatState.skipTransOut = true;
-		FlxG.switchState(new ModState('menus/Title'));
+		FlxG.switchState(new ModState('Title'));
 	});
 }
