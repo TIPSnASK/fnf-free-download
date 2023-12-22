@@ -5,6 +5,9 @@ Everything seen here (except the code) belongs Tyler_mon and the FNF Free Downlo
 *This port is only being made out of love and care for FNF Free Download, and nothing about this port intends to cause any harm. All development on this port will be stopped immediately if Tyler_mon or someone from the FNF Free Download team requests for it to be stopped.*
 
 # Info
+***IMPORTANT***<br>
+**some base codename engine things might break considering the small resolution of the game**
+
 the port's being made on a dev build so some stuff probably wont work yet until the engine releasees an update publicly.
 hopefully if everything goes right though, it'll work fine on public builds
 

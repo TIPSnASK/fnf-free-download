@@ -1,5 +1,8 @@
 // holy shit this is literally all of the fucking code 😭
 
+import funkin.editors.EditorPicker;
+import funkin.menus.ModSwitchMenu;
+
 var bg:FunkinSprite;
 var options:FunkinSprite;
 var optionList:Array<String> = ['StoryMenu', 'Freeplay', 'Options', 'Discord'];
@@ -28,6 +31,16 @@ function update(elapsed:Float) {
 			FlxG.switchState(new ModState('menus/' + optionList[curSelected]));
 		else
 			trace(optionList[curSelected] + ': yooooooooo');
+	}
+
+	if (FlxG.keys.justPressed.SEVEN) {
+		persistentUpdate = false;
+		openSubState(new EditorPicker());
+	}
+	
+	if (controls.SWITCHMOD) {
+		persistentUpdate = false;
+		openSubState(new ModSwitchMenu());
 	}
 
 	if (controls.UP_P) curSelected --;

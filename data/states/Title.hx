@@ -79,9 +79,9 @@ function update(elapsed:Float) {
 
 	enterThingy.alpha = (Math.sin(timer * 2) + 1) * 0.5; // tank you wizard 🙏
 
-	if (controls.ACCEPT && !finished && !transitioning && FlxG.sound.music.playing)
+	if (FlxG.sound.music != null && controls.ACCEPT && !finished && !transitioning && FlxG.sound.music.playing)
 		finishIntro();
-	else if (controls.ACCEPT && finished && !transitioning && FlxG.sound.music.playing) {
+	else if (FlxG.sound.music != null && controls.ACCEPT && finished && !transitioning && FlxG.sound.music.playing) {
 		FlxG.sound.play(Paths.sound('snd_josh'), 0.8);
 		transitioning = true;
 		people.playAnim('yeah', true, 'LOCK');

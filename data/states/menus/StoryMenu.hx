@@ -1,7 +1,11 @@
 import Xml;
 
-var weekndData:Array<{xml:Xml, name:String, color:FlxColor, songs:Array<{name:String, displayName:Null<String>}>}> = [];
+var weekndData:Array<{xml:Xml, name:String, color:FlxColor, rating:String, songs:Array<{name:String, displayName:Null<String>}>}> = [];
 var curSelected:Int = 0;
+
+var songsTxt:FunkinText;
+var ratingTxt:FunkinText;
+var whyDoYouLookLikeThat:FunkinText;
 
 function create() {
 	var bg:FunkinSprite = new FunkinSprite(-250).loadGraphic(Paths.image('menus/backgrounds/3'));
@@ -16,6 +20,12 @@ function create() {
 		bar.y = i == 0 ? 250 : -344;
 		bar.scrollFactor.set();
 		add(bar);
+		
+		var shadow:FunkinSprite = new FunkinSprite().makeSolid(FlxG.width, FlxG.height, 0xFF000000);
+		shadow.y = i == 0 ? bar.y - 5 : bar.y + 5;
+		shadow.scrollFactor.set();
+		shadow.alpha = 0.45;
+		add(shadow);
 	}
 
 	var weekndFiles = Paths.getFolderContent('data/weeknds');
@@ -26,7 +36,9 @@ function create() {
 			xml: xml,
 			name: xml.get('name'),
 			color: FlxColor.fromString(xml.get('color')),
+			rating: xml.get('rating'),
 			songs: [
+				// TODO: PRE DISPLAY NAME
 				for (song in xml.elementsNamed('song'))
 					{name: song.get('name'), displayName: song.exists('display') ? song.get('display') : null}
 			]
@@ -42,24 +54,77 @@ function create() {
 			}
 		}
 
-		var text:FunkinText = new FunkinText(400*index, 10, 400, weekndData[index].name, 24, false);
+		var text:FunkinText = new FunkinText(400*index, 15, 400, weekndData[index].name, 24, false);
 		text.alignment = 'center';
 		text.antialiasing = false;
 		text.color = weekndData[index].color;
 		add(text);
 	}
+
+	songsTxt = new FunkinText(10, 260, FlxG.width-20, 'Songs\n', 16, false);
+	songsTxt.alignment = 'left';
+	songsTxt.antialiasing = false;
+	songsTxt.scrollFactor.set();
+	add(songsTxt);
+
+	ratingTxt = new FunkinText(10, 260, FlxG.width-20, 'Rating\n', 16, false);
+	ratingTxt.alignment = 'right';
+	ratingTxt.antialiasing = false;
+	ratingTxt.scrollFactor.set();
+	add(ratingTxt);
+
+	whyDoYouLookLikeThat = new FunkinText(10, 275, FlxG.width-20, 'PLAY', 24, false);
+	whyDoYouLookLikeThat.alignment = 'center';
+	whyDoYouLookLikeThat.antialiasing = false;
+	whyDoYouLookLikeThat.scrollFactor.set();
+	add(whyDoYouLookLikeThat);
+
+	updateStuff();
 }
 
+function updateStuff() {
+	songsTxt.text = 'Songs\n';
+	for (stupid in weekndData[curSelected].songs)
+		songsTxt.text += (stupid.displayName == null ? stupid.name : stupid.displayName) + '\n';
+
+	ratingTxt.text = 'Rating\n' + weekndData[curSelected].rating;
+}
+
+var timer:Float = 0.0;
 function update(elapsed:Float) {
+	timer += elapsed;
+
+	if (controls.ACCEPT) {
+		var convertedData = {
+			name: weekndData[curSelected].name,
+			id: '',
+			sprite: '',
+			chars: [],
+			songs: [for (song in weekndData[curSelected].songs) song],
+			difficulties: [weekndData[curSelected].rating]
+		};
+
+		PlayState.loadWeek(convertedData, weekndData[curSelected].rating);
+		FlxG.switchState(new PlayState());
+	}
+
 	if (controls.BACK)
 		FlxG.switchState(new ModState('MainMenu'));
 
 	if (FlxG.keys.justPressed.EIGHT)
 		FlxG.switchState(new ModState('menus/StoryMenu'));
 
-	if (controls.LEFT_P) curSelected --;
-	if (controls.RIGHT_P) curSelected ++;
-	curSelected = FlxMath.bound(curSelected, 0, weekndData.length-1);
+	if (controls.LEFT_P) {
+		curSelected --;
+		curSelected = FlxMath.bound(curSelected, 0, weekndData.length-1);
+		updateStuff();
+	} if (controls.RIGHT_P) {
+		curSelected ++;
+		curSelected = FlxMath.bound(curSelected, 0, weekndData.length-1);
+		updateStuff();
+	}
+
+	whyDoYouLookLikeThat.y = 275 + (Math.sin(timer * 7) + 1) * 0.75; // tank you wizard 🙏
 
 	FlxG.camera.scroll.x = CoolUtil.fpsLerp(FlxG.camera.scroll.x, 400*curSelected, 0.12);
 }
