@@ -1,5 +1,5 @@
 import funkin.backend.MusicBeatState;
-import funkin.editors.charter.Charter;
+import funkin.editors.ui.UIState;
 import lime.graphics.Image;
 
 // separate them just in case
@@ -8,6 +8,15 @@ FlxG.height = FlxG.initialHeight = 400;
 window.resize(FlxG.width*2, FlxG.height*2);
 
 static var initialized:Bool = false;
+static var redirectStates:Map<FlxState, String> = [
+	MainMenuState => 'MainMenu',
+	StoryMenuState => 'menus/StoryMenu',
+	FreeplayState => 'menus/Freeplay'
+];
+
+static var fixResStates:Array<FlxState> = [
+	UIState
+];
 
 function new() {
 	if (FlxG.save.data.freeINTROSPLASH == null) FlxG.save.data.freeINTROSPLASH = true;
@@ -24,20 +33,30 @@ function preStateSwitch() {
 		FlxG.game._requestedState = FlxG.save.data.freeINTROSPLASH ? new ModState('SplashScreen') : new ModState('Title');
 	}
 
-	if (FlxG.game._requestedState is Charter) {
-		if (FlxG.width != 1280 || FlxG.height != 720) return;
+	for (stupid in redirectStates.keys())
+		if (FlxG.game._requestedState is stupid) {
+			FlxG.game._requestedState = new ModState(redirectStates.get(stupid));
+			break;
+		}
+
+	for (stupid in fixResStates) {
+		var res = [
+			FlxG.game._requestedState is stupid ? 1280 : 400,
+			FlxG.game._requestedState is stupid ? 720 : 400
+		];
+		var windowRes = [
+			FlxG.game._requestedState is stupid ? 1280 : 800,
+			FlxG.game._requestedState is stupid ? 720 : 800
+		];
 		
-		FlxG.width = FlxG.initialWidth = 1280;
-		FlxG.height = FlxG.initialHeight = 720;
-		window.resize(FlxG.width, FlxG.height);
+		if (FlxG.width == res[0] || FlxG.height == res[1]) return;
+	
+		FlxG.width = FlxG.initialWidth = res[0];
+		FlxG.height = FlxG.initialHeight = res[1];
+		window.resize(windowRes[0], windowRes[1]);
 
 		for (camera in FlxG.cameras.list) camera.setSize(FlxG.width, FlxG.height);
-	} else if (FlxG.width != 400 || FlxG.height != 400) {
-		FlxG.width = FlxG.initialWidth = 400;
-		FlxG.height = FlxG.initialHeight = 400;
-		window.resize(FlxG.width*2, FlxG.height*2);
-
-		for (camera in FlxG.cameras.list) camera.setSize(FlxG.width, FlxG.height);
+		break;
 	}
 }
 
