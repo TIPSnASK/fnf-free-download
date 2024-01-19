@@ -1,13 +1,15 @@
 import funkin.backend.MusicBeatState;
 import funkin.editors.ui.UIState;
 import lime.graphics.Image;
+import funkin.options.Options;
+import flixel.system.ui.FlxSoundTray;
+import funkin.backend.system.framerate.Framerate;
 
-// separate them just in case
 FlxG.width = FlxG.initialWidth = 400;
 FlxG.height = FlxG.initialHeight = 400;
 window.resize(FlxG.width*2, FlxG.height*2);
 
-static var initialized:Bool = false;
+static var fdInitialized:Bool = false;
 static var redirectStates:Map<FlxState, String> = [
 	MainMenuState => 'MainMenu',
 	StoryMenuState => 'menus/StoryMenu',
@@ -18,17 +20,38 @@ static var fixResStates:Array<FlxState> = [
 	UIState
 ];
 
+static function flash(cam:FlxCamera, data:{color:FlxColor, time:Float, force:Bool}, onComplete:Void->Void) {
+	if (FlxG.save.data.freeFLASH) {
+		cam.flash(data.color, data.time, onComplete, data.force);
+	} else {
+		if (onComplete != null) {
+			new FlxTimer().start(data.time, null, onComplete);
+		}
+	}
+}
+
+static function changeWindowIcon(name:String) {
+	window.setIcon(Image.fromBytes(Assets.getBytes(Paths.image('window-icons/' + name))));
+}
+
+static function convertTime(steps:Float, beats:Float, sections:Float):Float {
+	return ((Conductor.stepCrochet*steps)/1000 + (Conductor.stepCrochet*(beats*4))/1000 + (Conductor.stepCrochet*(sections*16))/1000)-0.01;
+}
+
 function new() {
 	if (FlxG.save.data.freeINTROSPLASH == null) FlxG.save.data.freeINTROSPLASH = true;
 	if (FlxG.save.data.freeFLASH == null) FlxG.save.data.freeFLASH = true;
 
 	window.title = "Made with FNF: Codename Engine";
-    window.setIcon(Image.fromBytes(Assets.getBytes(Paths.image('icon'))));
+	changeWindowIcon("default");
+
+	Options.framerate = 40;
+	Options.applySettings();
 }
 
 function preStateSwitch() {
-	if (!initialized) {
-		initialized = true;
+	if (!fdInitialized) {
+		fdInitialized = true;
 		MusicBeatState.skipTransIn = MusicBeatState.skipTransOut = true;
 		FlxG.game._requestedState = FlxG.save.data.freeINTROSPLASH ? new ModState('SplashScreen') : new ModState('Title');
 	}
@@ -60,8 +83,12 @@ function preStateSwitch() {
 	}
 }
 
+function postStateSwitch() {
+	Framerate.debugMode = 0;
+}
+
 function onDestroy() {
-	initialized = false;
+	fdInitialized = false;
 	FlxG.width = FlxG.initialWidth = 1280;
 	FlxG.height = FlxG.initialHeight = 720;
 	window.resize(FlxG.width, FlxG.height);

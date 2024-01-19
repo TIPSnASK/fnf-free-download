@@ -5,7 +5,7 @@ import funkin.menus.ModSwitchMenu;
 
 var bg:FunkinSprite;
 var options:FunkinSprite;
-var optionList:Array<String> = ['StoryMenu', 'Freeplay', 'Options', 'Discord'];
+var optionList:Array<String> = ['StoryMenu', 'Freeplay', 'Settings', 'Discord'];
 var curSelected:Int = 0;
 
 function create() {

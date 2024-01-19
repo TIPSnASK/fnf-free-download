@@ -69,7 +69,7 @@ function create() {
 function finishIntro() {
 	finished = true;
 	removeLines();
-	if (FlxG.save.data.freeFLASH) FlxG.camera.flash(0xFFFFFFFF, 0.25, null, true);
+	flash(FlxG.camera, {color: 0xFFFFFFFF, time: 0.25, force: true}, null);
 	titleGroup.visible = true;
 }
 
@@ -85,7 +85,7 @@ function update(elapsed:Float) {
 		FlxG.sound.play(Paths.sound('snd_josh'), 0.8);
 		transitioning = true;
 		people.playAnim('yeah', true, 'LOCK');
-		if (FlxG.save.data.freeFLASH) FlxG.camera.flash(0xFFFFFFFF, 0.25, null, true);
+		flash(FlxG.camera, {color: 0xFFFFFFFF, time: 0.25, force: true}, null);
 		new FlxTimer().start(1, () -> {
 			FlxG.switchState(new ModState('MainMenu'));
 		});
