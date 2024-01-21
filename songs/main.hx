@@ -1,5 +1,10 @@
 // shut up vsc
 
+import funkin.backend.system.Logs;
+import funkin.backend.system.Logs.Level;
+import funkin.backend.utils.NativeAPI.ConsoleColor;
+
+import flixel.math.FlxRect;
 import flixel.ui.FlxBar;
 import flixel.ui.FlxBarFillDirection;
 import karaoke.game.FreeIcon;
@@ -15,10 +20,14 @@ public var scoreTxtShadow:FunkinText;
 public var playerIcon:FunkinSprite;
 public var opponentIcon:FunkinSprite;
 
+public var noteskin:String = "default";
+public var uiskin:String = "default";
+
 function postCreate() {
-	for (sl in strumLines.members)
+	for (sl in strumLines.members) {
         for (note in sl.notes.members)
             note.alpha = 1;
+	}
 
 	camZoomingStrength = 0;
 
@@ -85,16 +94,27 @@ function postCreate() {
 	// ref.alpha = 0.9;
 	// insert(0, ref);
 
-	playerIcon = new FreeIcon("dude");
+	playerIcon = new FreeIcon("dude-" + uiskin);
 	playerIcon.cameras = [camHUD];
 	add(playerIcon);
 
-	opponentIcon = new FreeIcon("strad");
+	opponentIcon = new FreeIcon("strad-" + uiskin);
 	opponentIcon.cameras = [camHUD];
 	add(opponentIcon);
 
 	playerIcon.y = healthBar.y - (playerIcon.height/2.25);
 	opponentIcon.y = healthBar.y - (opponentIcon.height/2.25);
+
+	switch(uiskin) {
+		case "gaw":
+			for (i in [healthBarShadow, healthBarBG, scoreTxtShadow, flowBarBG, flowBarShadow])
+				i.colorTransform.color = 0xFFFFFFFF;
+			
+			healthBar.createFilledBar(0xFF000000, 0xFF000000);
+			flowBar.createFilledBar(0xFF000000, 0xFFFFFFFF);
+
+			scoreTxt.setFormat(scoreTxt.font, scoreTxt.size, 0xFF000000, scoreTxt.alignment, scoreTxt.borderStyle, 0xFFFFFFFF);
+	}
 }
 
 var timer:Float = 0;
@@ -105,11 +125,25 @@ function postUpdate(elapsed:Float) {
 		for (note in sl.notes.members)
 			if (note.isSustainNote)
 				note.y -= 24;
+
+		for (character in sl.characters) {
+			var fpsDivideVal:Float = switch(character.getAnimName()) {
+				default:
+					if (["SING", "MISS", "DANCE"].contains(character.lastAnimContext))
+						character.lastAnimContext == "DANCE" ? 150 : 125;
+					else
+						-1;
+				case "ayy": -1;
+			}
+
+			if (fpsDivideVal != -1)
+				character.animation.curAnim.frameRate = character.animDatas[character.getAnimName()].fps*(Conductor.bpm/fpsDivideVal);
+		}
 	}
 
 	scoreTxt.text = scoreTxtShadow.text = 'score: ' + songScore + ' | misses: ' + misses;
 
-	flowBar.y = (healthBar.y - 19) + (Math.sin(timer * 6) + 1) * 0.75; // tank you wizard 🙏
+	flowBar.y = Std.int((healthBar.y - 18) + (Math.sin(timer * 4.5) + 1) * 1.25); // tank you wizard 🙏
 	flowBarShadow.y = flowBar.y+(downscroll ? -4 : 2);
 	flowBarBG.y = flowBar.y - 2;
 
@@ -126,13 +160,12 @@ function onNoteHit(event) {
 
 	if (event.player) {
 		if (!event.note.isSustainNote) {
-			flow += 0.2;
-			flow = FlxMath.bound(flow, 0, 4);
-			flowBar.percent = (flow/4)*100;
+			flow += 0.05;
+			flow = FlxMath.bound(flow, 0, 1);
+			flowBar.percent = flow*100;
 		}
 
-		event.healthGain = event.note.isSustainNote ? 0.015 : 0.025;
-		event.healthGain *= 1 + flow;
+		event.healthGain = event.note.isSustainNote ? 0.02 : 0.05;
 		event.score = event.note.isSustainNote ? 25 : 100;
 	}
 }
@@ -154,7 +187,7 @@ function onPlayerMiss(event) {
 	flow = FlxMath.bound(flow, 0, 1);
 	flowBar.percent = flow*100;
 	
-	event.healthGain *= FlxMath.remapToRange(flow, 0, 1, 2, 1);
+	event.healthGain = -(1+(4*(1-flow)))/50;
 	event.score = -50;
 
 	event.cancelMissSound();
@@ -171,12 +204,22 @@ function onNoteCreation(event) {
 	event.cancel();
 	
 	var note = event.note;
-	note.frames = Paths.getFrames('game/notes/free');
-	if (!note.isSustainNote)
-		note.animation.addByPrefix('scroll', ['purple', 'blue', 'green', 'red'][event.note.noteData], 0, true);
-	else {
-		note.animation.addByPrefix('hold', ['purple_hold', 'blue_hold', 'green_hold', 'red_hold'][event.note.noteData], 0, true);
-		note.animation.addByPrefix('holdend', ['purple_cap', 'blue_cap', 'green_cap', 'red_cap'][event.note.noteData], 0, true);
+	note.frames = Paths.getFrames('game/notes/free-' + noteskin);
+	switch(noteskin) {
+		default:
+			if (!note.isSustainNote)
+				note.animation.addByPrefix('scroll', ['purple', 'blue', 'green', 'red'][event.note.noteData], 0, true);
+			else {
+				note.animation.addByPrefix('hold', ['purple_hold', 'blue_hold', 'green_hold', 'red_hold'][event.note.noteData], 0, true);
+				note.animation.addByPrefix('holdend', ['purple_cap', 'blue_cap', 'green_cap', 'red_cap'][event.note.noteData], 0, true);
+			}
+		case "gaw":
+			if (!note.isSustainNote)
+				note.animation.addByPrefix('scroll', ['left', 'down', 'up', 'right'][event.note.noteData], 0, true);
+			else {
+				note.animation.addByPrefix('hold', "hold", 0, true);
+				note.animation.addByPrefix('holdend', "hold_cap", 0, true);
+			}
 	}
 
 	note.updateHitbox();
@@ -193,9 +236,20 @@ function onStrumCreation(event) {
 	event.cancel();
 	
 	var strum = event.strum;
-	strum.frames = Paths.getFrames('game/notes/free');
+	strum.frames = Paths.getFrames('game/notes/free-' + noteskin);
 	strum.animation.addByPrefix('static', event.animPrefix, 0, true);
 	strum.animation.addByPrefix('pressed', event.animPrefix, 0, true); // so it'll stop tracing stupid shit
 
 	strum.updateHitbox();
+}
+
+function beatHit() {
+	for (sl in strumLines)
+		for (character in sl.characters) {
+			if (character.danceOnBeat) character.danceOnBeat = false;
+			if (["SING", "MISS"].contains(character.lastAnimContext) && character.lastHit + (Conductor.stepCrochet * character.holdTime) < Conductor.songPosition)
+				character.playAnim('idle', true, 'DANCE');
+			else if (character.lastAnimContext == "DANCE")
+				character.playAnim('idle', true, 'DANCE');
+		}
 }

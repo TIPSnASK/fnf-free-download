@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="TV.png" width="652" height="646">
+	<SubTexture name="spr_TVayy_0" x="227" y="227" width="66" height="104" frameX="-15" frameY="-8" frameWidth="84" frameHeight="112"/>
+	<SubTexture name="spr_TVayy_1" x="341" y="322" width="67" height="103" frameX="-17" frameY="-9" frameWidth="84" frameHeight="112"/>
+	<SubTexture name="spr_TVayy_2" x="302" y="1" width="67" height="104" frameX="-15" frameY="-8" frameWidth="84" frameHeight="112"/>
+	<SubTexture name="spr_TVayy_3" x="1" y="228" width="73" height="110" frameX="-2" frameY="-2" frameWidth="84" frameHeight="112"/>
+	<SubTexture name="spr_TVayy_4" x="1" y="1" width="73" height="111" frameX="-0" frameY="-1" frameWidth="84" frameHeight="112"/>
+	<SubTexture name="spr_TVayy_5" x="227" y="114" width="72" height="110" frameX="-0" frameY="-0" frameWidth="84" frameHeight="112"/>
+	<SubTexture name="spr_TVayy_6" x="77" y="227" width="72" height="110" frameX="-0" frameY="-0" frameWidth="84" frameHeight="112"/>
+	<SubTexture name="spr_TVayy_7" x="227" y="114" width="72" height="110" frameX="-0" frameY="-0" frameWidth="84" frameHeight="112"/>
+	<SubTexture name="spr_TVayy_8" x="152" y="227" width="72" height="110" frameX="-0" frameY="-0" frameWidth="84" frameHeight="112"/>
+	<SubTexture name="spr_TVayy_9" x="227" y="114" width="72" height="110" frameX="-0" frameY="-0" frameWidth="84" frameHeight="112"/>
+	<SubTexture name="spr_TVayy_10" x="77" y="1" width="72" height="110" frameX="-0" frameY="-0" frameWidth="84" frameHeight="112"/>
+	<SubTexture name="spr_TVayy_11" x="77" y="114" width="72" height="110" frameX="-0" frameY="-0" frameWidth="84" frameHeight="112"/>
+	<SubTexture name="spr_TVayy_12" x="1" y="115" width="72" height="110" frameX="-0" frameY="-0" frameWidth="84" frameHeight="112"/>
+	<SubTexture name="spr_TVayy_13" x="152" y="1" width="72" height="110" frameX="-0" frameY="-0" frameWidth="84" frameHeight="112"/>
+	<SubTexture name="spr_TVayy_14" x="296" y="227" width="1" height="1" frameX="-0" frameY="-0" frameWidth="84" frameHeight="112"/>
+	<SubTexture name="spr_TVayy_15" x="152" y="114" width="72" height="110" frameX="-0" frameY="-0" frameWidth="84" frameHeight="112"/>
+	<SubTexture name="spr_TVayy_16" x="227" y="1" width="72" height="110" frameX="-0" frameY="-0" frameWidth="84" frameHeight="112"/>
+	<SubTexture name="spr_TVdown_0" x="302" y="108" width="65" height="104" frameX="-0" frameY="-0" frameWidth="65" frameHeight="104"/>
+	<SubTexture name="spr_TVdown_1" x="302" y="215" width="65" height="104" frameX="-0" frameY="-0" frameWidth="65" frameHeight="104"/>
+	<SubTexture name="spr_TVdown_2" x="302" y="215" width="65" height="104" frameX="-0" frameY="-0" frameWidth="65" frameHeight="104"/>
+	<SubTexture name="spr_TVdownalt_0" x="419" y="575" width="70" height="70" frameX="-0" frameY="-3" frameWidth="70" frameHeight="73"/>
+	<SubTexture name="spr_TVdownalt_1" x="492" y="575" width="70" height="70" frameX="-0" frameY="-3" frameWidth="70" frameHeight="73"/>
+	<SubTexture name="spr_TVdownalt_2" x="581" y="151" width="70" height="71" frameX="-0" frameY="-2" frameWidth="70" frameHeight="73"/>
+	<SubTexture name="spr_TVdownalt_3" x="580" y="225" width="70" height="71" frameX="-0" frameY="-2" frameWidth="70" frameHeight="73"/>
+	<SubTexture name="spr_TVdownalt_4" x="581" y="1" width="70" height="72" frameX="-0" frameY="-1" frameWidth="70" frameHeight="73"/>
+	<SubTexture name="spr_TVdownalt_5" x="580" y="299" width="70" height="71" frameX="-0" frameY="-2" frameWidth="70" frameHeight="73"/>
+	<SubTexture name="spr_TVdownalt_6" x="470" y="499" width="70" height="73" frameX="-0" frameY="-0" frameWidth="70" frameHeight="73"/>
+	<SubTexture name="spr_TVdownalt_7" x="581" y="76" width="70" height="72" frameX="-0" frameY="-1" frameWidth="70" frameHeight="73"/>
+	<SubTexture name="spr_TVidle_0" x="1" y="341" width="65" height="104" frameX="-0" frameY="-0" frameWidth="66" frameHeight="104"/>
+	<SubTexture name="spr_TVleft_0" x="69" y="341" width="65" height="104" frameX="-0" frameY="-0" frameWidth="65" frameHeight="104"/>
+	<SubTexture name="spr_TVleft_1" x="137" y="340" width="65" height="104" frameX="-0" frameY="-0" frameWidth="65" frameHeight="104"/>
+	<SubTexture name="spr_TVleft_2" x="137" y="340" width="65" height="104" frameX="-0" frameY="-0" frameWidth="65" frameHeight="104"/>
+	<SubTexture name="spr_TVleftalt_0" x="440" y="1" width="73" height="99" frameX="-0" frameY="-3" frameWidth="80" frameHeight="102"/>
+	<SubTexture name="spr_TVleftalt_1" x="440" y="103" width="72" height="99" frameX="-1" frameY="-3" frameWidth="80" frameHeight="102"/>
+	<SubTexture name="spr_TVleftalt_2" x="438" y="205" width="68" height="99" frameX="-5" frameY="-3" frameWidth="80" frameHeight="102"/>
+	<SubTexture name="spr_TVleftalt_3" x="438" y="307" width="68" height="98" frameX="-5" frameY="-4" frameWidth="80" frameHeight="102"/>
+	<SubTexture name="spr_TVleftalt_4" x="336" y="441" width="66" height="97" frameX="-7" frameY="-5" frameWidth="80" frameHeight="102"/>
+	<SubTexture name="spr_TVleftalt_5" x="1" y="448" width="68" height="98" frameX="-6" frameY="-4" frameWidth="80" frameHeight="102"/>
+	<SubTexture name="spr_TVleftalt_6" x="72" y="448" width="66" height="98" frameX="-7" frameY="-4" frameWidth="80" frameHeight="102"/>
+	<SubTexture name="spr_TVleftalt_7" x="1" y="448" width="68" height="98" frameX="-6" frameY="-4" frameWidth="80" frameHeight="102"/>
+	<SubTexture name="spr_TVpause_0" x="205" y="340" width="65" height="104" frameX="-0" frameY="-0" frameWidth="66" frameHeight="104"/>
+	<SubTexture name="spr_TVright_0" x="273" y="334" width="65" height="104" frameX="-0" frameY="-0" frameWidth="65" frameHeight="104"/>
+	<SubTexture name="spr_TVright_1" x="372" y="1" width="65" height="104" frameX="-0" frameY="-0" frameWidth="65" frameHeight="104"/>
+	<SubTexture name="spr_TVright_2" x="372" y="1" width="65" height="104" frameX="-0" frameY="-0" frameWidth="65" frameHeight="104"/>
+	<SubTexture name="spr_TVrightalt_0" x="509" y="301" width="65" height="96" frameX="-2" frameY="-0" frameWidth="70" frameHeight="96"/>
+	<SubTexture name="spr_TVrightalt_1" x="509" y="400" width="68" height="96" frameX="-1" frameY="-0" frameWidth="70" frameHeight="96"/>
+	<SubTexture name="spr_TVrightalt_2" x="1" y="549" width="66" height="96" frameX="-1" frameY="-0" frameWidth="70" frameHeight="96"/>
+	<SubTexture name="spr_TVrightalt_3" x="70" y="549" width="67" height="96" frameX="-1" frameY="-0" frameWidth="70" frameHeight="96"/>
+	<SubTexture name="spr_TVrightalt_4" x="1" y="549" width="66" height="96" frameX="-1" frameY="-0" frameWidth="70" frameHeight="96"/>
+	<SubTexture name="spr_TVrightalt_5" x="140" y="549" width="68" height="96" frameX="-0" frameY="-0" frameWidth="70" frameHeight="96"/>
+	<SubTexture name="spr_TVrightalt_6" x="211" y="548" width="68" height="96" frameX="-0" frameY="-0" frameWidth="70" frameHeight="96"/>
+	<SubTexture name="spr_TVrightalt_7" x="282" y="548" width="69" height="96" frameX="-0" frameY="-0" frameWidth="70" frameHeight="96"/>
+	<SubTexture name="spr_TVup_0" x="370" y="108" width="65" height="104" frameX="-0" frameY="-0" frameWidth="65" frameHeight="104"/>
+	<SubTexture name="spr_TVup_1" x="370" y="215" width="65" height="104" frameX="-0" frameY="-0" frameWidth="65" frameHeight="104"/>
+	<SubTexture name="spr_TVup_2" x="370" y="215" width="65" height="104" frameX="-0" frameY="-0" frameWidth="65" frameHeight="104"/>
+	<SubTexture name="spr_TVupalt_0" x="141" y="447" width="62" height="98" frameX="-1" frameY="-2" frameWidth="65" frameHeight="100"/>
+	<SubTexture name="spr_TVupalt_1" x="206" y="447" width="62" height="98" frameX="-1" frameY="-2" frameWidth="65" frameHeight="100"/>
+	<SubTexture name="spr_TVupalt_2" x="405" y="428" width="62" height="97" frameX="-0" frameY="-3" frameWidth="65" frameHeight="100"/>
+	<SubTexture name="spr_TVupalt_3" x="271" y="447" width="62" height="98" frameX="-0" frameY="-2" frameWidth="65" frameHeight="100"/>
+	<SubTexture name="spr_TVupalt_4" x="516" y="1" width="62" height="97" frameX="-1" frameY="-3" frameWidth="65" frameHeight="100"/>
+	<SubTexture name="spr_TVupalt_5" x="516" y="101" width="62" height="97" frameX="-1" frameY="-3" frameWidth="65" frameHeight="100"/>
+	<SubTexture name="spr_TVupalt_6" x="354" y="541" width="62" height="96" frameX="-1" frameY="-4" frameWidth="65" frameHeight="100"/>
+	<SubTexture name="spr_TVupalt_7" x="515" y="201" width="62" height="97" frameX="-1" frameY="-3" frameWidth="65" frameHeight="100"/>
+</TextureAtlas>

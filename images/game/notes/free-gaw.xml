@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="free-gaw.png" width="107" height="93">
+	<SubTexture name="down" x="1" y="1" width="40" height="44" frameX="-2" frameY="-2" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="hold" x="44" y="1" width="15" height="48" frameX="-14" frameY="-0" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="hold_cap" x="62" y="44" width="15" height="4" frameX="-14" frameY="-0" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="left" x="44" y="52" width="44" height="40" frameX="-0" frameY="-4" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="right" x="62" y="1" width="44" height="40" frameX="-0" frameY="-4" frameWidth="44" frameHeight="48"/>
+	<SubTexture name="up" x="1" y="48" width="40" height="44" frameX="-2" frameY="-2" frameWidth="44" frameHeight="48"/>
+</TextureAtlas>

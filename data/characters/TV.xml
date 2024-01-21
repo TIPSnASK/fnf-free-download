@@ -1,0 +1,14 @@
+<!DOCTYPE codename-engine-character>
+<character antialiasing="false" holdTime="8" flipX="false" isPlayer="false">
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_TVidle" name="idle"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_TVleft_" name="singLEFT"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_TVdown_" name="singDOWN"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_TVup_" name="singUP"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_TVright_" name="singRIGHT"/>
+	<anim x="10" loop="false" y="-3" fps="12" anim="spr_TVleftalt" name="singLEFT-alt"/>
+	<anim x="-5" loop="false" y="-33" fps="12" anim="spr_TVdownalt" name="singDOWN-alt"/>
+	<anim x="-1" loop="false" y="-3" fps="12" anim="spr_TVupalt" name="singUP-alt"/>
+	<anim x="8" loop="false" y="-9" fps="12" anim="spr_TVrightalt" name="singRIGHT-alt"/>
+	<anim x="15" loop="false" y="6" fps="12" anim="spr_TVayy" name="ayy"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_TVpause" name="paused"/>
+</character>

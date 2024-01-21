@@ -1,14 +1,13 @@
 <!DOCTYPE codename-engine-character>
-<character x="0" y="0" isPlayer="true" flipX="true" holdTime="4">
-	<anim name="idle" anim="spr_dudeidle" x="0" y="0" loop="false" fps="12"/>
-
-	<anim name="singLEFT" anim="spr_dudeleft" x="0" y="0" loop="false" fps="12"/>
-	<anim name="singDOWN" anim="spr_dudedown" x="0" y="0" loop="false" fps="12"/>
-	<anim name="singUP" anim="spr_dudeup" x="0" y="0" loop="false" fps="12"/>
-	<anim name="singRIGHT" anim="spr_duderight" x="0" y="0" loop="false" fps="12"/>
-
-	<anim name="singLEFTmiss" anim="spr_dudeleftmiss" x="0" y="0" loop="false" fps="12"/>
-	<anim name="singDOWNmiss" anim="spr_dudedownmiss" x="0" y="0" loop="false" fps="12"/>
-	<anim name="singUPmiss" anim="spr_dudeupmiss" x="0" y="0" loop="false" fps="12"/>
-	<anim name="singRIGHTmiss" anim="spr_duderightmiss" x="0" y="0" loop="false" fps="12"/>
+<character antialiasing="false" holdTime="8" flipX="true" isPlayer="true">
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_dudeidle" name="idle"/>
+	<anim x="9" loop="false" y="-5" fps="12" anim="spr_dudeleft_" name="singLEFT"/>
+	<anim x="16" loop="false" y="-4" fps="12" anim="spr_dudedown_" name="singDOWN"/>
+	<anim x="8" loop="false" y="11" fps="12" anim="spr_dudeup_" name="singUP"/>
+	<anim x="2" loop="false" y="4" fps="12" anim="spr_duderight_" name="singRIGHT"/>
+	<anim x="9" loop="false" y="-4" fps="12" anim="spr_dudeleftmiss" name="singLEFTmiss"/>
+	<anim x="16" loop="false" y="-4" fps="12" anim="spr_dudedownmiss" name="singDOWNmiss"/>
+	<anim x="9" loop="false" y="8" fps="12" anim="spr_dudeupmiss" name="singUPmiss"/>
+	<anim x="1" loop="false" y="4" fps="12" anim="spr_duderightmiss" name="singRIGHTmiss"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_dudepause" name="paused"/>
 </character>

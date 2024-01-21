@@ -1,0 +1,13 @@
+<!DOCTYPE codename-engine-character>
+<character antialiasing="false" holdTime="8" flipX="true" isPlayer="true">
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_dwidle" name="idle"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_dwleft" name="singLEFT"/>
+	<anim x="-2" loop="false" y="-5" fps="12" anim="spr_dwdown" name="singDOWN"/>
+	<anim x="0" loop="false" y="2" fps="12" anim="spr_dwup" name="singUP"/>
+	<anim x="1" loop="false" y="-2" fps="12" anim="spr_dwright" name="singRIGHT"/>
+	<anim x="7" loop="false" y="1" fps="12" anim="spr_dwmissleft" name="singLEFTmiss"/>
+	<anim x="2" loop="false" y="-2" fps="12" anim="spr_dwmissdown" name="singDOWNmiss"/>
+	<anim x="11" loop="false" y="12" fps="12" anim="spr_dwmissup" name="singUPmiss"/>
+	<anim x="20" loop="false" y="0" fps="12" anim="spr_dwmissright" name="singRIGHTmiss"/>
+	<anim x="-2" loop="false" y="-2" fps="12" anim="spr_dwpause" name="paused"/>
+</character>

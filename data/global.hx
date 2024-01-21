@@ -77,6 +77,9 @@ function preStateSwitch() {
 		FlxG.width = FlxG.initialWidth = res[0];
 		FlxG.height = FlxG.initialHeight = res[1];
 		window.resize(windowRes[0], windowRes[1]);
+		if (FlxG.game._requestedState is stupid) {
+			window.x = 560; window.y = 126;
+		}
 
 		for (camera in FlxG.cameras.list) camera.setSize(FlxG.width, FlxG.height);
 		break;
