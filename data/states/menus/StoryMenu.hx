@@ -54,10 +54,14 @@ function create() {
 			}
 		}
 
-		var text:FunkinText = new FunkinText(400*index, 15, 400, weekndData[index].name, 24, false);
+		var text:FunkinText = new FunkinText(400*index, 12, 400, weekndData[index].name, 24, false);
 		text.alignment = 'center';
 		text.antialiasing = false;
 		text.color = weekndData[index].color;
+		// lunarcleint figured this out thank you lunar holy shit 🙏
+		text.textField.antiAliasType = 0; // advanced
+		text.textField.sharpness = 400; // max i think idk thats what it says
+		text.font = Paths.font("COMIC.TTF");
 		add(text);
 	}
 
@@ -78,6 +82,13 @@ function create() {
 	whyDoYouLookLikeThat.antialiasing = false;
 	whyDoYouLookLikeThat.scrollFactor.set();
 	add(whyDoYouLookLikeThat);
+
+	for (text in [songsTxt, ratingTxt, whyDoYouLookLikeThat]) {
+		// lunarcleint figured this out thank you lunar holy shit 🙏
+		text.textField.antiAliasType = 0; // advanced
+		text.textField.sharpness = 400; // max i think idk thats what it says
+		text.font = Paths.font("COMIC.TTF");
+	}
 
 	updateStuff();
 }

@@ -8,7 +8,7 @@
         {
             "name": "Character Index",
             "type": "String",
-            "defaultValue": "0"
+            "defaultValue": "-1"
         }
 	]
 }

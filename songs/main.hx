@@ -68,22 +68,31 @@ function postCreate() {
 	flowBarBG.cameras = [camHUD];
 	insert(members.indexOf(flowBar), flowBarBG);
 
-	scoreTxt = new FunkinText(10, healthBarBG.y + healthBarBG.height + 2, FlxG.width-20, 'score: 0 | misses: 0', 16, true);
+	scoreTxt = new FunkinText(10, healthBarBG.y + healthBarBG.height, FlxG.width-20, 'score: 0 | misses: 0', 16, true);
 	scoreTxt.alignment = 'center';
 	scoreTxt.antialiasing = false;
 	scoreTxt.scrollFactor.set();
 	scoreTxt.borderSize = 2;
 	scoreTxt.cameras = [camHUD];
+	scoreTxt.font = Paths.font("COMICBD.TTF");
 	add(scoreTxt);
 
 	scoreTxtShadow = new FunkinText(scoreTxt.x+2, scoreTxt.y+2, FlxG.width-20, 'score: 0 | misses: 0', 16, true);
 	scoreTxtShadow.alignment = 'center';
 	scoreTxtShadow.antialiasing = false;
 	scoreTxtShadow.scrollFactor.set();
-	scoreTxtShadow.borderSize = 2;
+	scoreTxtShadow.borderSize = 1;
 	scoreTxtShadow.color = 0xFF000000;
 	scoreTxtShadow.cameras = [camHUD];
+	scoreTxtShadow.font = Paths.font("COMICBD.TTF");
 	insert(members.indexOf(scoreTxt), scoreTxtShadow);
+
+	// lunarcleint figured this out thank you lunar holy shit 🙏
+	scoreTxt.textField.antiAliasType = scoreTxtShadow.textField.antiAliasType = 0; // advanced
+	scoreTxt.textField.sharpness = scoreTxtShadow.textField.sharpness = 400; // max i think idk thats what it says
+
+	for (cam in FlxG.cameras.list)
+		cam.antialiasing = false;
 
 	// var ref:FunkinSprite = new FunkinSprite().loadGraphic(Paths.image('ref'));
 	// ref.zoomFactor = 0;

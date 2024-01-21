@@ -44,8 +44,8 @@ function create() {
 
 	people = new FunkinSprite();
 	people.frames = Paths.getSparrowAtlas('menus/title/dude-n-lady');
-	people.animation.addByPrefix('idle', 'spr_menugf_', 9, false);
-	people.animation.addByPrefix('yeah', 'spr_menugfyeah', 9, false);
+	people.animation.addByPrefix('idle', 'spr_menugf_', 0, false);
+	people.animation.addByPrefix('yeah', 'spr_menugfyeah', 0, false);
 	people.playAnim('idle', true);
 	people.scale.set(2, 2);
 	people.updateHitbox();
@@ -79,6 +79,8 @@ function update(elapsed:Float) {
 
 	enterThingy.alpha = (Math.sin(timer * 2) + 1) * 0.5; // tank you wizard 🙏
 
+	people.animation.curAnim.frameRate = 12*(Conductor.bpm/150);
+
 	if (FlxG.sound.music != null && controls.ACCEPT && !finished && !transitioning && FlxG.sound.music.playing)
 		finishIntro();
 	else if (FlxG.sound.music != null && controls.ACCEPT && finished && !transitioning && FlxG.sound.music.playing) {
@@ -96,8 +98,9 @@ function beatHit() {
 	if (!transitioning)
 		people.playAnim('idle', true);
 
+	FlxTween.cancelTweensOf(logo);
 	logo.scale.set(2.15, 2.15);
-	FlxTween.tween(logo, {'scale.x': 2, 'scale.y': 2}, 0.25, {ease: FlxEase.circOut});
+	FlxTween.tween(logo, {'scale.x': 2, 'scale.y': 2}, 1, {ease: FlxEase.elasticOut});
 
 	if (!finished) {
 		switch(curBeat) {
@@ -126,9 +129,14 @@ function line(lines:Array<String>) {
 
 function newLine(lines:Array<String>) {
 	for (line in lines) {
-		var text:FunkinText = new FunkinText(0, (textGroup.length * 45) + 125, FlxG.width, line, 32, false);
+		var lastHeight:Float = CoolUtil.last(textGroup.members) == null ? 0 : CoolUtil.last(textGroup.members).height;
+		var text:FunkinText = new FunkinText(0, 125 + (lastHeight*(textGroup.length)), FlxG.width, line, 32, false);
 		text.alignment = 'center';
 		text.antialiasing = false;
+		// lunarcleint figured this out thank you lunar holy shit 🙏
+		text.textField.antiAliasType = 0; // advanced
+		text.textField.sharpness = 400; // max i think idk thats what it says
+		text.font = Paths.font("COMIC.TTF");
 		textGroup.add(text);
 	}
 }
