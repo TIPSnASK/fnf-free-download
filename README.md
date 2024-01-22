@@ -8,7 +8,7 @@ Everything seen here (except the code) belongs Tyler_mon and the FNF Free Downlo
 ***IMPORTANT***<br>
 **some base codename engine things might break considering the small resolution of the game**
 
-the port's being made on a dev build so some stuff probably wont work yet until the engine releasees an update publicly.
+the port's being made on a dev build so some stuff probably wont work yet until the engine releases an update publicly.
 hopefully if everything goes right though, it'll work fine on public builds
 
 im probably not gonna try to make it look pixel perfect considering how hard it is to make one game look like another, but i at least want it to be playable
