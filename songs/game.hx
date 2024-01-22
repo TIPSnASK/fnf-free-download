@@ -4,7 +4,6 @@ import funkin.backend.system.Logs;
 import funkin.backend.system.Logs.Level;
 import funkin.backend.utils.NativeAPI.ConsoleColor;
 
-import flixel.math.FlxRect;
 import flixel.ui.FlxBar;
 import flixel.ui.FlxBarFillDirection;
 import karaoke.game.FreeIcon;
@@ -22,6 +21,53 @@ public var opponentIcon:FunkinSprite;
 
 public var noteskin:String = "default";
 public var uiskin:String = "default";
+
+function onGamePause(event) {
+	for (sl in strumLines.members) {
+		for (character in sl.characters) {
+			var data = {
+				anim: character.animation.curAnim,
+				context: character.lastAnimContext
+			};
+			character.playAnim("paused", true);
+
+			new FlxTimer().start(.001, (t:FlxTimer) -> {
+				if (character != null)
+					character.playAnim(data.anim.name, true, data.context, false, data.anim.curFrame);
+				t.destroy();
+			});
+		}
+	}
+
+	event.cancel();
+
+	persistentUpdate = false;
+	persistentDraw = true;
+	paused = true;
+
+	openSubState(new ModSubState('substates/game/Pause'));
+}
+
+function onCountdown(event) {
+	if (event.swagCounter != 4) {
+		event.spritePath = "game/spr_countdown_" + event.swagCounter;
+		event.soundPath = "gameplay/snd_" + (event.swagCounter == 3 ? "go" : FlxMath.remapToRange(event.swagCounter-1, -1, 3, 3, -1));
+		event.scale = 2;
+	}
+}
+
+function onPostCountdown(event) {
+	if (event.sprite != null) {
+		var spr = event.sprite;
+		FlxTween.cancelTweensOf(spr);
+		FlxTween.tween(spr, {alpha: 0}, Conductor.crochet / 1000, {
+			onComplete: (tween:FlxTween) -> {
+				spr.destroy();
+				remove(spr, true);
+			}
+		});
+	}
+}
 
 function postCreate() {
 	for (sl in strumLines.members) {
@@ -90,9 +136,6 @@ function postCreate() {
 	// lunarcleint figured this out thank you lunar holy shit 🙏
 	scoreTxt.textField.antiAliasType = scoreTxtShadow.textField.antiAliasType = 0; // advanced
 	scoreTxt.textField.sharpness = scoreTxtShadow.textField.sharpness = 400; // max i think idk thats what it says
-
-	for (cam in FlxG.cameras.list)
-		cam.antialiasing = false;
 
 	// var ref:FunkinSprite = new FunkinSprite().loadGraphic(Paths.image('ref'));
 	// ref.zoomFactor = 0;
@@ -205,7 +248,7 @@ function onPlayerMiss(event) {
 		if (missSound != null)
 			FlxG.sound.destroySound(missSound);
 	}
-	missSound.pitch = FlxG.random.float(0.75, 1.25);
+	missSound.pitch = 0.6 + FlxG.random.float(0, 0.8);
 	missSound.play();
 }
 

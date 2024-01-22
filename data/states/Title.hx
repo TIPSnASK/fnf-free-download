@@ -71,6 +71,9 @@ function finishIntro() {
 	removeLines();
 	flash(FlxG.camera, {color: 0xFFFFFFFF, time: 0.25, force: true}, null);
 	titleGroup.visible = true;
+
+	if (FlxG.sound.music.time < 8720)
+		FlxG.sound.music.time = 8720;
 }
 
 var timer:Float = 0.0;
@@ -84,7 +87,7 @@ function update(elapsed:Float) {
 	if (FlxG.sound.music != null && controls.ACCEPT && !finished && !transitioning && FlxG.sound.music.playing)
 		finishIntro();
 	else if (FlxG.sound.music != null && controls.ACCEPT && finished && !transitioning && FlxG.sound.music.playing) {
-		FlxG.sound.play(Paths.sound('snd_josh'), 0.8);
+		FlxG.sound.play(Paths.sound('menus/snd_josh'), 0.8);
 		transitioning = true;
 		people.playAnim('yeah', true, 'LOCK');
 		flash(FlxG.camera, {color: 0xFFFFFFFF, time: 0.25, force: true}, null);

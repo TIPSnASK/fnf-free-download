@@ -1,7 +1,13 @@
 <!DOCTYPE codename-engine-stage>
 <stage zoom="1" name="gaw" folder="game/stages/">
 	<combo x="-2147483647"/>
+
 	<sprite name="bg" x="0" y="0" sprite="tutorialback" antialiasing="false"/>
+	<sprite name="bg" x="123" y="265" sprite="tutorialbglight" antialiasing="false"/>
+	<sprite name="ladyAndTheTramp" x="123" y="189" sprite="tutorialbackguys" antialiasing="false">
+		<anim name="idle" anim="spr_tutorialbackguys" type="onbeat" />
+	</sprite>
+
 	<dad x="61" y="216"/>
 	<boyfriend x="250" y="231"/>
 </stage>

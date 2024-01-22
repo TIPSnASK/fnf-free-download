@@ -56,9 +56,9 @@ function preStateSwitch() {
 		FlxG.game._requestedState = FlxG.save.data.freeINTROSPLASH ? new ModState('SplashScreen') : new ModState('Title');
 	}
 
-	for (stupid in redirectStates.keys())
+	for (stupid => smart in redirectStates)
 		if (FlxG.game._requestedState is stupid) {
-			FlxG.game._requestedState = new ModState(redirectStates.get(stupid));
+			FlxG.game._requestedState = new ModState(smart);
 			break;
 		}
 
@@ -78,11 +78,6 @@ function preStateSwitch() {
 		FlxG.height = FlxG.initialHeight = res[1];
 		window.resize(windowRes[0], windowRes[1]);
 
-		if (!(FlxG.game._requestedState is stupid)) {
-			window.x = 560;
-			window.y = 126;
-		}
-
 		for (camera in FlxG.cameras.list) camera.setSize(FlxG.width, FlxG.height);
 		break;
 	}
@@ -93,6 +88,12 @@ function postStateSwitch() {
 
 	FlxSoundTray.volumeUpChangeSFX = Paths.sound("volume/snd_ribbit1");
 	FlxSoundTray.volumeDownChangeSFX = Paths.sound("volume/snd_ribbit2");
+	FlxG.sound.soundTray.alpha = 0;
+
+	window.title = "Made with FNF: Codename Engine";
+
+	for (cam in FlxG.cameras.list)
+		cam.antialiasing = false;
 }
 
 function onDestroy() {
