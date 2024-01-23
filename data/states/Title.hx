@@ -103,7 +103,7 @@ function beatHit() {
 
 	FlxTween.cancelTweensOf(logo);
 	logo.scale.set(2.15, 2.15);
-	FlxTween.tween(logo, {'scale.x': 2, 'scale.y': 2}, 1, {ease: FlxEase.elasticOut});
+	FlxTween.tween(logo, {'scale.x': 2, 'scale.y': 2}, 0.25, {ease: FlxEase.circOut});
 
 	if (!finished) {
 		switch(curBeat) {

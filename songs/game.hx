@@ -22,6 +22,8 @@ public var opponentIcon:FunkinSprite;
 public var noteskin:String = "default";
 public var uiskin:String = "default";
 
+static var isPostCutscene:Bool = false;
+
 function onGamePause(event) {
 	for (sl in strumLines.members) {
 		for (character in sl.characters) {
@@ -67,6 +69,11 @@ function onPostCountdown(event) {
 			}
 		});
 	}
+}
+
+function create() {
+	if (playCutscenes && PlayState.isStoryMode)
+		cutscene = Paths.script('data/scripts/cutscene');
 }
 
 function postCreate() {

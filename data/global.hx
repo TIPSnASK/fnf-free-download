@@ -4,6 +4,9 @@ import lime.graphics.Image;
 import funkin.options.Options;
 import flixel.system.ui.FlxSoundTray;
 import funkin.backend.system.framerate.Framerate;
+import flixel.util.FlxSpriteUtil;
+import flixel.util.FlxGradient;
+import Xml;
 
 FlxG.width = FlxG.initialWidth = 400;
 FlxG.height = FlxG.initialHeight = 400;
@@ -36,6 +39,35 @@ static function changeWindowIcon(name:String) {
 
 static function convertTime(steps:Float, beats:Float, sections:Float):Float {
 	return ((Conductor.stepCrochet*steps)/1000 + (Conductor.stepCrochet*(beats*4))/1000 + (Conductor.stepCrochet*(sections*16))/1000)-0.01;
+}
+
+static function gradientText(text:FlxText, colors:Array<FlxColor>) {
+	return FlxSpriteUtil.alphaMask(
+		text,
+		FlxGradient.createGradientBitmapData(text.width, text.height, colors),
+		text.pixels
+	);
+}
+
+static function getInnerData(xml:Xml) {
+	var it = xml.iterator();
+	if (!it.hasNext())
+		return null;
+	var v = it.next();
+	if (it.hasNext()) {
+		var n = it.next();
+		if (v.nodeType == Xml.PCData && n.nodeType == Xml.CData && StringTools.trim(v.nodeValue) == "") {
+			if (!it.hasNext())
+				return n.nodeValue;
+			var n2 = it.next();
+			if (n2.nodeType == Xml.PCData && StringTools.trim(n2.nodeValue) == "" && !it.hasNext())
+				return n.nodeValue;
+		}
+		return null;
+	}
+	if (v.nodeType != Xml.PCData && v.nodeType != Xml.CData)
+		return null;
+	return v.nodeValue;
 }
 
 function new() {

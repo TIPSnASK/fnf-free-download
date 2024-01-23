@@ -26,13 +26,21 @@ function create() {
 	pauseCam.bgColor = 0x5D000000;
 	FlxG.cameras.add(pauseCam, false);
 
+
+	// stupid fucking way of doing this but idc
 	var pausedTxt = new FunkinText(8, 12, FlxG.width, "PAUSED", 54, true);
-	pausedTxt.cameras = [pauseCam];
-	pausedTxt.font = Paths.font("COMIC.TTF");
-	pausedTxt.textField.antiAliasType = 0;
-	pausedTxt.textField.sharpness = 400;
-	pausedTxt.borderSize = 3;
-	add(pausedTxt);
+	var pausedTxtNoOutline = new FunkinText(8, 12, FlxG.width, "PAUSED", 54, false);
+
+	for (i in [pausedTxt, pausedTxtNoOutline]) {
+		i.cameras = [pauseCam];
+		i.font = Paths.font("COMIC.TTF");
+		i.textField.antiAliasType = 0;
+		i.textField.sharpness = 400;
+		i.borderSize = 3;
+		add(i);
+	}
+
+	gradientText(pausedTxtNoOutline, [0xFFFFFFFF, 0xFFD5D9EA]);
 
 	for (index => line in menuItems) {
 		var lastHeight:Float = (CoolUtil.last(itemArray) == null ? 0 : CoolUtil.last(itemArray).height);

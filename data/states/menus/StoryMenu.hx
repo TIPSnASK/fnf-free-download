@@ -54,15 +54,25 @@ function create() {
 			}
 		}
 
-		var text:FunkinText = new FunkinText(400*index, 12, 400, weekndData[index].name, 24, false);
+		var text:FunkinText = new FunkinText(400*index, 10, 400, weekndData[index].name, 24, false);
 		text.alignment = 'center';
 		text.antialiasing = false;
 		text.color = weekndData[index].color;
 		// lunarcleint figured this out thank you lunar holy shit 🙏
 		text.textField.antiAliasType = 0; // advanced
 		text.textField.sharpness = 400; // max i think idk thats what it says
-		text.font = Paths.font("COMIC.TTF");
+		text.font = Paths.font("COMICBD.TTF");
 		add(text);
+
+		gradientText(text, [
+			weekndData[index].color,
+			FlxColor.fromRGB(
+				(((weekndData[index].color >> 16) & 0xff)) - 64,
+				(((weekndData[index].color >> 8) & 0xff)) - 64,
+				(((weekndData[index].color) & 0xff)) - 64,
+				255
+			)
+		]);
 	}
 
 	songsTxt = new FunkinText(10, 260, FlxG.width-20, 'Songs\n', 16, false);
@@ -87,7 +97,7 @@ function create() {
 		// lunarcleint figured this out thank you lunar holy shit 🙏
 		text.textField.antiAliasType = 0; // advanced
 		text.textField.sharpness = 400; // max i think idk thats what it says
-		text.font = Paths.font("COMIC.TTF");
+		text.font = Paths.font("COMIC" + (text == whyDoYouLookLikeThat ? "BD" : "") + ".TTF");
 	}
 
 	updateStuff();
@@ -108,7 +118,7 @@ function update(elapsed:Float) {
 	if (controls.ACCEPT) {
 		var convertedData = {
 			name: weekndData[curSelected].name,
-			id: '',
+			id: curSelected,
 			sprite: '',
 			chars: [],
 			songs: [for (song in weekndData[curSelected].songs) song],

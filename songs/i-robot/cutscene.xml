@@ -1,0 +1,15 @@
+<pre>
+	<wait time="1"/>
+	<sound path="sfx/snd_doorknock"/>
+	<wait time="2"/>
+
+	<music path="dialog/mus_birthdayboy"/>
+	<sprite path="1"/>
+	
+	<talk character="dude">
+		uh... lady, I think I hit a dog on my way over here
+	</talk>
+	<talk character="lady">
+		!!!
+	</talk>
+</pre>
