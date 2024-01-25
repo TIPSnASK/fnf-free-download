@@ -107,6 +107,7 @@ function next() {
 		case "wait":
 			new FlxTimer().start(Std.parseFloat(element.get("time")), (t:FlxTimer) -> {
 				next();
+				t.destroy();
 			});
 		case "sound":
 			FlxG.sound.play(Paths.sound(element.get("path")));
@@ -156,9 +157,10 @@ function updateDialog() {
 	}
 	if (!imInTheMiddleOfSomething) {
 		imInTheMiddleOfSomething = true;
-		new FlxTimer().start((talkSound.length), () -> {
+		new FlxTimer().start((talkSound.length), (t:FlxTimer) -> {
 			talkSound.play(false);
 			dialogProgress ++;
+			t.destroy();
 			imInTheMiddleOfSomething = false;
 		});
 	}
