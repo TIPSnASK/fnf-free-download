@@ -8,6 +8,8 @@ Everything seen here (except the code) belongs Tyler_mon and the FNF Free Downlo
 ***IMPORTANT***<br>
 **some base codename engine things might break considering the small resolution of the game**
 
+**development on this started before free download was cancelled on 12/31/2023, so i have no clue if working on a port like this is allowed but im still gonna work on it for now i guess**
+
 the port's being made on a dev build so some stuff probably wont work yet until the engine releases an update publicly.
 hopefully if everything goes right though, it'll work fine on public builds
 

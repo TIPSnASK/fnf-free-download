@@ -4,7 +4,7 @@ import funkin.backend.utils.IniUtil;
 
 var xml:Xml;
 var curElements:Array<Xml>;
-var dumb:String = isPostCutscene ? "post" : "pre";
+var dumb:String = "pre";
 var song:String = PlayState.instance.SONG.meta.name;
 var curIndex:Int = -1;
 
