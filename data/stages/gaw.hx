@@ -17,11 +17,7 @@ function postCreate() {
 	colorSwapShader.colorReplaceStripe = [0.5, 0.5, 0.5, 1.0];
 	colorSwapShader.colorReplacePants = [0.5, 0.5, 0.5, 1.0];
 	colorSwapShader.colorReplaceShoes = [0.5, 0.5, 0.5, 1.0];
-	// ladyAndTheTramp.setColorTransform(1.25, 1.25, 1.25, 1, 0, 0, 0, 0);
-	var stupid:FunkinSprite = new FunkinSprite(ladyAndTheTramp.x+17, ladyAndTheTramp.y+2).makeSolid(96, 58, 0xFFFFFFFF);
-	stupid.blend = 0;
-	stupid.alpha = 0.15;
-	insert(members.indexOf(ladyAndTheTramp)+1, stupid);
+	ladyAndTheTramp.setColorTransform(1.25, 1.25, 1.25, 1, 0, 0, 0, 0);
 }
 
 function update(elapsed:Float) {

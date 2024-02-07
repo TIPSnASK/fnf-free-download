@@ -1,5 +1,4 @@
 import funkin.backend.MusicBeatState;
-import funkin.editors.ui.UIState;
 import lime.graphics.Image;
 import funkin.options.Options;
 import flixel.system.ui.FlxSoundTray;
@@ -7,6 +6,11 @@ import funkin.backend.system.framerate.Framerate;
 import flixel.util.FlxSpriteUtil;
 import flixel.util.FlxGradient;
 import Xml;
+
+import funkin.options.OptionsMenu;
+import funkin.editors.charter.Charter;
+import funkin.editors.EditorTreeMenu;
+import funkin.options.TreeMenu;
 
 FlxG.width = FlxG.initialWidth = 400;
 FlxG.height = FlxG.initialHeight = 400;
@@ -19,8 +23,12 @@ static var redirectStates:Map<FlxState, String> = [
 	FreeplayState => 'menus/Freeplay'
 ];
 
+// IM GONNA KILLL YOUUUUUUU
 static var fixResStates:Array<FlxState> = [
-	UIState
+	Charter,
+	OptionsMenu,
+	EditorTreeMenu,
+	TreeMenu
 ];
 
 static function flash(cam:FlxCamera, data:{color:FlxColor, time:Float, force:Bool}, onComplete:Void->Void) {
@@ -77,8 +85,8 @@ function new() {
 	window.title = "Made with FNF: Codename Engine";
 	changeWindowIcon("default");
 
-	Options.framerate = 40;
-	Options.applySettings();
+	// Options.framerate = 40; // commented because annoying
+	// Options.applySettings();
 }
 
 function preStateSwitch() {
@@ -128,7 +136,7 @@ function postStateSwitch() {
 		cam.antialiasing = false;
 }
 
-function onDestroy() {
+function destroy() {
 	fdInitialized = false;
 	FlxG.width = FlxG.initialWidth = 1280;
 	FlxG.height = FlxG.initialHeight = 720;

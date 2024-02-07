@@ -34,7 +34,8 @@ vec4 colorShoes = vec4(56.0/255.0, 54.0/255.0, 68.0/255.0, 1.0);
 
 void main()
 {
-	vec4 pixelColor = flixel_texture2D(bitmap, openfl_TextureCoordv);
+	// texture2D instead of flixel_texture2D so we get the base texture without any modifications
+	vec4 pixelColor = texture2D(bitmap, openfl_TextureCoordv);
 	
 	float range = 5.0 / 255.0;
 
@@ -90,6 +91,17 @@ void main()
 				pixelColor.rgb = colorReplaceShoes.rgb;
 			}
 		}
+	}
+
+	// apply the colorTransform stuff that flixel_texture2D normally does (stolen from FlxGraphicsShader lol!!!)
+	if (hasColorTransform) {
+		mat4 colorMultiplier = mat4(0);
+		colorMultiplier[0][0] = openfl_ColorMultiplierv.x;
+		colorMultiplier[1][1] = openfl_ColorMultiplierv.y;
+		colorMultiplier[2][2] = openfl_ColorMultiplierv.z;
+		colorMultiplier[3][3] = openfl_ColorMultiplierv.w;
+
+		pixelColor = clamp(openfl_ColorOffsetv + (pixelColor * colorMultiplier), 0.0, 1.0);
 	}
 	
 	gl_FragColor = pixelColor;
