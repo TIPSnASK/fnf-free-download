@@ -91,7 +91,7 @@ function new() {
 	// Options.applySettings();
 
 	if (!FileSystem.exists("mods/free-download-skins.json")) {
-		File.saveContent("mods/free-download-skins.json", "{}");
+		File.saveContent("mods/free-download-skins.json", "{\"skins\": []}");
 	}
 }
 
