@@ -6,6 +6,8 @@ import funkin.backend.system.framerate.Framerate;
 import flixel.util.FlxSpriteUtil;
 import flixel.util.FlxGradient;
 import Xml;
+import sys.FileSystem;
+import sys.io.File;
 
 import funkin.options.OptionsMenu;
 import funkin.editors.charter.Charter;
@@ -87,6 +89,10 @@ function new() {
 
 	// Options.framerate = 40; // commented because annoying
 	// Options.applySettings();
+
+	if (!FileSystem.exists("mods/free-download-skins.json")) {
+		File.saveContent("mods/free-download-skins.json", "{}");
+	}
 }
 
 function preStateSwitch() {
