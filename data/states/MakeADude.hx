@@ -22,6 +22,8 @@ var saveButton:UIButton;
 var loadButton:UIButton;
 var cancelButton:UIButton;
 
+var setSkinButton:UIButton;
+
 var updateColors:Bool = false;
 
 var selectedButton:Int = 0;
@@ -43,11 +45,6 @@ var colorData = {
 };
 
 var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
-
-function coolText(text:String):Array<String> {
-	var trim:String;
-	return [for(line in text.split("\n")) if ((trim = StringTools.trim(line)) != "" && !StringTools.startsWith(trim, "#")) trim];
-}
 
 function loadSkin(name:String) {
 	updateColors = false;
@@ -219,8 +216,15 @@ function postCreate() {
 			dumbZoom = 1.4;
 			dumbPos.y -= 85;
 		}
-	}, 128); // i might be tripping ballsacks but the width thing doesnt work anymore what
+	}, 128);
 	add(showPickerButton);
+
+	setSkinButton = new UIButton(showPickerButton.x + showPickerButton.bWidth + 5, 46, "set as skin", () -> {
+		userSkins.selected = dudeName.label.text;
+		File.saveContent("mods/free-download-skins.json", Json.stringify(userSkins));
+	}, 180);
+	setSkinButton.color = 0xFFF000FF;
+	add(setSkinButton);
 
 	// because life isnt good
 	var w = 72;
@@ -324,7 +328,7 @@ function postCreate() {
 		loadSkin(dudeName.label.text);
 	};
 
-	for (i in [dumbBar1, dumbBar2, dumbText, dumberText, creditAvery, colorPicker, showPickerButton, dudeName, saveButton, loadButton, cancelButton])
+	for (i in [dumbBar1, dumbBar2, dumbText, dumberText, creditAvery, colorPicker, showPickerButton, dudeName, saveButton, loadButton, cancelButton, setSkinButton])
 		i.cameras = [STUPIDFUCKINGCAMERA];
 }
 

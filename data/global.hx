@@ -6,6 +6,7 @@ import funkin.backend.system.framerate.Framerate;
 import flixel.util.FlxSpriteUtil;
 import flixel.util.FlxGradient;
 import Xml;
+import haxe.Json;
 import sys.FileSystem;
 import sys.io.File;
 
@@ -27,10 +28,7 @@ static var redirectStates:Map<FlxState, String> = [
 
 // IM GONNA KILLL YOUUUUUUU
 static var fixResStates:Array<FlxState> = [
-	Charter,
-	OptionsMenu,
-	EditorTreeMenu,
-	TreeMenu
+	Charter
 ];
 
 static function flash(cam:FlxCamera, data:{color:FlxColor, time:Float, force:Bool}, onComplete:Void->Void) {
@@ -80,6 +78,55 @@ static function getInnerData(xml:Xml) {
 	return v.nodeValue;
 }
 
+static function coolText(text:String):Array<String> {
+	var trim:String;
+	return [for(line in text.split("\n")) if ((trim = StringTools.trim(line)) != "" && !StringTools.startsWith(trim, "#")) trim];
+}
+
+static function loadDudeSkin(shader:CustomShader, name:String) {
+	var path:String = Paths.txt("skins/" + name);
+	var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
+	var dumbData:Array<String> = [];
+
+	if (Assets.exists(path))
+		dumbData = CoolUtil.coolTextFile(path);
+
+	for (dumb in userSkins.skins) {
+		if (dumb.name == name)
+			dumbData = coolText(dumb.data);
+	}
+
+	if (dumbData != []) {
+		for (index => line in dumbData) {
+			var lineData:Array<Float> = [for (ass in line.split(",")) Std.parseFloat(StringTools.trim(ass))/255];
+
+			// Invalid Cast
+			// because life isnt good
+			switch(index) {
+				case 0: // hat
+					shader.colorReplaceHat = lineData;
+				case 1: // skin
+					shader.colorReplaceSkin = lineData;
+				case 2: // hair
+					shader.colorReplaceHair = lineData;
+
+				case 3: // shirt
+					shader.colorReplaceShirt = lineData;
+				case 4: // stripe
+					shader.colorReplaceStripe = lineData;
+
+				case 5: // pants
+					shader.colorReplacePants = lineData;
+				case 6: // shoes
+					shader.colorReplaceShoes = lineData;
+			}
+		}
+	} else {
+		trace("that skin doesnt exist!");
+		loadDudeSkin(shader, "default");
+	}
+}
+
 function new() {
 	if (FlxG.save.data.freeINTROSPLASH == null) FlxG.save.data.freeINTROSPLASH = true;
 	if (FlxG.save.data.freeFLASH == null) FlxG.save.data.freeFLASH = true;
@@ -91,7 +138,7 @@ function new() {
 	// Options.applySettings();
 
 	if (!FileSystem.exists("mods/free-download-skins.json")) {
-		File.saveContent("mods/free-download-skins.json", "{\"skins\": []}");
+		File.saveContent("mods/free-download-skins.json", "{\"selected\": \"default\", \"skins\": []}");
 	}
 }
 
@@ -118,7 +165,7 @@ function preStateSwitch() {
 			FlxG.game._requestedState is stupid ? 720 : 800
 		];
 		
-		if (FlxG.width == res[0] || FlxG.height == res[1]) return;
+		if (FlxG.width == res[0] && FlxG.height == res[1]) return;
 	
 		FlxG.width = FlxG.initialWidth = res[0];
 		FlxG.height = FlxG.initialHeight = res[1];

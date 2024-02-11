@@ -1,3 +1,10 @@
+import sys.io.File;
+import haxe.Json;
+
+public function usePlayerSkin(shader:CustomShader) { // for convenience
+	loadDudeSkin(shader, Json.parse(File.getContent("mods/free-download-skins.json")).selected);
+}
+
 function create() {
 	if (playCutscenes && PlayState.isStoryMode)
 		cutscene = Paths.script('data/scripts/cutscene');

@@ -10,13 +10,7 @@ function postCreate() {
 	camGame.scroll.set(0,0);
 
 	ladyAndTheTramp.shader = colorSwapShader;
-	colorSwapShader.colorReplaceHat = [0.5, 0.5, 0.5, 1.0];
-	colorSwapShader.colorReplaceSkin = [0.5, 0.5, 0.5, 1.0];
-	colorSwapShader.colorReplaceHair = [0.5, 0.5, 0.5, 1.0];
-	colorSwapShader.colorReplaceShirt = [0.5, 0.5, 0.5, 1.0];
-	colorSwapShader.colorReplaceStripe = [0.5, 0.5, 0.5, 1.0];
-	colorSwapShader.colorReplacePants = [0.5, 0.5, 0.5, 1.0];
-	colorSwapShader.colorReplaceShoes = [0.5, 0.5, 0.5, 1.0];
+	usePlayerSkin(colorSwapShader);
 	ladyAndTheTramp.setColorTransform(1.25, 1.25, 1.25, 1, 0, 0, 0, 0);
 }
 

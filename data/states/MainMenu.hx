@@ -32,8 +32,10 @@ function update(elapsed:Float) {
 	if (controls.ACCEPT) {
 		if (Assets.exists(Paths.script('data/states/menus/' + optionList[curSelected])))
 			FlxG.switchState(new ModState('menus/' + optionList[curSelected]));
-		else
+		else if (optionList[curSelected] != "Settings")
 			trace(optionList[curSelected] + ': yooooooooo');
+		else if (optionList[curSelected] == "Settings")
+			FlxG.switchState(new OptionsMenu());
 	}
 
 	if (controls.LEFT_P || controls.RIGHT_P)
