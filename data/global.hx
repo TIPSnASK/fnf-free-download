@@ -19,7 +19,7 @@ FlxG.width = FlxG.initialWidth = 400;
 FlxG.height = FlxG.initialHeight = 400;
 window.resize(FlxG.width*2, FlxG.height*2);
 
-static var fdInitialized:Bool = false;
+static var initialized:Bool = false;
 static var redirectStates:Map<FlxState, String> = [
 	MainMenuState => 'MainMenu',
 	StoryMenuState => 'menus/StoryMenu',
@@ -143,8 +143,8 @@ function new() {
 }
 
 function preStateSwitch() {
-	if (!fdInitialized) {
-		fdInitialized = true;
+	if (!initialized) {
+		initialized = true;
 		MusicBeatState.skipTransIn = MusicBeatState.skipTransOut = true;
 		FlxG.game._requestedState = FlxG.save.data.freeINTROSPLASH ? new ModState('SplashScreen') : new ModState('Title');
 	}
@@ -190,7 +190,7 @@ function postStateSwitch() {
 }
 
 function destroy() {
-	fdInitialized = false;
+	initialized = null;
 	FlxG.width = FlxG.initialWidth = 1280;
 	FlxG.height = FlxG.initialHeight = 720;
 	window.resize(FlxG.width, FlxG.height);
