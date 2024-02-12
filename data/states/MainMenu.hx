@@ -12,6 +12,8 @@ var optionList:Array<String> = ['StoryMenu', 'Freeplay', 'Settings', 'Discord'];
 var curSelected:Int = 0;
 
 function create() {
+	playMenuMusic();
+
 	bg = new FunkinSprite().loadGraphic(Paths.image('menus/backgrounds/2'));
 	bg.scale.set(2, 2);
 	bg.updateHitbox();
@@ -39,7 +41,7 @@ function update(elapsed:Float) {
 	}
 
 	if (controls.LEFT_P || controls.RIGHT_P)
-		FlxG.switchState(new UIState(true, "MakeADude"));
+		FlxG.switchState(new UIState(true, "editors/MakeADude"));
 
 	if (FlxG.keys.justPressed.SEVEN) {
 		persistentUpdate = false;

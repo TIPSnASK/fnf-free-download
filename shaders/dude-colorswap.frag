@@ -37,7 +37,7 @@ void main()
 	// texture2D instead of flixel_texture2D so we get the base texture without any modifications
 	vec4 pixelColor = texture2D(bitmap, openfl_TextureCoordv);
 	
-	float range = 5.0 / 255.0;
+	float range = 3.0 / 255.0;
 
 	if(abs(pixelColor.r - colorHat.r) <= range) {
 		if(abs(pixelColor.g - colorHat.g) <= range) {

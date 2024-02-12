@@ -1,10 +1,11 @@
 import funkin.backend.utils.FunkinParentDisabler;
 import funkin.editors.charter.Charter;
 import funkin.options.OptionsMenu;
+import funkin.editors.ui.UIState;
 
 var itemArray:Array<FunkinText> = [];
 var pauseCam:FlxCamera;
-var menuItems = ['Resume', 'Restart', 'Options', 'Quit'];
+var menuItems = ['Resume', 'Restart', 'Options', "Make a Dude", 'Quit'];
 var curSelected:Int = 0;
 var parentDisabler:FunkinParentDisabler;
 // var pauseMusic:FlxSound;
@@ -26,6 +27,7 @@ function create() {
 	pauseCam.bgColor = 0x5D000000;
 	FlxG.cameras.add(pauseCam, false);
 
+	FlxG.sound.play(Paths.sound("sfx/snd_recordscratch"), 0.8);
 
 	// stupid fucking way of doing this but idc
 	var pausedTxt = new FunkinText(8, 12, FlxG.width, "PAUSED", 54, true);
@@ -81,7 +83,11 @@ function selectItem(selected:String) {
 			FlxG.resetState();
 		case 'Options':
 			FlxG.switchState(new OptionsMenu());
+		case 'Make a Dude':
+			fromGame = true;
+			FlxG.switchState(new UIState(true, "editors/MakeADude"));
 		case 'Quit':
+			fromGame = false;
 			if (PlayState.isStoryMode)
 				FlxG.switchState(new StoryMenuState());
 			if (PlayState.chartingMode)
@@ -108,4 +114,10 @@ function update(elapsed:Float) {
 
 	if (controls.ACCEPT)
 		selectItem(menuItems[curSelected]);
+}
+
+function onClose() {
+	if (FlxG.cameras.list.contains(pauseCam))
+		FlxG.cameras.remove(pauseCam, true);
+	FlxG.sound.play(Paths.sound("sfx/snd_recordscratch"), 0.8);
 }

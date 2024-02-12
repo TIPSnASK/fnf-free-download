@@ -8,6 +8,8 @@ var ratingTxt:FunkinText;
 var whyDoYouLookLikeThat:FunkinText;
 
 function create() {
+	playMenuMusic();
+	
 	var bg:FunkinSprite = new FunkinSprite(-250).loadGraphic(Paths.image('menus/backgrounds/3'));
 	bg.scrollFactor.set();
 	bg.scale.set(2,2);

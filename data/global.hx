@@ -20,6 +20,8 @@ FlxG.height = FlxG.initialHeight = 400;
 window.resize(FlxG.width*2, FlxG.height*2);
 
 static var initialized:Bool = false;
+static var fromGame:Bool = false; // for things you can go to through the pause menu and stuff
+
 static var redirectStates:Map<FlxState, String> = [
 	MainMenuState => 'MainMenu',
 	StoryMenuState => 'menus/StoryMenu',
@@ -124,6 +126,13 @@ static function loadDudeSkin(shader:CustomShader, name:String) {
 	} else {
 		trace("that skin doesnt exist!");
 		loadDudeSkin(shader, "default");
+	}
+}
+
+static function playMenuMusic() {
+	if (FlxG.sound.music == null || !FlxG.sound.music.playing) {
+		CoolUtil.playMusic(Paths.music('mus_menu'), true, 1, true, 110);
+		FlxG.sound.music.persist = true;
 	}
 }
 

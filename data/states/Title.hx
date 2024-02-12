@@ -19,10 +19,10 @@ function create() {
 
 	new FlxTimer().start(0.75, () -> {
 		introGuys.alpha = 1;
-		FlxG.sound.play(Paths.sound('snd_recordscratch'), 1, false, null, true, () -> {
+		FlxG.sound.play(Paths.sound('sfx/snd_recordscratch'), 1, false, null, true, () -> {
 			new FlxTimer().start(0.25, () -> {
 				introGuys.alpha = 0.001;
-				new FlxTimer().start(0.5, function() {CoolUtil.playMusic(Paths.music('mus_menu'), true, 1, true, 110);});
+				new FlxTimer().start(0.5, function() {playMenuMusic();});
 			});
 		});
 	});

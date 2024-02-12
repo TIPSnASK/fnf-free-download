@@ -100,6 +100,8 @@ function loadSkin(name:String) {
 }
 
 function create() {
+	playMenuMusic();
+	
 	var bg:FunkinSprite = new FunkinSprite().loadGraphic(Paths.image("menus/backgrounds/1"));
 	bg.zoomFactor = 0;
 	// just accidentally remade the options menu background after i Gave up on the options menu im gonna fucking
@@ -281,7 +283,7 @@ function postCreate() {
 	loadButton.color = 0xFF0000FF;
 
 	cancelButton = new UIButton(0, dumbBar2.y-37, "cancel", () -> {
-		FlxG.switchState(new MainMenuState());
+		FlxG.switchState(fromGame ? new PlayState() : new MainMenuState());
 	}, 72, 32);
 	cancelButton.x = loadButton.x-loadButton.bWidth-5;
 	add(cancelButton);
@@ -336,8 +338,9 @@ function update(elapsed:Float) {
 	if (FlxG.keys.justPressed.EIGHT)
 		FlxG.switchState(new UIState(true, "MakeADude"));
 
-	if (FlxG.keys.justPressed.ESCAPE)
-		FlxG.switchState(new MainMenuState());
+	if (FlxG.keys.justPressed.ESCAPE) {
+		FlxG.switchState(fromGame ? new PlayState() : new MainMenuState());
+	}
 
 	for (hate in buttonArr)
 		hate.alpha = buttonArr.indexOf(hate) == selectedButton ? 1 : 0.5;

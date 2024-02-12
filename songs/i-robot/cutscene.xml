@@ -1,15 +1,71 @@
+<!-- I NEED FLXBITMAPTEXT UPDATE RIGHT NOW!!!!!!! -->
+
 <pre>
 	<wait time="1"/>
 	<sound path="sfx/snd_doorknock"/>
 	<wait time="2"/>
 
 	<music path="dialog/mus_birthdayboy"/>
-	<sprite path="1"/>
+	<sprite path="1" dude="true"/>
 	
 	<talk character="dude">
-		uh... lady, I think I hit a dog on my way over here
+		uh...[wait:0.5] lady,[wait:0.25] I think I hit a dog on my way over here
 	</talk>
 	<talk character="lady">
 		!!!
 	</talk>
+
+	<sprite path="2" dude="true"/>
+	<talk character="dude">
+		haha nah im kidding![wait:0.5] you know i cant drive!
+	</talk>
+	<talk character="lady">
+		>:(
+	</talk>
+
+	<sprite path="3" dude="true"/>
+	<talk character="dude" colors="#9D66DB">
+		but uh, anyway. about your %dad%... does he actually know we're dating?
+	</talk>
+
+	<talk character="lady">
+		X
+	</talk>
+	<talk character="dude">
+		oh nuts...
+	</talk>
+	<talk character="lady">
+		?
+	</talk>
+
+	<talk character="dude">
+		well, you know how dads are with people dating their daughters!
+	</talk>
+	<talk character="dude">
+		I mean... in cartoons...
+		but those are real!
+	</talk>
+	<!-- no text shake cause idk how :( -->
+	<talk character="dude">
+		your dads gonna be PISSED when he finds out we're dating!
+	</talk>
+
+	
+	<talk character="dude">
+		theres gotta be something I can do to get on his good side...
+	</talk>
+	<talk character="lady">
+		?
+	</talk>
+	<talk character="dude">
+		huh? what'cha lookin at?
+	</talk>
+
+	<sprite path="4" dude="true"/>
+	<talk character="dude">
+		looks like a...
+		karaoke machine?
+	</talk>
+
+	<close/>
 </pre>
