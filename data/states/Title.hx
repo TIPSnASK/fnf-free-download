@@ -80,7 +80,7 @@ var timer:Float = 0.0;
 function update(elapsed:Float) {
 	timer += elapsed;
 
-	enterThingy.alpha = (Math.sin(timer * 2) + 1) * 0.5; // tank you wizard 🙏
+	enterThingy.alpha = FlxMath.bound((Math.sin(timer * 5) + 1) * 0.5, 0.2, 1); // tank you wizard 🙏
 
 	people.animation.curAnim.frameRate = 12*(Conductor.bpm/150);
 
