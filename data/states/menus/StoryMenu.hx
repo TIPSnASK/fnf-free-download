@@ -118,6 +118,7 @@ function update(elapsed:Float) {
 	timer += elapsed;
 
 	if (controls.ACCEPT) {
+		FlxG.sound.play(Paths.sound("menus/snd_josh")).persist = true;
 		var convertedData = {
 			name: weekndData[curSelected].name,
 			id: curSelected,

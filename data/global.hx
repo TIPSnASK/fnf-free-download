@@ -21,6 +21,7 @@ window.resize(FlxG.width*2, FlxG.height*2);
 
 static var initialized:Bool = false;
 static var fromGame:Bool = false; // for things you can go to through the pause menu and stuff
+static var skinToEdit:String = ""; // because ooohh the skin editor is sooo speciall
 
 static var redirectStates:Map<FlxState, String> = [
 	MainMenuState => 'MainMenu',
@@ -200,6 +201,8 @@ function postStateSwitch() {
 
 function destroy() {
 	initialized = null;
+	fromGame = null;
+	skinToEdit = null;
 	FlxG.width = FlxG.initialWidth = 1280;
 	FlxG.height = FlxG.initialHeight = 720;
 	window.resize(FlxG.width, FlxG.height);

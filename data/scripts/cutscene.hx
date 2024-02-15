@@ -134,6 +134,7 @@ function next() {
 				music = null;
 			}
 			music = FlxG.sound.play(Paths.music(element.get("path")));
+			music.looped = true;
 			next();
 		case "sprite":
 			remove(curSprite);
@@ -160,10 +161,11 @@ function next() {
 
 			// WORK WITH ME!!!
 			if (element.exists("colors")) {
-				dialogFormats = [for (i in element.get("colors").split(",")) {
+				var arr:Array<String> = element.get("colors").split(",");
+				dialogFormats = [for (i in arr) {
 					i = StringTools.trim(i);
 					color = FlxColor.fromString(i);
-					new FlxTextFormatMarkerPair(new FlxTextFormat(color), "%");
+					new FlxTextFormatMarkerPair(new FlxTextFormat(color), ["%", "$", "#", "&", "~", "*"][arr.indexOf(i)]);
 				}];
 			}
 			
@@ -260,9 +262,8 @@ function update(elapsed:Float) {
 	if (inDialog && canPressEnter && controls.ACCEPT)
 		next();
 	if (inDialog && FlxG.keys.justPressed.SHIFT)
-		dialogProgress = dialog.length-1;
+		next();
 
-	// i cant tell if i fucked up something or there's a bug i need to report
 	if (controls.BACK) {
 		end();
 	}

@@ -1,5 +1,4 @@
 // ENTIRELY BASED OFF OF AVERY'S "CREATE A DUDE" CONCEPT ART
-// i'll work on this later lol
 
 import haxe.Json;
 import funkin.editors.ui.UIButton;

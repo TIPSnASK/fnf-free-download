@@ -5,7 +5,7 @@ import funkin.editors.ui.UIState;
 
 var itemArray:Array<FunkinText> = [];
 var pauseCam:FlxCamera;
-var menuItems = ['Resume', 'Restart', 'Options', "Make a Dude", 'Quit'];
+var menuItems = ['Resume', 'Restart', 'Options', "Change Skin", 'Quit'];
 var curSelected:Int = 0;
 var parentDisabler:FunkinParentDisabler;
 // var pauseMusic:FlxSound;
@@ -83,9 +83,9 @@ function selectItem(selected:String) {
 			FlxG.resetState();
 		case 'Options':
 			FlxG.switchState(new OptionsMenu());
-		case 'Make a Dude':
+		case 'Change Skin':
 			fromGame = true;
-			FlxG.switchState(new UIState(true, "editors/MakeADude"));
+			FlxG.switchState(new UIState(true, "editors/make-a-dude/ChooseADude"));
 		case 'Quit':
 			fromGame = false;
 			if (PlayState.isStoryMode)
@@ -94,7 +94,7 @@ function selectItem(selected:String) {
 				FlxG.switchState(new Charter(PlayState.SONG.meta.name, PlayState.difficulty, false));
 			if (!PlayState.isStoryMode && !PlayState.chartingMode)
 				FlxG.switchState(new FreeplayState());
-	}
+	} // one sec, rearranging my setup or somethin
 }
 
 function update(elapsed:Float) {

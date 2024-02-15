@@ -32,16 +32,19 @@ function create() {
 
 function update(elapsed:Float) {
 	if (controls.ACCEPT) {
-		if (Assets.exists(Paths.script('data/states/menus/' + optionList[curSelected])))
+		if (Assets.exists(Paths.script('data/states/menus/' + optionList[curSelected]))) {
+			FlxG.sound.play(Paths.sound("menus/snd_josh")).persist = true;
 			FlxG.switchState(new ModState('menus/' + optionList[curSelected]));
-		else if (optionList[curSelected] != "Settings")
+		} else if (optionList[curSelected] != "Settings")
 			trace(optionList[curSelected] + ': yooooooooo');
-		else if (optionList[curSelected] == "Settings")
+		else if (optionList[curSelected] == "Settings") {
+			FlxG.sound.play(Paths.sound("menus/snd_josh")).persist = true;
 			FlxG.switchState(new OptionsMenu());
+		}
 	}
 
 	if (controls.LEFT_P || controls.RIGHT_P)
-		FlxG.switchState(new UIState(true, "editors/MakeADude"));
+		FlxG.switchState(new UIState(true, "editors/make-a-dude/MakeADude"));
 
 	if (FlxG.keys.justPressed.SEVEN) {
 		persistentUpdate = false;
