@@ -8,6 +8,8 @@ var ratingTxt:FunkinText;
 var whyDoYouLookLikeThat:FunkinText;
 
 function create() {
+	playMenuMusic();
+	
 	var bg:FunkinSprite = new FunkinSprite(-250).loadGraphic(Paths.image('menus/backgrounds/3'));
 	bg.scrollFactor.set();
 	bg.scale.set(2,2);
@@ -116,6 +118,7 @@ function update(elapsed:Float) {
 	timer += elapsed;
 
 	if (controls.ACCEPT) {
+		FlxG.sound.play(Paths.sound("menus/snd_josh")).persist = true;
 		var convertedData = {
 			name: weekndData[curSelected].name,
 			id: curSelected,

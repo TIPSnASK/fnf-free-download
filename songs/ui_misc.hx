@@ -6,7 +6,7 @@ public function usePlayerSkin(shader:CustomShader) { // for convenience
 }
 
 function create() {
-	if (playCutscenes && PlayState.isStoryMode)
+	if (playCutscenes)
 		cutscene = Paths.script('data/scripts/cutscene');
 }
 
@@ -38,4 +38,8 @@ function onGamePause(event) {
 	paused = true;
 
 	openSubState(new ModSubState('substates/game/Pause'));
+}
+
+function onSongEnd() {
+	fromGame = false;
 }

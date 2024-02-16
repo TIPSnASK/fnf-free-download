@@ -20,6 +20,9 @@ FlxG.height = FlxG.initialHeight = 400;
 window.resize(FlxG.width*2, FlxG.height*2);
 
 static var initialized:Bool = false;
+static var fromGame:Bool = false; // for things you can go to through the pause menu and stuff
+static var skinToEdit:String = ""; // because ooohh the skin editor is sooo speciall
+
 static var redirectStates:Map<FlxState, String> = [
 	MainMenuState => 'MainMenu',
 	StoryMenuState => 'menus/StoryMenu',
@@ -127,6 +130,13 @@ static function loadDudeSkin(shader:CustomShader, name:String) {
 	}
 }
 
+static function playMenuMusic() {
+	if (FlxG.sound.music == null || !FlxG.sound.music.playing) {
+		CoolUtil.playMusic(Paths.music('mus_menu'), true, 1, true, 110);
+		FlxG.sound.music.persist = true;
+	}
+}
+
 function new() {
 	if (FlxG.save.data.freeINTROSPLASH == null) FlxG.save.data.freeINTROSPLASH = true;
 	if (FlxG.save.data.freeFLASH == null) FlxG.save.data.freeFLASH = true;
@@ -191,6 +201,8 @@ function postStateSwitch() {
 
 function destroy() {
 	initialized = null;
+	fromGame = null;
+	skinToEdit = null;
 	FlxG.width = FlxG.initialWidth = 1280;
 	FlxG.height = FlxG.initialHeight = 720;
 	window.resize(FlxG.width, FlxG.height);

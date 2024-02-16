@@ -15,6 +15,8 @@ var stupidCheckboxes = [];
 var stupidCheckboxIDs = [];
 
 function create() {
+	playMenuMusic();
+	
 	var bg:FunkinSprite = new FunkinSprite(-2, -450).loadGraphic(Paths.image("menus/backgrounds/1"));
 	bg.zoomFactor = 0;
 	// just accidentally remade the options menu background after i Gave up on the options menu im gonna fucking

@@ -39,7 +39,12 @@ function onPostCountdown(event) {
 	}
 }
 
+function onSongStart() {
+	canPause = true;
+}
+
 function postCreate() {
+	canPause = false;
 	for (sl in strumLines.members) {
         for (note in sl.notes.members)
             note.alpha = 1;

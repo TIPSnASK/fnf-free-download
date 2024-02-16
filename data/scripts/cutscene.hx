@@ -1,6 +1,10 @@
 import Xml;
 import funkin.backend.utils.XMLUtil;
 import funkin.backend.utils.IniUtil;
+import sys.io.File;
+import flixel.text.FlxText.FlxTextBorderStyle;
+import flixel.text.FlxText.FlxTextFormat;
+import flixel.text.FlxText.FlxTextFormatMarkerPair;
 
 var xml:Xml;
 var curElements:Array<Xml>;
@@ -17,6 +21,11 @@ var speakerText:FunkinText;
 var dialogText:FunkinText;
 
 var curDialogBox:String = "normal";
+
+var dudeColors:CustomShader = new CustomShader("dude-colorswap");
+
+var dialogEvents:Array<{name:String, index:Int, value:String}> = [];
+var dialogFormats:Array<FlxTextFormatMarkerPair> = [];
 
 function create() {
 	if (!Assets.exists(Paths.file("songs/" + song + "/cutscene.xml"))) {
@@ -68,9 +77,13 @@ function create() {
 	dialogText.font = Paths.font("COMICBD.TTF");
 	dialogText.textField.antiAliasType = 0;
 	dialogText.textField.sharpness = 400;
+	dialogText.borderStyle = FlxTextBorderStyle.OUTLINE;
 	dialogText.borderSize = 2;
 	dialogText.visible = false;
+
 	add(dialogText);
+
+	loadDudeSkin(dudeColors, Json.parse(File.getContent("mods/free-download-skins.json")).selected);
 
 	next();
 }
@@ -101,6 +114,8 @@ function next() {
 	switch element.nodeName {
 		default:
 			trace(element.nodeName + "???????");
+		case "close":
+			end();
 		case "dialogbox":
 			makeDialogBoxFromXml(element);
 			next();
@@ -118,7 +133,8 @@ function next() {
 				FlxG.sound.destroySound(music);
 				music = null;
 			}
-			music = CoolUtil.playMusic(Paths.music(element.get("path")));
+			music = FlxG.sound.play(Paths.music(element.get("path")));
+			music.looped = true;
 			next();
 		case "sprite":
 			remove(curSprite);
@@ -126,8 +142,13 @@ function next() {
 			curSprite = CoolUtil.loadAnimatedGraphic(curSprite, Paths.image("cutscenes/" + PlayState.storyWeek.id + "/" + element.get("path")));
 			curSprite.cameras = [cutsceneCam];
 			add(curSprite);
+			if (element.exists("dude") && element.get("dude") == "true") {
+				curSprite.shader = dudeColors;
+			}
 			next();
 		case "talk":
+			dialogEvents = [];
+			
 			dialogBox.visible = speakerText.visible = dialogText.visible = true;
 			dialogText.text = "";
 
@@ -137,6 +158,47 @@ function next() {
 			dialog = XMLUtil.fixXMLText(getInnerData(element));
 			talkSound = FlxG.sound.load(Paths.sound("dialog/" + speakerData["TalkSound"]));
 			talkSound.volume = 0.8;
+
+			// WORK WITH ME!!!
+			if (element.exists("colors")) {
+				var arr:Array<String> = element.get("colors").split(",");
+				dialogFormats = [for (i in arr) {
+					i = StringTools.trim(i);
+					color = FlxColor.fromString(i);
+					new FlxTextFormatMarkerPair(new FlxTextFormat(color), ["%", "$", "#", "&", "~", "*"][arr.indexOf(i)]);
+				}];
+			}
+			
+			if (StringTools.contains(dialog, "[") && StringTools.contains(dialog, "]")) { // parse the damn events you fool!
+				var dumb:Array<String> = [
+					for (i in dialog.split("[")) {
+						var hate:String = i.substring(0, i.indexOf("]"));
+						hate;
+					}
+				];
+				var evenDumber:Array<Int> = []; // to keep track of indexes
+
+				// separate for loop statement because life isnt good
+				for (hate in dumb) {
+					if (hate == "" || StringTools.isSpace(hate)) {
+						dumb.remove(hate);
+						continue;
+					}
+				}
+				// separate for loop statement because life isnt good
+				for (hate in dumb) {
+					evenDumber.push(dialog.indexOf("[" + hate + "]"));
+					dialog = StringTools.replace(dialog, "[" + hate + "]", "");
+				}
+
+				for (i in dumb) {
+					dialogEvents.push({
+						name: i.split(":")[0],
+						index: evenDumber[dumb.indexOf(i)],
+						value: i.split(":")[1]
+					});
+				}
+			}
 
 			dialogProgress = 0;
 			inDialog = true;
@@ -148,14 +210,40 @@ var dialog:String = "";
 var dialogProgress:Int = -1;
 var imInTheMiddleOfSomething:Bool = false;
 var talkSound:FlxSound;
+var canPressEnter:Bool = false;
+
+// events!!
+var runningEvent:Bool = false;
+var waiting:Bool = false;
 function updateDialog() {
-	dialogText.text = dialog.substring(0, dialogProgress+1);
-	
-	if (dialogProgress >= dialog.length) {
+	canPressEnter = dialogProgress >= dialog.length;
+	if (canPressEnter) {
 		dialogProgress = -1;
 		return;
 	}
-	if (!imInTheMiddleOfSomething) {
+	
+	dialogText.text = dialog.substring(0, dialogProgress+1);
+	dialogText.applyMarkup(dialogText.text, dialogFormats);
+
+	if (!runningEvent) {
+		for (dumb in dialogEvents) {
+			if (dialogProgress == dumb.index) {
+				runningEvent = true;
+				switch dumb.name {
+					case "wait":
+						waiting = true;
+						new FlxTimer().start(Std.parseFloat(dumb.value), (t:FlxTimer) -> {
+							waiting = false;
+							runningEvent = false;
+							t.destroy();
+							dialogProgress++;
+						});
+				}
+			}
+		}
+	}
+
+	if (!imInTheMiddleOfSomething && !waiting) {
 		imInTheMiddleOfSomething = true;
 		new FlxTimer().start((talkSound.length), (t:FlxTimer) -> {
 			talkSound.play(false);
@@ -171,8 +259,28 @@ function update(elapsed:Float) {
 	if (dialogProgress != -1)
 		updateDialog();
 
-	if (inDialog && controls.ACCEPT)
+	if (inDialog && canPressEnter && controls.ACCEPT)
 		next();
 	if (inDialog && FlxG.keys.justPressed.SHIFT)
-		dialogProgress = dialog.length;
+		next();
+
+	if (controls.BACK) {
+		end();
+	}
+}
+
+function end() {
+	cutsceneCam.fade(0xFF000000, 0.25, false, () -> {close();}, true);
+}
+
+function destroy() {
+	if (music != null) {
+		music.stop();
+		FlxG.sound.destroySound(music);
+		music = null;
+	}
+	if (FlxG.cameras.list.contains(cutsceneCam)) {
+		FlxG.cameras.remove(cutsceneCam, true);
+	}
+	CoolUtil.last(FlxG.cameras.list).fade(0xFF000000, 0.25, true, null, true);
 }
