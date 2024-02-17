@@ -28,11 +28,6 @@ static var redirectStates:Map<FlxState, String> = [
 	FreeplayState => 'menus/Freeplay'
 ];
 
-// IM GONNA KILLL YOUUUUUUU
-static var fixResStates:Array<FlxState> = [
-	Charter
-];
-
 static function flash(cam:FlxCamera, data:{color:FlxColor, time:Float, force:Bool}, onComplete:Void->Void) {
 	if (FlxG.save.data.freeFLASH) {
 		cam.flash(data.color, data.time, onComplete, data.force);
@@ -131,6 +126,10 @@ static function loadDudeSkin(shader:CustomShader, name:String) {
 	}
 }
 
+static function usePlayerSkin(shader:CustomShader) { // for convenience
+	loadDudeSkin(shader, Json.parse(File.getContent("mods/free-download-skins.json")).selected);
+}
+
 static function playMenuMusic() {
 	if (FlxG.sound.music == null || !FlxG.sound.music.playing) {
 		CoolUtil.playMusic(Paths.music('mus_menu'), true, 1, true, 110);
@@ -139,6 +138,9 @@ static function playMenuMusic() {
 }
 
 function new() {
+	if (FlxG.camera != null)
+		FlxG.camera.bgColor = 0xFF000000;
+
 	if (FlxG.save.data.freeINTROSPLASH == null) FlxG.save.data.freeINTROSPLASH = true;
 	if (FlxG.save.data.freeFLASH == null) FlxG.save.data.freeFLASH = true;
 
@@ -153,6 +155,15 @@ function new() {
 	}
 
 	FlxG.autoPause = false; // sorry but i gotta be biblically accurate or else.....
+
+	FlxG.width = FlxG.initialWidth = 400;
+	FlxG.height = FlxG.initialHeight = 400;
+	window.resize(FlxG.width*2, FlxG.height*2);
+	window.resizable = false;
+	for (camera in FlxG.cameras.list) camera.setSize(FlxG.width, FlxG.height);
+
+	window.x += 220;
+	window.y -= 40;
 }
 
 function preStateSwitch() {
@@ -162,32 +173,10 @@ function preStateSwitch() {
 		FlxG.game._requestedState = FlxG.save.data.freeINTROSPLASH ? new ModState('SplashScreen') : new ModState('Title');
 	}
 
-	for (stupid => smart in redirectStates)
+	for (stupid => smart in redirectStates) {
 		if (FlxG.game._requestedState is stupid) {
 			FlxG.game._requestedState = new ModState(smart);
-			break;
 		}
-
-	for (stupid in fixResStates) {
-		window.resizable = FlxG.game._requestedState is stupid;
-
-		var res = [
-			FlxG.game._requestedState is stupid ? 1280 : 400,
-			FlxG.game._requestedState is stupid ? 720 : 400
-		];
-		var windowRes = [
-			FlxG.game._requestedState is stupid ? 1280 : 800,
-			FlxG.game._requestedState is stupid ? 720 : 800
-		];
-		
-		if (FlxG.width == res[0] && FlxG.height == res[1]) return;
-	
-		FlxG.width = FlxG.initialWidth = res[0];
-		FlxG.height = FlxG.initialHeight = res[1];
-		window.resize(windowRes[0], windowRes[1]);
-
-		for (camera in FlxG.cameras.list) camera.setSize(FlxG.width, FlxG.height);
-		break;
 	}
 }
 
