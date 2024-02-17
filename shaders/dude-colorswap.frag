@@ -104,5 +104,10 @@ void main()
 		pixelColor = clamp(openfl_ColorOffsetv + (pixelColor * colorMultiplier), 0.0, 1.0);
 	}
 	
-	gl_FragColor = pixelColor;
+	// alpha fix (also stolen from FlxGraphicsShader)
+	if (pixelColor.a > 0.0) {
+		gl_FragColor = vec4(pixelColor.rgb * pixelColor.a * openfl_Alphav, pixelColor.a * openfl_Alphav);
+	} else {
+		gl_FragColor = vec4(pixelColor.rgb / pixelColor.a, pixelColor.a);
+	}
 }
