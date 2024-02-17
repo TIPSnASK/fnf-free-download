@@ -282,7 +282,7 @@ function postCreate() {
 	loadButton.color = 0xFF0000FF;
 
 	cancelButton = new UIButton(0, dumbBar2.y-37, "cancel", () -> {
-		FlxG.switchState(fromGame ? new PlayState() : new MainMenuState());
+		FlxG.switchState(new UIState(true, "editors/make-a-dude/ChooseADude"));
 	}, 72, 32);
 	cancelButton.x = loadButton.x-loadButton.bWidth-5;
 	add(cancelButton);
@@ -334,9 +334,6 @@ function postCreate() {
 }
 
 function update(elapsed:Float) {
-	if (FlxG.keys.justPressed.EIGHT)
-		FlxG.switchState(new UIState(true, "MakeADude"));
-
 	if (FlxG.keys.justPressed.ESCAPE) {
 		FlxG.switchState(fromGame ? new PlayState() : new MainMenuState());
 	}

@@ -1,26 +1,108 @@
 import haxe.Json;
 import funkin.editors.ui.UIButton;
 import funkin.editors.ui.UIText;
-import funkin.editors.ui.UIScrollBar;
 import funkin.editors.ui.UIState;
 import funkin.editors.ui.UIColorwheel;
 import sys.io.File;
 import sys.FileSystem;
 import flixel.addons.display.FlxBackdrop;
+import flixel.text.FlxText.FlxTextFormat;
+import flixel.text.FlxText.FlxTextFormatMarkerPair;
 
 var camUI:FlxCamera;
 var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
 var backButton:UIButton;
 var editButton:UIButton;
 
-var scrollBar:UIScrollBar;
+var skinText:UIText;
+var arrows:UIText;
+var dude:FunkinSprite;
+
+var camZoom:Float = 1.4;
+
+var selectedFormat:FlxTextFormat = new FlxTextFormat(0xFF00FF62, true);
+var notSelectedFormat:FlxTextFormat = new FlxTextFormat(0xFFFF0055, true);
+var markupRules:Array<FlxTextFormatMarkerPair> = [new FlxTextFormatMarkerPair(selectedFormat, "$"), new FlxTextFormatMarkerPair(notSelectedFormat, "%")];
+
+var curSelected:Int = 0;
+var skins:Array<{data:String, name:String}> = [];
+
+var dudeColors:CustomShader;
+var selectSound:FlxSound;
 
 function create() {
-	var bg:FlxBackdrop = new FlxBackdrop().loadGraphic(Paths.image("menus/backgrounds/1"));
+	playMenuMusic();
+
+	for (i in Paths.getFolderContent("data/skins")) {
+		skins.push({
+			name: StringTools.replace(i, ".txt", ""),
+			data: Assets.getText(Paths.txt("skins/" + StringTools.replace(i, ".txt", "")))
+		});
+	}
+	
+	for (i in userSkins.skins) {
+		skins.push(i);
+	}
+
+	for (index => data in skins) {
+		if (userSkins.selected == data.name)
+			curSelected = index;
+	}
+
+	var bg:FunkinSprite = new FunkinSprite().loadGraphic(Paths.image("menus/backgrounds/1"));
 	// just accidentally remade the options menu background after i Gave up on the options menu im gonna fucking
 	bg.setColorTransform(1.2, 0.8, 0.4, 1, 0, 0, 0, 0);
-	bg.scale.set(1.4, 1.4);
+	bg.scale.set(1, 1);
+	bg.zoomFactor = 0.25;
 	add(bg);
+
+	dude = new FunkinSprite().loadGraphic(Paths.image("editors/make-a-dude/dude"));
+	dude.screenCenter();
+	add(dude);
+
+	skinText = new UIText(0, dude.y - 55, FlxG.width, "you shuoldnt be seeing this text.......", 16, 0xFFFFFFFF, true);
+	skinText.alignment = 'center';
+	skinText.antialiasing = false;
+	// lunarcleint figured this out thank you lunar holy shit 🙏
+	skinText.textField.antiAliasType = 0; // advanced
+	skinText.textField.sharpness = 400; // max i think idk thats what it says
+	skinText.font = Paths.font("COMIC.TTF");
+	skinText.borderSize = 2;
+	add(skinText);
+
+	// :-)
+	arrows = new UIText(0, 0, FlxG.width, "<                                >", 16, 0xFFFFFFFF, true);
+	arrows.alignment = 'center';
+	arrows.antialiasing = false;
+	// lunarcleint figured this out thank you lunar holy shit 🙏
+	arrows.textField.antiAliasType = 0; // advanced
+	arrows.textField.sharpness = 400; // max i think idk thats what it says
+	arrows.font = Paths.font("COMIC.TTF");
+	arrows.borderSize = 2;
+	arrows.screenCenter(FlxAxes.Y);
+	add(arrows);
+
+	var enterText:UIText = new UIText(0, dude.y + dude.height + 15, FlxG.width, "press enter to select", 16, 0xFFFFFFFF, true);
+	enterText.alignment = 'center';
+	enterText.antialiasing = false;
+	// lunarcleint figured this out thank you lunar holy shit 🙏
+	enterText.textField.antiAliasType = 0; // advanced
+	enterText.textField.sharpness = 400; // max i think idk thats what it says
+	enterText.font = Paths.font("COMIC.TTF");
+	enterText.borderSize = 2;
+	add(enterText);
+
+	dude.shader = dudeColors = new CustomShader("dude-colorswap");
+	updateSkin();
+
+	selectSound = FlxG.sound.load(Paths.sound("gameplay/ayy/dude"));
+}
+
+function updateSkin() {
+	loadDudeSkin(dudeColors, skins[curSelected].name);
+
+	skinText.text = skins[curSelected].name + "\n" + (skins[curSelected].name == userSkins.selected ? "$[SELECTED]$" : "%[UNSELECTED]%");
+	skinText.applyMarkup(skinText.text, markupRules);
 }
 
 function postCreate() {
@@ -46,27 +128,45 @@ function postCreate() {
 	dumbText.borderSize = 2;
 	add(dumbText);
 
-	backButton = new UIButton(4, 4, "go back", null, 128, 32);
+	backButton = new UIButton(4, 4, "go back", () -> {
+		FlxG.switchState(fromGame ? new PlayState() : new MainMenuState());
+	}, 128, 32);
 	add(backButton);
 
-	editButton = new UIButton(FlxG.width - backButton.bWidth - 4, 4, "edit skin", null, backButton.bWidth, 32);
+	editButton = new UIButton(FlxG.width - backButton.bWidth - 4, 4, "make a dude", () -> {
+		FlxG.switchState(new UIState(true, "editors/make-a-dude/MakeADude"));
+	}, backButton.bWidth, 32);
 	add(editButton);
 
-	scrollBar = new UIScrollBar(0, dumbBar1.height, 800, 0, 100, 20, 320);
-	scrollBar.onChange = (value:Float) -> {
-		FlxG.camera.scroll.y = value;
-	};
-	add(scrollBar);
-
-	for (i in [dumbBar1, dumbBar2, dumbText, backButton, editButton, scrollBar])
+	for (i in [dumbBar1, dumbBar2, dumbText, backButton, editButton])
 		i.cameras = [camUI];
 }
 
 function update(elapsed:Float) {
-	if (FlxG.keys.justPressed.EIGHT)
-		FlxG.switchState(new UIState(true, "editors/make-a-dude/ChooseADude"));
+	if (controls.BACK)
+		FlxG.switchState(fromGame ? new PlayState() : new MainMenuState());
 
-	FlxG.camera.scroll.y = FlxMath.bound(FlxG.camera.scroll.y - (FlxG.mouse.wheel * 20), 0, 800);
+	if (controls.LEFT_P || controls.RIGHT_P) {
+		curSelected = FlxMath.wrap(curSelected + (controls.LEFT_P ? -1 : 1), 0, skins.length-1);
+		updateSkin();
+		arrows.x += controls.LEFT_P ? -5 : 5;
+		dude.x += controls.LEFT_P ? -10 : 10;
+	}
 
-	scrollBar.start = FlxG.camera.scroll.y - (scrollBar.size/2);
+	if (controls.ACCEPT) {
+		userSkins.selected = skins[curSelected].name;
+		File.saveContent("mods/free-download-skins.json", Json.stringify(userSkins));
+		updateSkin();
+
+		dude.scale.set(1.1, 1.1);
+		selectSound.play(true);
+	}
+
+	skinText.x = arrows.x = lerp(arrows.x, 0, 0.12);
+	skinText.alpha = dude.alpha = lerp(dude.alpha, 1, 0.12);
+	dude.x = lerp(dude.x, 146, 0.24);
+	dude.scale.x = lerp(dude.scale.x, 1, 0.12);
+	dude.scale.y = lerp(dude.scale.y, 1, 0.12);
+
+	FlxG.camera.zoom = lerp(FlxG.camera.zoom, camZoom, 0.06);
 }
