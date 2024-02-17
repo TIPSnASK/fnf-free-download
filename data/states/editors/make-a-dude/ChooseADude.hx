@@ -143,9 +143,6 @@ function postCreate() {
 }
 
 function update(elapsed:Float) {
-	if (FlxG.keys.justPressed.EIGHT)
-		FlxG.switchState(new UIState(true, "editors/make-a-dude/ChooseADude"));
-
 	if (controls.BACK)
 		FlxG.switchState(fromGame ? new PlayState() : new MainMenuState());
 

@@ -151,6 +151,8 @@ function new() {
 	if (!FileSystem.exists("mods/free-download-skins.json")) {
 		File.saveContent("mods/free-download-skins.json", "{\"selected\": \"default\", \"skins\": []}");
 	}
+
+	FlxG.autoPause = false; // sorry but i gotta be biblically accurate or else.....
 }
 
 function preStateSwitch() {
@@ -167,6 +169,8 @@ function preStateSwitch() {
 		}
 
 	for (stupid in fixResStates) {
+		window.resizable = FlxG.game._requestedState is stupid;
+
 		var res = [
 			FlxG.game._requestedState is stupid ? 1280 : 400,
 			FlxG.game._requestedState is stupid ? 720 : 400
@@ -187,6 +191,7 @@ function preStateSwitch() {
 	}
 }
 
+public var fullscreenSound:FlxSound;
 function postStateSwitch() {
 	Framerate.debugMode = 0;
 
@@ -198,6 +203,16 @@ function postStateSwitch() {
 
 	for (cam in FlxG.cameras.list)
 		cam.antialiasing = false;
+
+	fullscreenSound = FlxG.sound.load(Paths.sound("sfx/snd_weirdnoise"));
+	fullscreenSound.persist = true;
+}
+
+function update(elapsed:Float) {
+	if (FlxG.fullscreen) {
+		fullscreenSound.play(true);
+		FlxG.fullscreen = false;
+	}
 }
 
 function destroy() {
@@ -206,4 +221,6 @@ function destroy() {
 	FlxG.width = FlxG.initialWidth = 1280;
 	FlxG.height = FlxG.initialHeight = 720;
 	window.resize(FlxG.width, FlxG.height);
+	window.resizable = true;
+	FlxG.autoPause = true;
 }

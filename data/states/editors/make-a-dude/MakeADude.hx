@@ -334,9 +334,6 @@ function postCreate() {
 }
 
 function update(elapsed:Float) {
-	if (FlxG.keys.justPressed.EIGHT)
-		FlxG.switchState(new UIState(true, "MakeADude"));
-
 	if (FlxG.keys.justPressed.ESCAPE) {
 		FlxG.switchState(fromGame ? new PlayState() : new MainMenuState());
 	}

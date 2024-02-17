@@ -1,5 +1,9 @@
 public var noteskin:String = "default";
 
+function postCreate() {
+	ghostTapping = false;
+}
+
 function onNoteHit(event) {
 	event.preventStrumGlow();
 	event.showSplash = false;
