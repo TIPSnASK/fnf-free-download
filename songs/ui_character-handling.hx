@@ -23,6 +23,7 @@ function postUpdate(elapsed:Float) {
 function beatHit() {
 	for (sl in strumLines)
 		for (character in sl.characters) {
+			if (character.isGF) return;
 			if (character.danceOnBeat) character.danceOnBeat = false;
 			if (["SING", "MISS"].contains(character.lastAnimContext) && character.lastHit + (Conductor.stepCrochet * character.holdTime) < Conductor.songPosition)
 				character.playAnim('idle', true, 'DANCE');

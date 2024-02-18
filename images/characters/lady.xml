@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="lady.png" width="603" height="116">
+	<SubTexture name="spr_ladyidleleft_0" x="1" y="1" width="64" height="112" frameX="-0" frameY="-2" frameWidth="69" frameHeight="114"/>
+	<SubTexture name="spr_ladyidleleft_1" x="269" y="1" width="65" height="114" frameX="-2" frameY="-0" frameWidth="69" frameHeight="114"/>
+	<SubTexture name="spr_ladyidleleft_2" x="337" y="1" width="64" height="114" frameX="-4" frameY="-0" frameWidth="69" frameHeight="114"/>
+	<SubTexture name="spr_ladyidleleft_3" x="135" y="1" width="64" height="113" frameX="-4" frameY="-1" frameWidth="69" frameHeight="114"/>
+	<SubTexture name="spr_ladyidleleft_4" x="404" y="1" width="64" height="114" frameX="-5" frameY="-0" frameWidth="69" frameHeight="114"/>
+	<SubTexture name="spr_ladyidleright_0" x="202" y="1" width="64" height="113" frameX="-4" frameY="-1" frameWidth="68" frameHeight="114"/>
+	<SubTexture name="spr_ladyidleright_1" x="68" y="1" width="64" height="112" frameX="-3" frameY="-2" frameWidth="68" frameHeight="114"/>
+	<SubTexture name="spr_ladyidleright_2" x="471" y="1" width="64" height="114" frameX="-1" frameY="-0" frameWidth="68" frameHeight="114"/>
+	<SubTexture name="spr_ladyidleright_3" x="538" y="1" width="64" height="114" frameX="-0" frameY="-0" frameWidth="68" frameHeight="114"/>
+	<SubTexture name="spr_ladyidleright_4" x="404" y="1" width="64" height="114" frameX="-1" frameY="-0" frameWidth="68" frameHeight="114"/>
+</TextureAtlas>

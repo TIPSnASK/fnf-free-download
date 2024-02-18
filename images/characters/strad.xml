@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="strad.png" width="1197" height="1191">
+	<SubTexture name="spr_stradayy_0" x="355" y="594" width="105" height="204" frameX="-0" frameY="-0" frameWidth="105" frameHeight="204"/>
+	<SubTexture name="spr_straddown_0" x="572" y="794" width="114" height="185" frameX="-1" frameY="-2" frameWidth="123" frameHeight="188"/>
+	<SubTexture name="spr_straddown_1" x="770" y="206" width="117" height="182" frameX="-2" frameY="-5" frameWidth="123" frameHeight="188"/>
+	<SubTexture name="spr_straddown_2" x="413" y="1" width="115" height="185" frameX="-2" frameY="-3" frameWidth="123" frameHeight="188"/>
+	<SubTexture name="spr_straddown_3" x="334" y="801" width="114" height="184" frameX="-2" frameY="-3" frameWidth="123" frameHeight="188"/>
+	<SubTexture name="spr_straddown_4" x="327" y="988" width="112" height="184" frameX="-2" frameY="-3" frameWidth="123" frameHeight="188"/>
+	<SubTexture name="spr_straddown_5" x="572" y="599" width="113" height="184" frameX="-2" frameY="-3" frameWidth="123" frameHeight="188"/>
+	<SubTexture name="spr_straddown_6" x="566" y="982" width="112" height="184" frameX="-2" frameY="-3" frameWidth="123" frameHeight="188"/>
+	<SubTexture name="spr_straddown_7" x="451" y="804" width="112" height="185" frameX="-1" frameY="-2" frameWidth="123" frameHeight="188"/>
+	<SubTexture name="spr_straddownalt_0" x="442" y="992" width="107" height="179" frameX="-1" frameY="-8" frameWidth="111" frameHeight="187"/>
+	<SubTexture name="spr_straddownalt_1" x="681" y="1000" width="106" height="181" frameX="-1" frameY="-6" frameWidth="111" frameHeight="187"/>
+	<SubTexture name="spr_straddownalt_2" x="1092" y="1" width="103" height="182" frameX="-2" frameY="-5" frameWidth="111" frameHeight="187"/>
+	<SubTexture name="spr_straddownalt_3" x="962" y="412" width="104" height="183" frameX="-2" frameY="-4" frameWidth="111" frameHeight="187"/>
+	<SubTexture name="spr_straddownalt_4" x="996" y="206" width="103" height="183" frameX="-2" frameY="-4" frameWidth="111" frameHeight="187"/>
+	<SubTexture name="spr_straddownalt_5" x="1069" y="392" width="102" height="183" frameX="-3" frameY="-4" frameWidth="111" frameHeight="187"/>
+	<SubTexture name="spr_straddownalt_6" x="790" y="1001" width="102" height="184" frameX="-3" frameY="-3" frameWidth="111" frameHeight="187"/>
+	<SubTexture name="spr_straddownalt_7" x="895" y="1001" width="102" height="184" frameX="-3" frameY="-3" frameWidth="111" frameHeight="187"/>
+	<SubTexture name="spr_stradidle_0" x="112" y="784" width="106" height="201" frameX="-0" frameY="-5" frameWidth="111" frameHeight="206"/>
+	<SubTexture name="spr_stradidle_1" x="1" y="783" width="108" height="200" frameX="-0" frameY="-6" frameWidth="111" frameHeight="206"/>
+	<SubTexture name="spr_stradidle_2" x="744" y="591" width="108" height="200" frameX="-0" frameY="-6" frameWidth="111" frameHeight="206"/>
+	<SubTexture name="spr_stradidle_3" x="770" y="1" width="107" height="202" frameX="-0" frameY="-4" frameWidth="111" frameHeight="206"/>
+	<SubTexture name="spr_stradidle_4" x="463" y="599" width="106" height="202" frameX="-0" frameY="-4" frameWidth="111" frameHeight="206"/>
+	<SubTexture name="spr_stradidle_5" x="880" y="1" width="104" height="202" frameX="-0" frameY="-4" frameWidth="111" frameHeight="206"/>
+	<SubTexture name="spr_stradidle_6" x="890" y="206" width="103" height="203" frameX="-1" frameY="-3" frameWidth="111" frameHeight="206"/>
+	<SubTexture name="spr_stradidle_7" x="689" y="794" width="102" height="203" frameX="-2" frameY="-3" frameWidth="111" frameHeight="206"/>
+	<SubTexture name="spr_stradidle_8" x="855" y="591" width="104" height="202" frameX="-0" frameY="-4" frameWidth="111" frameHeight="206"/>
+	<SubTexture name="spr_stradleft_0" x="139" y="196" width="133" height="191" frameX="-4" frameY="-5" frameWidth="143" frameHeight="196"/>
+	<SubTexture name="spr_stradleft_1" x="1" y="1" width="137" height="190" frameX="-2" frameY="-6" frameWidth="143" frameHeight="196"/>
+	<SubTexture name="spr_stradleft_2" x="1" y="194" width="135" height="191" frameX="-4" frameY="-5" frameWidth="143" frameHeight="196"/>
+	<SubTexture name="spr_stradleft_3" x="141" y="1" width="135" height="192" frameX="-4" frameY="-4" frameWidth="143" frameHeight="196"/>
+	<SubTexture name="spr_stradleft_4" x="275" y="196" width="133" height="191" frameX="-5" frameY="-5" frameWidth="143" frameHeight="196"/>
+	<SubTexture name="spr_stradleft_5" x="279" y="1" width="131" height="192" frameX="-6" frameY="-4" frameWidth="143" frameHeight="196"/>
+	<SubTexture name="spr_stradleft_6" x="1" y="388" width="131" height="192" frameX="-6" frameY="-4" frameWidth="143" frameHeight="196"/>
+	<SubTexture name="spr_stradleft_7" x="135" y="390" width="130" height="192" frameX="-6" frameY="-4" frameWidth="143" frameHeight="196"/>
+	<SubTexture name="spr_stradleftalt_0" x="107" y="988" width="102" height="202" frameX="-4" frameY="-3" frameWidth="109" frameHeight="205"/>
+	<SubTexture name="spr_stradleftalt_1" x="1" y="986" width="103" height="202" frameX="-1" frameY="-3" frameWidth="109" frameHeight="205"/>
+	<SubTexture name="spr_stradleftalt_2" x="794" y="796" width="102" height="202" frameX="-2" frameY="-3" frameWidth="109" frameHeight="205"/>
+	<SubTexture name="spr_stradleftalt_3" x="987" y="1" width="102" height="202" frameX="-2" frameY="-3" frameWidth="109" frameHeight="205"/>
+	<SubTexture name="spr_stradleftalt_4" x="899" y="796" width="102" height="202" frameX="-3" frameY="-3" frameWidth="109" frameHeight="205"/>
+	<SubTexture name="spr_stradleftalt_5" x="221" y="983" width="103" height="202" frameX="-3" frameY="-3" frameWidth="109" frameHeight="205"/>
+	<SubTexture name="spr_stradleftalt_6" x="899" y="796" width="102" height="202" frameX="-3" frameY="-3" frameWidth="109" frameHeight="205"/>
+	<SubTexture name="spr_stradleftalt_7" x="899" y="796" width="102" height="202" frameX="-4" frameY="-3" frameWidth="109" frameHeight="205"/>
+	<SubTexture name="spr_stradleftalt_8" x="899" y="796" width="102" height="202" frameX="-4" frameY="-3" frameWidth="109" frameHeight="205"/>
+	<SubTexture name="spr_stradpause_0" x="1004" y="598" width="95" height="198" frameX="-0" frameY="-0" frameWidth="95" frameHeight="198"/>
+	<SubTexture name="spr_stradright_0" x="1094" y="986" width="91" height="183" frameX="-2" frameY="-6" frameWidth="98" frameHeight="189"/>
+	<SubTexture name="spr_stradright_1" x="1098" y="799" width="91" height="182" frameX="-4" frameY="-7" frameWidth="98" frameHeight="189"/>
+	<SubTexture name="spr_stradright_2" x="1102" y="186" width="94" height="183" frameX="-2" frameY="-6" frameWidth="98" frameHeight="189"/>
+	<SubTexture name="spr_stradright_3" x="1000" y="1001" width="91" height="184" frameX="-2" frameY="-5" frameWidth="98" frameHeight="189"/>
+	<SubTexture name="spr_stradright_4" x="1004" y="799" width="91" height="184" frameX="-2" frameY="-5" frameWidth="98" frameHeight="189"/>
+	<SubTexture name="spr_stradright_5" x="1004" y="799" width="91" height="184" frameX="-2" frameY="-5" frameWidth="98" frameHeight="189"/>
+	<SubTexture name="spr_stradright_6" x="1004" y="799" width="91" height="184" frameX="-2" frameY="-5" frameWidth="98" frameHeight="189"/>
+	<SubTexture name="spr_stradright_7" x="1004" y="799" width="91" height="184" frameX="-2" frameY="-5" frameWidth="98" frameHeight="189"/>
+	<SubTexture name="spr_stradrightalt_0" x="654" y="198" width="113" height="193" frameX="-1" frameY="-9" frameWidth="122" frameHeight="202"/>
+	<SubTexture name="spr_stradrightalt_1" x="242" y="589" width="110" height="195" frameX="-6" frameY="-7" frameWidth="122" frameHeight="202"/>
+	<SubTexture name="spr_stradrightalt_2" x="221" y="787" width="110" height="193" frameX="-7" frameY="-9" frameWidth="122" frameHeight="202"/>
+	<SubTexture name="spr_stradrightalt_3" x="744" y="394" width="112" height="194" frameX="-5" frameY="-8" frameWidth="122" frameHeight="202"/>
+	<SubTexture name="spr_stradrightalt_4" x="654" y="1" width="113" height="194" frameX="-2" frameY="-8" frameWidth="122" frameHeight="202"/>
+	<SubTexture name="spr_stradrightalt_5" x="627" y="402" width="114" height="194" frameX="-1" frameY="-8" frameWidth="122" frameHeight="202"/>
+	<SubTexture name="spr_stradrightalt_6" x="508" y="402" width="116" height="194" frameX="-0" frameY="-8" frameWidth="122" frameHeight="202"/>
+	<SubTexture name="spr_stradrightalt_7" x="508" y="402" width="116" height="194" frameX="-0" frameY="-8" frameWidth="122" frameHeight="202"/>
+	<SubTexture name="spr_stradrightalt_8" x="508" y="402" width="116" height="194" frameX="-0" frameY="-8" frameWidth="122" frameHeight="202"/>
+	<SubTexture name="spr_stradup_0" x="1102" y="578" width="73" height="195" frameX="-0" frameY="-0" frameWidth="73" frameHeight="195"/>
+	<SubTexture name="spr_stradupalt_0" x="411" y="196" width="119" height="197" frameX="-1" frameY="-8" frameWidth="123" frameHeight="205"/>
+	<SubTexture name="spr_stradupalt_1" x="533" y="1" width="118" height="198" frameX="-2" frameY="-7" frameWidth="123" frameHeight="205"/>
+	<SubTexture name="spr_stradupalt_2" x="533" y="202" width="118" height="197" frameX="-2" frameY="-8" frameWidth="123" frameHeight="205"/>
+	<SubTexture name="spr_stradupalt_3" x="1" y="583" width="118" height="197" frameX="-2" frameY="-8" frameWidth="123" frameHeight="205"/>
+	<SubTexture name="spr_stradupalt_4" x="122" y="585" width="117" height="196" frameX="-2" frameY="-9" frameWidth="123" frameHeight="205"/>
+	<SubTexture name="spr_stradupalt_5" x="389" y="396" width="116" height="195" frameX="-3" frameY="-9" frameWidth="123" frameHeight="205"/>
+	<SubTexture name="spr_stradupalt_6" x="268" y="390" width="118" height="196" frameX="-2" frameY="-9" frameWidth="123" frameHeight="205"/>
+	<SubTexture name="spr_stradupalt_7" x="268" y="390" width="118" height="196" frameX="-2" frameY="-9" frameWidth="123" frameHeight="205"/>
+	<SubTexture name="spr_stradupalt_8" x="268" y="390" width="118" height="196" frameX="-2" frameY="-9" frameWidth="123" frameHeight="205"/>
+</TextureAtlas>

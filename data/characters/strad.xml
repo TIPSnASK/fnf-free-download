@@ -1,0 +1,9 @@
+<!DOCTYPE codename-engine-character>
+<character antialiasing="false" holdTime="8" camx="-74" camy="63" isPlayer="false" flipX="false">
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_stradidle" name="idle"/>
+	<anim x="38" loop="false" y="-8" fps="12" anim="spr_stradleft_" name="singLEFT"/>
+	<anim x="3" loop="false" y="-19" fps="12" anim="spr_straddown_" name="singDOWN"/>
+	<anim x="-1" loop="false" y="-11" fps="12" anim="spr_stradup_" name="singUP"/>
+	<anim x="-12" loop="false" y="-15" fps="12" anim="spr_stradright_" name="singRIGHT"/>
+	<anim x="-6" loop="false" y="-9" fps="12" anim="spr_stradpause" name="paused"/>
+</character>

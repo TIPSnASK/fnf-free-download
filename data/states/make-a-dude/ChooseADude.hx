@@ -134,7 +134,7 @@ function postCreate() {
 	add(backButton);
 
 	editButton = new UIButton(FlxG.width - backButton.bWidth - 4, 4, "make a dude", () -> {
-		FlxG.switchState(new UIState(true, "editors/make-a-dude/MakeADude"));
+		FlxG.switchState(new UIState(true, "make-a-dude/MakeADude"));
 	}, backButton.bWidth, 32);
 	add(editButton);
 

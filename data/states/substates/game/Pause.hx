@@ -85,7 +85,7 @@ function selectItem(selected:String) {
 			FlxG.switchState(new OptionsMenu());
 		case 'Change Skin':
 			fromGame = true;
-			FlxG.switchState(new UIState(true, "editors/make-a-dude/ChooseADude"));
+			FlxG.switchState(new UIState(true, "make-a-dude/ChooseADude"));
 		case 'Quit':
 			fromGame = false;
 			if (PlayState.isStoryMode)
