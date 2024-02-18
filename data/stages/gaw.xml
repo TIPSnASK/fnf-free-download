@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-stage>
-<stage zoom="1" name="gaw" folder="game/stages/">
+<stage zoom="1" name="gaw" folder="game/stages/gaw/">
 	<combo x="-2147483647"/>
 
 	<sprite name="bg" x="0" y="0" sprite="tutorialback" antialiasing="false"/>
