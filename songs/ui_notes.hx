@@ -81,7 +81,7 @@ function onStrumCreation(event) {
 		default: 0.53;
 		case 0: 0.025;
 	}) + (44 * event.strumID), 24);
-	event.strum.scrollSpeed = 0.4 * PlayState.SONG.scrollSpeed;
+	event.strum.scrollSpeed = 0.55 * PlayState.SONG.scrollSpeed;
 	
 	event.cancel();
 	

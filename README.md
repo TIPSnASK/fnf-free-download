@@ -10,6 +10,10 @@ Everything seen here (except most of the code) belongs Tyler_mon, Funne, and Dek
 
 **development on this started before free download was cancelled on 12/31/2023, so i have no clue if working on a port like this is allowed but im still gonna work on it for now i guess**
 
+***THIS PORT USES THE `onDraw` FUNCTION!! SOME THINGS MAY BREAK IF YOU HAVENT COMPILED YOUR OWN CODENAME ENGINE BUILD***
+
+***THIS HAPPENS BECAUSE ACTION BUILDS USE THE WRONG FLIXEL REPOSITORY. I REPORTED THE PROBLEM A WHILE AGO BUT I DONT KNOW IF THEY'RE FIXING IT OR NOT***
+
 the port's being made on a dev build so some stuff probably wont work yet until the engine releases an update publicly.
 hopefully if everything goes right though, it'll work fine on public builds
 

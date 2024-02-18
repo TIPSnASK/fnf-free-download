@@ -4,16 +4,13 @@ import flixel.ui.FlxBar;
 import flixel.ui.FlxBarFillDirection;
 import karaoke.game.FreeIcon;
 
-public var healthBarShadow:FunkinSprite;
-public var flowBarShadow:FunkinSprite;
-public var flowBarBG:FunkinSprite;
 public var flowBar:FlxBar;
 public var flow:Float = 0;
 
 public var scoreTxtShadow:FunkinText;
 
-public var playerIcon:FunkinSprite;
-public var opponentIcon:FunkinSprite;
+public var playerIcon:FreeIcon;
+public var opponentIcon:FreeIcon;
 
 public var uiskin:String = "default";
 
@@ -43,6 +40,24 @@ function onSongStart() {
 	canPause = true;
 }
 
+// WON'T WORK IF YOU GOT CODENAME THROUGH ACTION BUILDS!!
+var outlineColor:FlxColor = 0xFF000000;
+function outlineDraw(spr:FlxSprite) {
+	var w:Int = 2;
+
+	spr.setGraphicSize(spr.width+w, spr.height+w);
+	spr.colorTransform.color = outlineColor;
+	spr.offset.set(-2, -2);
+	spr.draw();
+
+	spr.offset.set();
+	spr.draw();
+
+	spr.setGraphicSize(spr.width-w, spr.height-w);
+	spr.setColorTransform();
+	spr.draw();
+}
+
 function postCreate() {
 	canPause = false;
 	for (sl in strumLines.members) {
@@ -58,57 +73,47 @@ function postCreate() {
 	healthBar.createFilledBar(0xFF800080, 0xFFFFFF00);
 	healthBar.cameras = [camHUD];
 	healthBar.screenCenter(FlxAxes.X);
-	add(healthBar);
 
-	healthBarShadow = new FunkinSprite(healthBar.x+2, healthBar.y+(downscroll ? -4 : 2)).makeSolid(healthBar.width+2, healthBar.height+2, 0xFF000000);
-	healthBarShadow.scrollFactor.set();
-	healthBarShadow.cameras = [camHUD];
-	insert(members.indexOf(healthBar), healthBarShadow);
-	
-	healthBarBG = new FunkinSprite(healthBar.x-2, healthBar.y-2).makeSolid(healthBar.width+4, healthBar.height+4, 0xFF000000);
-	healthBarBG.scrollFactor.set();
-	healthBarBG.cameras = [camHUD];
-	insert(members.indexOf(healthBar), healthBarBG);
+	// WON'T WORK IF YOU GOT CODENAME THROUGH ACTION BUILDS!!
+	healthBar.onDraw = outlineDraw;
+
+	add(healthBar);
 
 	flowBar = new FlxBar(0, healthBar.y - 19, FlxBarFillDirection.RIGHT_TO_LEFT, FlxG.width*0.4, 8);
 	flowBar.scrollFactor.set();
 	flowBar.createFilledBar(0xFF12484B, 0xFF37949A);
 	flowBar.cameras = [camHUD];
 	flowBar.screenCenter(FlxAxes.X);
+
+	// WON'T WORK IF YOU GOT CODENAME THROUGH ACTION BUILDS!!
+	flowBar.onDraw = outlineDraw;
+
 	add(flowBar);
 
-	flowBarShadow = new FunkinSprite(flowBar.x+2, flowBar.y+(downscroll ? -4 : 2)).makeSolid(flowBar.width+2, flowBar.height+2, 0xFF000000);
-	flowBarShadow.scrollFactor.set();
-	flowBarShadow.cameras = [camHUD];
-	insert(members.indexOf(healthBar), flowBarShadow);
-
-	flowBarBG = new FunkinSprite(flowBar.x-2, flowBar.y-2).makeSolid(flowBar.width+4, flowBar.height+4, 0xFF000000);
-	flowBarBG.scrollFactor.set();
-	flowBarBG.cameras = [camHUD];
-	insert(members.indexOf(flowBar), flowBarBG);
-
-	scoreTxt = new FunkinText(10, healthBarBG.y + healthBarBG.height, FlxG.width-20, 'score: 0 | misses: 0', 16, true);
+	scoreTxt = new FunkinText(10, healthBar.y + healthBar.height + 2, FlxG.width-20, 'score: 0 | misses: 0', 16, true);
 	scoreTxt.alignment = 'center';
 	scoreTxt.antialiasing = false;
 	scoreTxt.scrollFactor.set();
 	scoreTxt.borderSize = 2;
 	scoreTxt.cameras = [camHUD];
 	scoreTxt.font = Paths.font("COMICBD.TTF");
+
+	// WON'T WORK IF YOU GOT CODENAME THROUGH ACTION BUILDS!!
+	scoreTxt.onDraw = (spr:FunkinText) -> {
+		spr.colorTransform.color = outlineColor;
+		spr.offset.set(-2, -2);
+		spr.draw();
+
+		spr.setColorTransform();
+		spr.offset.set();
+		spr.draw();
+	};
+
 	add(scoreTxt);
 
-	scoreTxtShadow = new FunkinText(scoreTxt.x+2, scoreTxt.y+2, FlxG.width-20, 'score: 0 | misses: 0', 16, true);
-	scoreTxtShadow.alignment = 'center';
-	scoreTxtShadow.antialiasing = false;
-	scoreTxtShadow.scrollFactor.set();
-	scoreTxtShadow.borderSize = 1;
-	scoreTxtShadow.color = 0xFF000000;
-	scoreTxtShadow.cameras = [camHUD];
-	scoreTxtShadow.font = Paths.font("COMICBD.TTF");
-	insert(members.indexOf(scoreTxt), scoreTxtShadow);
-
 	// lunarcleint figured this out thank you lunar holy shit 🙏
-	scoreTxt.textField.antiAliasType = scoreTxtShadow.textField.antiAliasType = 0; // advanced
-	scoreTxt.textField.sharpness = scoreTxtShadow.textField.sharpness = 400; // max i think idk thats what it says
+	scoreTxt.textField.antiAliasType = 0; // advanced
+	scoreTxt.textField.sharpness = 400; // max i think idk thats what it says
 
 	// var ref:FunkinSprite = new FunkinSprite().loadGraphic(Paths.image('ref'));
 	// ref.zoomFactor = 0;
@@ -132,12 +137,21 @@ function postCreate() {
 
 	switch(uiskin) {
 		case "gaw":
-			for (i in [healthBarShadow, healthBarBG, scoreTxtShadow, flowBarBG, flowBarShadow])
-				i.colorTransform.color = 0xFFFFFFFF;
+			outlineColor = 0xFFFFFFFF;
 			
 			healthBar.createFilledBar(0xFF000000, 0xFF000000);
 			flowBar.createFilledBar(0xFF000000, 0xFFFFFFFF);
 
+			scoreTxt.onDraw = (spr:FunkinText) -> {
+				spr.colorTransform.color = outlineColor;
+				spr.offset.set(-2, -2);
+				spr.draw();
+		
+				spr.setColorTransform();
+				spr.color = 0xFF000000;
+				spr.offset.set();
+				spr.draw();
+			};
 			scoreTxt.setFormat(scoreTxt.font, scoreTxt.size, 0xFF000000, scoreTxt.alignment, scoreTxt.borderStyle, 0xFFFFFFFF);
 	}
 }
@@ -146,11 +160,9 @@ var timer:Float = 0;
 function postUpdate(elapsed:Float) {
 	timer += elapsed;
 
-	scoreTxt.text = scoreTxtShadow.text = 'score: ' + songScore + ' | misses: ' + misses;
+	scoreTxt.text = 'score: ' + songScore + ' | misses: ' + misses;
 
 	flowBar.y = Std.int((healthBar.y - 18) + (Math.sin(timer * 4.5) + 1) * 1.25); // tank you wizard 🙏
-	flowBarShadow.y = flowBar.y+(downscroll ? -4 : 2);
-	flowBarBG.y = flowBar.y - 2;
 
 	playerIcon.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 1, 0)) - 5);
 	opponentIcon.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 1, 0))) - (opponentIcon.width - 10);

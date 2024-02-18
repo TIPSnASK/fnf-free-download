@@ -154,8 +154,6 @@ function new() {
 		File.saveContent("mods/free-download-skins.json", "{\"selected\": \"default\", \"skins\": []}");
 	}
 
-	FlxG.autoPause = false; // sorry but i gotta be biblically accurate or else.....
-
 	FlxG.width = FlxG.initialWidth = 400;
 	FlxG.height = FlxG.initialHeight = 400;
 	window.resize(FlxG.width*2, FlxG.height*2);
@@ -195,6 +193,8 @@ function postStateSwitch() {
 
 	fullscreenSound = FlxG.sound.load(Paths.sound("sfx/snd_weirdnoise"));
 	fullscreenSound.persist = true;
+
+	FlxG.autoPause = false; // sorry but i gotta be biblically accurate or else.....
 }
 
 function update(elapsed:Float) {
