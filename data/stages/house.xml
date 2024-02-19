@@ -2,10 +2,10 @@
 <stage zoom="1" name="gaw" folder="game/stages/house/">
 	<combo x="-2147483647"/>
 
-	<sprite name="back" x="0" y="0" sprite="back" antialiasing="false"/>
+	<sprite name="back" x="0" y="0" sprite="back" antialiasing="false" scroll="0.9"/>
 	<sprite name="pool" x="0" y="0" sprite="pool" antialiasing="false"/>
 
-	<girlfriend x="400" y="231"/>
-	<dad x="61" y="216"/>
-	<boyfriend x="400" y="231"/>
+	<girlfriend x="400" y="125"/>
+	<dad x="260" y="75"/>
+	<boyfriend x="540" y="177"/>
 </stage>

@@ -1,5 +1,6 @@
 <!DOCTYPE codename-mod-options>
 <menu name="FNF Free Download" desc="yup">
+	<checkbox id="freeFPS" name="Change FPS"/>
 	<checkbox id="freeFLASH" name="Flashing Lights"/>
 	<checkbox id="freeINTROSPLASH" name="Show Intro Splash"/>
 </menu>

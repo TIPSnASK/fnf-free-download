@@ -40,6 +40,7 @@ function create() {
 			curElements.remove(i);
 
 	cutsceneCam = new FlxCamera();
+	cutsceneCam.bgColor = 0xFF000000;
 	FlxG.cameras.add(cutsceneCam, false);
 	
 	curSprite = new FunkinSprite().makeSolid();

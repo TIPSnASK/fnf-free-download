@@ -1,4 +1,17 @@
 {
+	"beatsPerMeasure": 4,
+	"opponentModeAllowed": false,
+	"coopAllowed": false,
+	"stepsPerBeat": 4,
 	"bpm": 100,
-	"needsVoices": false
+	"difficulties": [
+		"EASY"
+	],
+	"needsVoices": false,
+	"parsedColor": -7376387,
+	"displayName": "summer",
+	"icon": "face",
+	"name": "summer",
+	"color": "#8F71FD",
+	"customValues": {}
 }

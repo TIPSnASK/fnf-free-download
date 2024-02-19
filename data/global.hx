@@ -143,12 +143,10 @@ function new() {
 
 	if (FlxG.save.data.freeINTROSPLASH == null) FlxG.save.data.freeINTROSPLASH = true;
 	if (FlxG.save.data.freeFLASH == null) FlxG.save.data.freeFLASH = true;
+	if (FlxG.save.data.freeFPS == null) FlxG.save.data.freeFPS = true;
 
 	window.title = "Made with FNF: Codename Engine";
 	changeWindowIcon("default");
-
-	// Options.framerate = 40; // commented because annoying
-	// Options.applySettings();
 
 	if (!FileSystem.exists("mods/free-download-skins.json")) {
 		File.saveContent("mods/free-download-skins.json", "{\"selected\": \"default\", \"skins\": []}");
@@ -162,6 +160,10 @@ function new() {
 
 	window.x += 220;
 	window.y -= 40;
+
+	if (FlxG.save.data.freeFPS) {
+		FlxG.drawFramerate = FlxG.updateFramerate = 40;
+	}
 }
 
 function preStateSwitch() {
@@ -212,4 +214,5 @@ function destroy() {
 	window.resize(FlxG.width, FlxG.height);
 	window.resizable = true;
 	FlxG.autoPause = true;
+	FlxG.drawFramerate = FlxG.updateFramerate = Options.framerate;
 }

@@ -10,4 +10,6 @@
 	<anim x="9" loop="false" y="6" fps="12" anim="spr_dudeupmiss" name="singUPmiss"/>
 	<anim x="7" loop="false" y="3" fps="12" anim="spr_duderightmiss" name="singRIGHTmiss"/>
 	<anim x="0" loop="false" y="0" fps="12" anim="spr_dudepause" name="paused"/>
+	<anim x="-8" loop="false" y="4" fps="12" anim="spr_dudeayy_" name="ayy"/>
+	<anim x="-8" loop="false" y="4" fps="12" anim="spr_dudeayysuck_" name="ayy-bad"/>
 </character>
