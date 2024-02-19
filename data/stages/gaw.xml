@@ -3,7 +3,7 @@
 	<combo x="-2147483647"/>
 
 	<sprite name="bg" x="0" y="0" sprite="tutorialback" antialiasing="false"/>
-	<sprite name="bg" x="123" y="265" sprite="tutorialbglight" antialiasing="false"/>
+	<sprite name="light" x="123" y="265" sprite="tutorialbglight" antialiasing="false"/>
 	<sprite name="ladyAndTheTramp" x="123" y="189" sprite="tutorialbackguys" antialiasing="false">
 		<anim name="idle" anim="spr_tutorialbackguys" type="onbeat" />
 	</sprite>
