@@ -10,6 +10,11 @@ function onEvent(e)
 					FlxG.sound.play(Paths.sound("gameplay/ayy/" + character.curCharacter));
 				}
 			}
-		else
-			strumLines.members[e.event.params[0]].characters[Std.parseInt(e.event.params[1])].playAnim(animToPlay, true, "MISS");
+		else {
+			var character:Character = strumLines.members[e.event.params[0]].characters[Std.parseInt(e.event.params[1])];
+			character.playAnim(animToPlay, true, "MISS");
+			if (Assets.exists(Paths.sound("gameplay/ayy/" + character.curCharacter))) {
+				FlxG.sound.play(Paths.sound("gameplay/ayy/" + character.curCharacter));
+			}
+		}
 	}
