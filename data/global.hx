@@ -160,10 +160,6 @@ function new() {
 
 	window.x += 220;
 	window.y -= 40;
-
-	if (FlxG.save.data.freeFPS) {
-		FlxG.drawFramerate = FlxG.updateFramerate = 40;
-	}
 }
 
 function preStateSwitch() {
@@ -190,13 +186,18 @@ function postStateSwitch() {
 
 	window.title = "Made with FNF: Codename Engine";
 
-	for (cam in FlxG.cameras.list)
+	for (cam in FlxG.cameras.list) {
 		cam.antialiasing = false;
+	}
 
 	fullscreenSound = FlxG.sound.load(Paths.sound("sfx/snd_weirdnoise"));
 	fullscreenSound.persist = true;
 
 	FlxG.autoPause = false; // sorry but i gotta be biblically accurate or else.....
+
+	if (FlxG.save.data.freeFPS) {
+		FlxG.drawFramerate = FlxG.updateFramerate = 40;
+	}	
 }
 
 function update(elapsed:Float) {

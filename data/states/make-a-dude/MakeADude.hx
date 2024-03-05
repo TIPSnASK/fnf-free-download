@@ -282,7 +282,7 @@ function postCreate() {
 	loadButton.color = 0xFF0000FF;
 
 	cancelButton = new UIButton(0, dumbBar2.y-37, "cancel", () -> {
-		FlxG.switchState(new UIState(true, "editors/make-a-dude/ChooseADude"));
+		FlxG.switchState(new UIState(true, "make-a-dude/ChooseADude"));
 	}, 72, 32);
 	cancelButton.x = loadButton.x-loadButton.bWidth-5;
 	add(cancelButton);
