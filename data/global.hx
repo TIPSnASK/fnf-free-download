@@ -157,9 +157,6 @@ function new() {
 	window.resize(FlxG.width*2, FlxG.height*2);
 	window.resizable = false;
 	for (camera in FlxG.cameras.list) camera.setSize(FlxG.width, FlxG.height);
-
-	window.x += 220;
-	window.y -= 40;
 }
 
 function preStateSwitch() {
