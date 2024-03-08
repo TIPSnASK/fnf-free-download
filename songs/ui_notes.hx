@@ -1,7 +1,7 @@
 public var noteskin:String = "default";
 
 function postCreate() {
-	ghostTapping = false;
+	// ghostTapping = false; // accessibility...
 }
 
 function onNoteHit(event) {
