@@ -80,10 +80,11 @@ static function coolText(text:String):Array<String> {
 	return [for(line in text.split("\n")) if ((trim = StringTools.trim(line)) != "" && !StringTools.startsWith(trim, "#")) trim];
 }
 
-static function loadDudeSkin(shader:CustomShader, name:String) {
+static function loadDudeSkin(shader:CustomShader, name:String):Bool {
 	var path:String = Paths.txt("skins/" + name);
 	var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
 	var dumbData:Array<String> = [];
+	var whatDoINameThisVariable:Bool = false;
 
 	if (Assets.exists(path))
 		dumbData = CoolUtil.coolTextFile(path);
@@ -91,6 +92,9 @@ static function loadDudeSkin(shader:CustomShader, name:String) {
 		for (dumb in userSkins.skins) {
 			if (dumb.name == name) {
 				dumbData = coolText(dumb.data);
+				if (dumb.clickedGenderButton != null && dumb.clickedGenderButton == true)
+					whatDoINameThisVariable = true;
+				break;
 			}
 		}
 	}
@@ -124,10 +128,27 @@ static function loadDudeSkin(shader:CustomShader, name:String) {
 		trace("that skin doesnt exist!");
 		loadDudeSkin(shader, "default");
 	}
+
+	return whatDoINameThisVariable;
 }
 
-static function usePlayerSkin(shader:CustomShader) { // for convenience
-	loadDudeSkin(shader, Json.parse(File.getContent("mods/free-download-skins.json")).selected);
+static function iKnowWhatYouAre():Bool {
+	var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
+	var yeah:Bool = false;
+
+	for (dumb in userSkins.skins) {
+		if (dumb.name == userSkins.selected) {
+			if (dumb.clickedGenderButton != null)
+				yeah = dumb.clickedGenderButton;
+			break;
+		}
+	}
+
+	return yeah;
+}
+
+static function usePlayerSkin(shader:CustomShader):Bool { // for convenience
+	return loadDudeSkin(shader, Json.parse(File.getContent("mods/free-download-skins.json")).selected);
 }
 
 static function playMenuMusic() {

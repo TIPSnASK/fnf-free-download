@@ -1,5 +1,5 @@
 # **[FNF Free Download](https://gamejolt.com/games/fridaynightfunkin/705302): Codename Engine Port**
-**This is a fanmade port of FNF Free Download to Codename Engine.
+**This is a fanmade port of FNF Free Download to Codename Engine (with some extra things).
 Everything seen here (except most of the code) belongs Tyler_mon, Funne, and Deklaswas.**
 
 *This port is only being made out of love and care for FNF Free Download, and nothing about this port intends to cause any harm. All development on this port will be stopped immediately if someone from the FNF Free Download team requests for it to be stopped.*

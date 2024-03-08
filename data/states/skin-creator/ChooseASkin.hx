@@ -1,6 +1,7 @@
 import haxe.Json;
 import funkin.editors.ui.UIButton;
 import funkin.editors.ui.UIText;
+import funkin.editors.ui.UITextBox;
 import funkin.editors.ui.UIState;
 import funkin.editors.ui.UIColorwheel;
 import sys.io.File;
@@ -13,6 +14,9 @@ var camUI:FlxCamera;
 var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
 var backButton:UIButton;
 var editButton:UIButton;
+
+var yourName:UITextBox;
+var theyAddedPronounsToFreeDownload:UITextBox;
 
 var skinText:UIText;
 var enterText:UIText;
@@ -99,8 +103,19 @@ function create() {
 	selectSound = FlxG.sound.load(Paths.sound("gameplay/ayy/dude"));
 }
 
+var whatDoIFuckingCallThisDamnVariable:Bool = false;
 function updateSkin() {
-	loadDudeSkin(dudeColors, skins[curSelected].name);
+	var what:Bool = loadDudeSkin(dudeColors, skins[curSelected].name);
+
+	if (what && whatDoIFuckingCallThisDamnVariable != true) {
+		dude.loadGraphic(Paths.image("editors/make-a-dude/player-f"));
+		dude.screenCenter();
+		whatDoIFuckingCallThisDamnVariable = true;
+	} else if (!what && whatDoIFuckingCallThisDamnVariable != false) {
+		dude.loadGraphic(Paths.image("editors/make-a-dude/dude"));
+		dude.screenCenter();
+		whatDoIFuckingCallThisDamnVariable = false;
+	}
 
 	skinText.text = skins[curSelected].name + "\n" + (skins[curSelected].name == userSkins.selected ? "$[SELECTED]$" : "%[UNSELECTED]%");
 	skinText.applyMarkup(skinText.text, markupRules);
@@ -119,7 +134,7 @@ function postCreate() {
 	dumbBar2.zoomFactor = 0;
 	add(dumbBar2);
 
-	var dumbText:UIText = new UIText(0, 6, FlxG.width, "choose a dude", 16, 0xFFFFFFFF, true);
+	var dumbText:UIText = new UIText(0, 6, FlxG.width, "choose a skin", 16, 0xFFFFFFFF, true);
 	dumbText.alignment = 'center';
 	dumbText.antialiasing = false;
 	// lunarcleint figured this out thank you lunar holy shit 🙏
@@ -134,68 +149,82 @@ function postCreate() {
 	}, 128, 32);
 	add(backButton);
 
-	editButton = new UIButton(FlxG.width - backButton.bWidth - 4, 4, "make a dude", () -> {
-		FlxG.switchState(new UIState(true, "make-a-dude/MakeADude"));
+	editButton = new UIButton(FlxG.width - backButton.bWidth - 4, 4, "skin creator", () -> {
+		FlxG.switchState(new UIState(true, "skin-creator/SkinCreator"));
 	}, backButton.bWidth, 32);
 	add(editButton);
 
-	for (i in [dumbBar1, dumbBar2, dumbText, backButton, editButton])
+	yourName = new UITextBox(5, dumbBar2.y + 4, userSkins.name, (FlxG.width/2) - 10, 32);
+	add(yourName);
+
+	theyAddedPronounsToFreeDownload = new UITextBox((FlxG.width/2), dumbBar2.y + 4, userSkins.pronouns, (FlxG.width/2) - 5, 32);
+	add(theyAddedPronounsToFreeDownload);
+
+	for (i in [dumbBar1, dumbBar2, dumbText, backButton, editButton, yourName, theyAddedPronounsToFreeDownload])
 		i.cameras = [camUI];
+}
+
+function destroy() {
+	userSkins.name = yourName.label.text;
+	userSkins.pronouns = theyAddedPronounsToFreeDownload.label.text;
+	File.saveContent("mods/free-download-skins.json", Json.stringify(userSkins));
 }
 
 var deletingDude:Bool = false;
 var canDelete:Bool = true;
 var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
 function update(elapsed:Float) {
-	if (controls.BACK && !deletingDude) {
-		FlxG.switchState(fromGame ? new PlayState() : new MainMenuState());
-	} else if (controls.BACK && deletingDude)  {
-		deletingDude = false;
-		enterText.text = "press enter to select\npress X to delete";
-	}
+	if (!yourName.focused && !theyAddedPronounsToFreeDownload.focused) {
+		if (controls.BACK && !deletingDude) {
+			FlxG.switchState(fromGame ? new PlayState() : new MainMenuState());
+		} else if (controls.BACK && deletingDude)  {
+			deletingDude = false;
+			enterText.text = "press enter to select\npress X to delete";
+		}
 
-	if ((controls.LEFT_P || controls.RIGHT_P) && !deletingDude) {
-		curSelected = FlxMath.wrap(curSelected + (controls.LEFT_P ? -1 : 1), 0, skins.length-1);
-		updateSkin();
-		arrows.x += controls.LEFT_P ? -5 : 5;
-		dude.x += controls.LEFT_P ? -10 : 10;
-	}
+		if ((controls.LEFT_P || controls.RIGHT_P) && !deletingDude) {
+			curSelected = FlxMath.wrap(curSelected + (controls.LEFT_P ? -1 : 1), 0, skins.length-1);
+			updateSkin();
+			arrows.x += controls.LEFT_P ? -5 : 5;
+			dude.x += controls.LEFT_P ? -10 : 10;
+		}
 
-	if (controls.ACCEPT && !deletingDude) {
-		userSkins.selected = skins[curSelected].name;
-		File.saveContent("mods/free-download-skins.json", Json.stringify(userSkins));
-		updateSkin();
-
-		dude.scale.set(1.1, 1.1);
-		selectSound.play(true);
-	}
-
-	if (FlxG.keys.justPressed.X && canDelete) {
-		if (!deletingDude) {
-			if (userSkins.skins.contains(skins[curSelected])) {
-				enterText.text = "press X again to delete this skin\npress BACK to cancel";
-				deletingDude = true;
-			} else {
-				enterText.text = "you can't delete this one silly!"; // it's not a user-created skin
-				canDelete = false;
-				FlxTween.shake(enterText, 0.01, 0.1);
-				new FlxTimer().start(2, (t:FlxTimer) -> {
-					enterText.text = "press enter to select\npress X to delete";
-					canDelete = true;
-				});
-			}
-		} else {
-			for (dumb in userSkins.skins) {
-				if (dumb.name == skins[curSelected].name) {
-					if (dumb.name == userSkins.selected) {
-						userSkins.selected = "default";
-					}
-					userSkins.skins.remove(dumb);
-				}
-			}
+		if (controls.ACCEPT && !deletingDude) {
+			userSkins.selected = skins[curSelected].name;
 			File.saveContent("mods/free-download-skins.json", Json.stringify(userSkins));
+			updateSkin();
 
-			FlxG.switchState(new UIState(true, "make-a-dude/ChooseADude"));
+			dude.scale.set(1.1, 1.1);
+			selectSound.play(true);
+		}
+
+		if (FlxG.keys.justPressed.X && canDelete) {
+			if (!deletingDude) {
+				if (userSkins.skins.contains(skins[curSelected])) {
+					enterText.text = "press X again to delete this skin\npress BACK to cancel";
+					deletingDude = true;
+				} else {
+					enterText.text = "you can't delete this one silly!"; // it's not a user-created skin
+					canDelete = false;
+					FlxTween.shake(enterText, 0.01, 0.1);
+					new FlxTimer().start(2, (t:FlxTimer) -> {
+						enterText.text = "press enter to select\npress X to delete";
+						canDelete = true;
+					});
+				}
+			} else {
+				for (dumb in userSkins.skins) {
+					if (dumb.name == skins[curSelected].name) {
+						if (dumb.name == userSkins.selected) {
+							userSkins.selected = "default";
+						}
+						userSkins.skins.remove(dumb);
+					}
+				}
+				File.saveContent("mods/free-download-skins.json", Json.stringify(userSkins));
+
+				FlxG.switchState(new UIState(true, "skin-creator/ChooseASkin"));
+			}
 		}
 	}
 

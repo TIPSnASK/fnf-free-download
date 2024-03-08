@@ -21,7 +21,8 @@ var saveButton:UIButton;
 var loadButton:UIButton;
 var cancelButton:UIButton;
 
-var setSkinButton:UIButton;
+var randomizeButton:UIButton;
+var genderButton:UIButton;
 
 var updateColors:Bool = false;
 
@@ -50,13 +51,18 @@ function loadSkin(name:String) {
 	var path:String = Paths.txt("skins/" + name);
 
 	var dumbData:Array<String> = [];
+	var yup:Bool = false;
 
 	if (Assets.exists(path))
 		dumbData = CoolUtil.coolTextFile(path);
 
 	for (dumb in userSkins.skins) {
-		if (dumb.name == name)
+		if (dumb.name == name) {
 			dumbData = coolText(dumb.data);
+			if (dumb.clickedGenderButton != null)
+				whatDoICallThisVariable = dumb.clickedGenderButton;
+			break;
+		}
 	}
 
 	if (dumbData != []) {
@@ -92,6 +98,11 @@ function loadSkin(name:String) {
 					colorData.shoes = theFlxColor;
 			}
 		}
+
+		if (whatDoICallThisVariable == true) {
+			dude.loadGraphic(Paths.image("editors/make-a-dude/" + (whatDoICallThisVariable ? "player-f" : "dude")));
+			dude.screenCenter();
+		}
 	} else {
 		dudeName.label.text = "that skin doesnt exist!";
 		loadSkin("default");
@@ -113,7 +124,7 @@ function create() {
 	dude.shader = colorSwap;
 	add(dude);
 
-	loadSkin("default");
+	loadSkin(userSkins.selected);
 }
 
 var showPickerButton:UIButton;
@@ -160,6 +171,7 @@ function iMightKillYou(picker:UIColorwheel, color:FlxColor) {
 	picker.updateWheel();
 }
 
+var whatDoICallThisVariable:Bool = false;
 function postCreate() {
 	STUPIDFUCKINGCAMERA = new FlxCamera();
 	STUPIDFUCKINGCAMERA.bgColor = 0;
@@ -173,7 +185,7 @@ function postCreate() {
 	dumbBar2.zoomFactor = 0;
 	add(dumbBar2);
 
-	var dumbText:UIText = new UIText(5, 0, 390, "MAKE A DUDE", 24, 0xFFFFFFFF, true);
+	var dumbText:UIText = new UIText(5, 0, 390, "SKIN CREATOR", 24, 0xFFFFFFFF, true);
 	dumbText.alignment = 'left';
 	dumbText.antialiasing = false;
 	// lunarcleint figured this out thank you lunar holy shit 🙏
@@ -220,12 +232,56 @@ function postCreate() {
 	}, 128);
 	add(showPickerButton);
 
-	setSkinButton = new UIButton(showPickerButton.x + showPickerButton.bWidth + 5, 46, "set as skin", () -> {
-		userSkins.selected = dudeName.label.text;
-		File.saveContent("mods/free-download-skins.json", Json.stringify(userSkins));
+	genderButton = new UIButton(5, 46 + showPickerButton.bHeight + 7, "the gender button", () -> {
+		whatDoICallThisVariable = !whatDoICallThisVariable;
+		dude.loadGraphic(Paths.image("editors/make-a-dude/" + (whatDoICallThisVariable ? "player-f" : "dude")));
+		dude.screenCenter();
+	}, 128);
+	add(genderButton);
+
+	randomizeButton = new UIButton(showPickerButton.x + showPickerButton.bWidth + 5, 46, "randomize", () -> {
+		// fuck you bitch your fault for using a randomize button
+
+		function randomColor():{r:Float, g:Float, b:Float, color:FlxColor} {
+			var color:FlxColor = FlxG.random.color(null, null, 1);
+
+			var red:Int = (color >> 16) & 0xff;
+			var green:Int = (color >> 8) & 0xff;
+			var blue:Int = (color) & 0xff;
+	
+			var redFloat:Float = red/255;
+			var greenFloat:Float = green/255;
+			var blueFloat:Float = blue/255;
+
+			return {r: redFloat, g: greenFloat, b: blueFloat, color: color};
+		}
+
+		var hat = randomColor();
+		colorSwap.colorReplaceHat = [hat.r, hat.g, hat.b, 1];
+		colorData.hat = hat.color;
+		var skin = randomColor();
+		colorSwap.colorReplaceSkin = [skin.r, skin.g, skin.b, 1];
+		colorData.skin = skin.color;
+		var hair = randomColor();
+		colorSwap.colorReplaceHair = [hair.r, hair.g, hair.b, 1];
+		colorData.hair = hair.color;
+
+		var shirt = randomColor();
+		colorSwap.colorReplaceShirt = [shirt.r, shirt.g, shirt.b, 1];
+		colorData.shirt = shirt.color;
+		var stripe = randomColor();
+		colorSwap.colorReplaceStripe = [stripe.r, stripe.g, stripe.b, 1];
+		colorData.stripes = stripe.color;
+
+		var pants = randomColor();
+		colorSwap.colorReplacePants = [pants.r, pants.g, pants.b, 1];
+		colorData.pants = pants.color;
+		var shoes = randomColor();
+		colorSwap.colorReplaceShoes = [shoes.r, shoes.g, shoes.b, 1];
+		colorData.shoes = shoes.color;
 	}, 180);
-	setSkinButton.color = 0xFFF000FF;
-	add(setSkinButton);
+	randomizeButton.color = 0xFFFFFF00;
+	add(randomizeButton);
 
 	// because life isnt good
 	var w = 72;
@@ -282,13 +338,13 @@ function postCreate() {
 	loadButton.color = 0xFF0000FF;
 
 	cancelButton = new UIButton(0, dumbBar2.y-37, "cancel", () -> {
-		FlxG.switchState(new UIState(true, "make-a-dude/ChooseADude"));
+		FlxG.switchState(new UIState(true, "skin-creator/ChooseASkin"));
 	}, 72, 32);
 	cancelButton.x = loadButton.x-loadButton.bWidth-5;
 	add(cancelButton);
 	cancelButton.color = 0xFFFF0000;
 	
-	dudeName = new UITextBox(5, dumbBar2.y-37, "name", FlxG.width-242, 32);
+	dudeName = new UITextBox(5, dumbBar2.y-37, userSkins.selected, FlxG.width-242, 32);
 	add(dudeName);
 
 	saveButton.callback = () -> {
@@ -306,7 +362,8 @@ function postCreate() {
 
 		var stupid = {
 			name: dudeName.label.text,
-			data: data
+			data: data,
+			clickedGenderButton: whatDoICallThisVariable
 		};
 
 		if (Assets.exists(Paths.txt("skins/" + stupid.name)))
@@ -329,13 +386,13 @@ function postCreate() {
 		loadSkin(dudeName.label.text);
 	};
 
-	for (i in [dumbBar1, dumbBar2, dumbText, dumberText, creditAvery, colorPicker, showPickerButton, dudeName, saveButton, loadButton, cancelButton, setSkinButton])
+	for (i in [dumbBar1, dumbBar2, dumbText, dumberText, creditAvery, colorPicker, showPickerButton, genderButton, dudeName, saveButton, loadButton, cancelButton, randomizeButton])
 		i.cameras = [STUPIDFUCKINGCAMERA];
 }
 
 function update(elapsed:Float) {
 	if (FlxG.keys.justPressed.ESCAPE) {
-		FlxG.switchState(fromGame ? new PlayState() : new MainMenuState());
+		FlxG.switchState(new UIState(true, "skin-creator/ChooseASkin"));
 	}
 
 	for (hate in buttonArr)

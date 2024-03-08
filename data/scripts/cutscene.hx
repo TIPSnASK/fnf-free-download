@@ -27,6 +27,8 @@ var dudeColors:CustomShader = new CustomShader("dude-colorswap");
 var dialogEvents:Array<{name:String, index:Int, value:String}> = [];
 var dialogFormats:Array<FlxTextFormatMarkerPair> = [];
 
+var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
+
 function create() {
 	if (!Assets.exists(Paths.file("songs/" + song + "/cutscene.xml"))) {
 		close();
@@ -154,7 +156,7 @@ function next() {
 			dialogText.text = "";
 
 			speakerData = IniUtil.parseAsset(Paths.ini("dialog/" + element.get("character")));
-			speakerText.text = speakerData["DisplayName"];
+			speakerText.text = speakerData["DisplayName"] == "Dude" ? Json.parse(File.getContent("mods/free-download-skins.json")).name : speakerData["DisplayName"];
 			speakerText.color = dialogText.color = FlxColor.fromString(speakerData["Color"]);
 			dialog = XMLUtil.fixXMLText(getInnerData(element));
 			talkSound = FlxG.sound.load(Paths.sound("dialog/" + speakerData["TalkSound"]));
@@ -186,18 +188,40 @@ function next() {
 						continue;
 					}
 				}
+
 				// separate for loop statement because life isnt good
 				for (hate in dumb) {
 					evenDumber.push(dialog.indexOf("[" + hate + "]"));
-					dialog = StringTools.replace(dialog, "[" + hate + "]", "");
+					var fuck:Array<String> = hate.split(":");
+					var replacer:String = switch fuck[0] {
+						default:
+							"";
+						case "pronoun":
+							userSkins.pronouns.split("/")[Std.parseInt(hate.split(":")[1])];
+						case "player":
+							var theThing:String = switch (Std.parseInt(fuck[1])) {
+								case 0: // Normal
+									userSkins.name;
+								case 1: // lowercase
+									userSkins.name.toLowerCase();
+								case 2: // UPPERCASE
+									userSkins.name.toUpperCase();
+							};
+							theThing;
+					}
+					dialog = StringTools.replace(dialog, "[" + hate + "]", replacer);
 				}
 
 				for (i in dumb) {
-					dialogEvents.push({
+					var awShucks = {
 						name: i.split(":")[0],
 						index: evenDumber[dumb.indexOf(i)],
 						value: i.split(":")[1]
-					});
+					};
+					
+					if (awShucks.name != "p") {
+						dialogEvents.push(awShucks);
+					}
 				}
 			}
 
@@ -261,8 +285,6 @@ function update(elapsed:Float) {
 		updateDialog();
 
 	if (inDialog && canPressEnter && controls.ACCEPT)
-		next();
-	if (inDialog && FlxG.keys.justPressed.SHIFT)
 		next();
 
 	if (controls.BACK) {
