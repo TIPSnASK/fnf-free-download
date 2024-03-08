@@ -27,27 +27,38 @@ function stepHit(s) {
 
 					dad.onDraw = (spr:Character) -> {
 						spr.color = 0xFFFFC8AD;
-						spr.offset.set();
+						spr.offset.set(-spr.globalOffset.x, -spr.globalOffset.y);
 						spr.alpha = 1;
 						spr.draw();
 				
 						spr.setColorTransform(0, 0, 0, 0.4);
-						spr.offset.set(4, -4);
+						spr.offset.set(-spr.globalOffset.x + 4, -spr.globalOffset.y + -4);
 						spr.draw();
 					};
 				
 					boyfriend.onDraw = (spr:Character) -> {
 						spr.color = 0xFFFFC8AD;
-						spr.offset.set();
+						spr.offset.set(-spr.globalOffset.x, -spr.globalOffset.y);
 						spr.alpha = 1;
 						spr.draw();
 				
 						spr.setColorTransform(0, 0, 0, 0.4);
-						spr.offset.set(-4, -4);
+						spr.offset.set(-spr.globalOffset.x + -4, -spr.globalOffset.y + -4);
 						spr.draw();
 					};
 				
 					gf.onDraw = (spr:Character) -> {
+						spr.color = 0xFFFFC8AD;
+						spr.offset.set(-spr.globalOffset.x, -spr.globalOffset.y);
+						spr.alpha = 1;
+						spr.draw();
+				
+						spr.setColorTransform(0, 0, 0, 0.4);
+						spr.offset.set(-spr.globalOffset.x, -spr.globalOffset.y + -4);
+						spr.draw();
+					};
+
+					ladySpeaker.onDraw = (spr:FunkinSprite) -> {
 						spr.color = 0xFFFFC8AD;
 						spr.offset.set();
 						spr.alpha = 1;

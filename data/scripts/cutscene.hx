@@ -156,7 +156,7 @@ function next() {
 			dialogText.text = "";
 
 			speakerData = IniUtil.parseAsset(Paths.ini("dialog/" + element.get("character")));
-			speakerText.text = speakerData["DisplayName"] == "Dude" ? Json.parse(File.getContent("mods/free-download-skins.json")).name : speakerData["DisplayName"];
+			speakerText.text = StringTools.contains(speakerData["DisplayName"], "Dude") ? Json.parse(File.getContent("mods/free-download-skins.json")).name : speakerData["DisplayName"];
 			speakerText.color = dialogText.color = FlxColor.fromString(speakerData["Color"]);
 			dialog = XMLUtil.fixXMLText(getInnerData(element));
 			talkSound = FlxG.sound.load(Paths.sound("dialog/" + speakerData["TalkSound"]));

@@ -28,8 +28,6 @@ function update(elapsed:Float) {
 	ladySpeaker.setPosition(x - (ladySpeaker.width*0.2), y + 77);
 	speakerLightSpr.setPosition(x - (speakerLightSpr.width*0.2), y);
 
-	ladySpeaker.onDraw = onDraw;
-
 	speakerLightSpr.visible = speakerLight;
 }
 
