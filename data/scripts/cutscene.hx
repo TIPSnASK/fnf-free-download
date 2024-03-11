@@ -270,7 +270,7 @@ function updateDialog() {
 
 	if (!imInTheMiddleOfSomething && !waiting) {
 		imInTheMiddleOfSomething = true;
-		new FlxTimer().start((talkSound.length), (t:FlxTimer) -> {
+		new FlxTimer().start(0.02, (t:FlxTimer) -> {
 			talkSound.play(false);
 			dialogProgress ++;
 			t.destroy();
