@@ -154,10 +154,10 @@ function postCreate() {
 	}, backButton.bWidth, 32);
 	add(editButton);
 
-	yourName = new UITextBox(5, dumbBar2.y + 4, userSkins.name, (FlxG.width/2) - 10, 32);
+	yourName = new UITextBox(5, dumbBar2.y + 4, (userSkins.name == null || userSkins.name == "") ? "type your name", (FlxG.width/2) - 10, 32);
 	add(yourName);
 
-	theyAddedPronounsToFreeDownload = new UITextBox((FlxG.width/2), dumbBar2.y + 4, userSkins.pronouns, (FlxG.width/2) - 5, 32);
+	theyAddedPronounsToFreeDownload = new UITextBox((FlxG.width/2), dumbBar2.y + 4, (userSkins.pronouns == null || userSkins.pronouns == "") ? "they/them/theirs", (FlxG.width/2) - 5, 32);
 	add(theyAddedPronounsToFreeDownload);
 
 	for (i in [dumbBar1, dumbBar2, dumbText, backButton, editButton, yourName, theyAddedPronounsToFreeDownload])
