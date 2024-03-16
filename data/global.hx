@@ -165,6 +165,7 @@ function new() {
 	if (FlxG.save.data.freeINTROSPLASH == null) FlxG.save.data.freeINTROSPLASH = true;
 	if (FlxG.save.data.freeFLASH == null) FlxG.save.data.freeFLASH = true;
 	if (FlxG.save.data.freeFPS == null) FlxG.save.data.freeFPS = true;
+	if (FlxG.save.data.freeTOLOOKAWAY == null) FlxG.save.data.freeTOLOOKAWAY = false;
 
 	window.title = "Made with FNF: Codename Engine";
 	changeWindowIcon("default");
@@ -211,7 +212,7 @@ function postStateSwitch() {
 	fullscreenSound = FlxG.sound.load(Paths.sound("sfx/snd_weirdnoise"));
 	fullscreenSound.persist = true;
 
-	FlxG.autoPause = false; // sorry but i gotta be biblically accurate or else.....
+	FlxG.autoPause = FlxG.save.data.freeTOLOOKAWAY; // sorry but i gotta be biblically accurate or else.....
 
 	if (FlxG.save.data.freeFPS) {
 		FlxG.drawFramerate = FlxG.updateFramerate = 40;
