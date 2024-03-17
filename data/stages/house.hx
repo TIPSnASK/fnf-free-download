@@ -76,7 +76,7 @@ function stepHit(s) {
 function onCameraMove(event) {
 	if (startingSong) camGame.snapToTarget();
 	switch(curCameraTarget) {
-		case 0: event.position.set(280, 175);
+		case 0: event.position.set(265, 175);
 		case 1: event.position.set(570, 175);
 		case 2: event.position.set(450, 175);
 	}

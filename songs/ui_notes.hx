@@ -1,7 +1,7 @@
 public var noteskin:String = "default";
 
-function postCreate() {
-	// ghostTapping = false; // accessibility...
+function create() {
+	Note.swagWidth = 44;
 }
 
 function onNoteHit(event) {
@@ -80,7 +80,7 @@ function onStrumCreation(event) {
 	event.strum.setPosition(FlxG.width*(switch(event.player) {
 		default: 0.53;
 		case 0: 0.025;
-	}) + (44 * event.strumID), 24);
+	}) + (Note.swagWidth * event.strumID), 24);
 
 	// adjusted scroll speed, i dont recommend going below 0.55 cause it'll cause pop-in
 	event.strum.scrollSpeed = 0.55 * PlayState.SONG.scrollSpeed;

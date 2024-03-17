@@ -17,6 +17,23 @@ function onGamePause(event) {
 	openSubState(new ModSubState('substates/game/Pause'));
 }
 
+function onGameOver(event) {
+	event.cancel();
+	if (curStep < 0) return;
+	boyfriend.stunned = true;
+
+	persistentUpdate = false;
+	persistentDraw = false;
+	paused = true;
+
+	vocals.stop();
+	if (FlxG.sound.music != null)
+		FlxG.sound.music.stop();
+	for (strumLine in strumLines.members) strumLine.vocals.stop();
+
+	openSubState(new ModSubState('substates/game/Over'));
+}
+
 function onSongEnd() {
 	fromGame = false;
 }

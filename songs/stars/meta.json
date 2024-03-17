@@ -1,0 +1,17 @@
+{
+	"beatsPerMeasure": 4,
+	"opponentModeAllowed": false,
+	"coopAllowed": false,
+	"stepsPerBeat": 4,
+	"bpm": 120,
+	"difficulties": [
+		"EASY"
+	],
+	"needsVoices": true,
+	"parsedColor": -7376387,
+	"displayName": "stars",
+	"icon": "strad",
+	"name": "stars",
+	"color": "#8F71FD",
+	"customValues": {}
+}

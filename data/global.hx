@@ -166,6 +166,8 @@ function new() {
 	if (FlxG.save.data.freeFLASH == null) FlxG.save.data.freeFLASH = true;
 	if (FlxG.save.data.freeFPS == null) FlxG.save.data.freeFPS = true;
 	if (FlxG.save.data.freeTOLOOKAWAY == null) FlxG.save.data.freeTOLOOKAWAY = false;
+	if (FlxG.save.data.freeFULLSCREENEASTEREGG == null) FlxG.save.data.freeFULLSCREENEASTEREGG = true;
+	if (FlxG.save.data.freeAUTOHIDEFPS == null) FlxG.save.data.freeAUTOHIDEFPS = true;
 
 	window.title = "Made with FNF: Codename Engine";
 	changeWindowIcon("default");
@@ -197,7 +199,7 @@ function preStateSwitch() {
 
 public var fullscreenSound:FlxSound;
 function postStateSwitch() {
-	Framerate.debugMode = 0;
+	if (FlxG.save.data.freeAUTOHIDEFPS) Framerate.debugMode = 0;
 
 	FlxSoundTray.volumeUpChangeSFX = Paths.sound("volume/snd_ribbit1");
 	FlxSoundTray.volumeDownChangeSFX = Paths.sound("volume/snd_ribbit2");
@@ -220,7 +222,7 @@ function postStateSwitch() {
 }
 
 function update(elapsed:Float) {
-	if (FlxG.fullscreen) {
+	if (FlxG.fullscreen && FlxG.save.data.freeFULLSCREENEASTEREGG) {
 		fullscreenSound.play(true);
 		FlxG.fullscreen = false;
 	}
