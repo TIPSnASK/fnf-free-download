@@ -96,7 +96,7 @@ function postCreate() {
 	scoreTxt.scrollFactor.set();
 	scoreTxt.borderSize = 2;
 	scoreTxt.cameras = [camHUD];
-	scoreTxt.font = Paths.font("COMICBD.TTF");
+	scoreTxt.font = Paths.font("COMIC.TTF");
 
 	// WON'T WORK IF YOU GOT CODENAME THROUGH ACTION BUILDS!!
 	scoreTxt.onDraw = (spr:FunkinText) -> {
