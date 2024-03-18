@@ -4,6 +4,6 @@
 	<checkbox id="freeFLASH" name="Flashing Lights" desc="Disable this if you want to turn off flashing lights!"/>
 	<checkbox id="freeINTROSPLASH" name="Show Intro Splash" desc="Disable this if you want to get rid of the &#34;made in codename&#34; intro screen."/>
 	<checkbox id="freeTOLOOKAWAY" name="Pause on Unfocus" desc="Enable this if you prefer want the game to pause when you look away."/>
-	<checkbox id="freeFULLSCREENEASTEREGG" name="Fullscreen Easter Egg" desc="Disable this if you want to be able to fullscreen."/>
+	<checkbox id="freeFULLSCREENEASTEREGG" name="Fullscreen Easter Egg" desc="Disable this if you want to be able to fullscreen. It's insanely glitchy though, so be careful!"/>
 	<checkbox id="freeAUTOHIDEFPS" name="Hide FPS Counter" desc="Disable this if you want the FPS counter to be visible by default."/>
 </menu>
