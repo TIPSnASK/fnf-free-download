@@ -27,7 +27,7 @@ function create() {
 	dudeRED.screenCenter();
 	dudeRED.color = 0xFFFF0000;
 	dudeRED.shader = new CustomShader("wiggle");
-	dudeRED.shader.wIntensity = 0.05;
+	dudeRED.shader.wIntensity = 0.025;
 	dudeRED.shader.wStrength = 1;
 	dudeRED.shader.wSpeed = 1.5;
 	dudeRED.alpha = 0.5;
@@ -37,7 +37,7 @@ function create() {
 	dudeBLUE.screenCenter();
 	dudeBLUE.color = 0xFF0000FF;
 	dudeBLUE.shader = new CustomShader("wiggle");
-	dudeBLUE.shader.wIntensity = -0.05;
+	dudeBLUE.shader.wIntensity = -0.025;
 	dudeBLUE.shader.wStrength = 1;
 	dudeBLUE.shader.wSpeed = 1.5;
 	dudeBLUE.alpha = 0.5;
@@ -58,9 +58,9 @@ function create() {
 
 	new FlxTimer().start(1.5, (t:FlxTimer) -> {
 		t.destroy();
-		FlxTween.tween(retryText, {alpha: 1}, 1);
-		FlxTween.tween(dude, {alpha: 1}, 1);
-		FlxTween.tween(faker, {alpha: 0}, 1);
+		FlxTween.tween(retryText, {alpha: 1}, 1.5, {ease: FlxEase.quadOut});
+		FlxTween.tween(dude, {alpha: 1}, 1.5, {ease: FlxEase.quadOut});
+		FlxTween.tween(faker, {alpha: 0}, 1.5, {ease: FlxEase.quadOut});
 		CoolUtil.playMusic(Paths.music("mus_gameover"));
 		_canPressEnter = true;
 	});
@@ -98,7 +98,7 @@ function update(e:Float) {
 		FlxG.sound.play(Paths.sound("sfx/snd_ha"));
 		new FlxTimer().start(1, (t:FlxTimer) -> {
 			t.destroy();
-			FlxG.camera.fade(0xFF000000, 0.25, false, () -> {FlxG.switchState(new PlayState());}, true);
+			FlxG.camera.fade(0xFF000000, 0.4, false, () -> {FlxG.switchState(new PlayState());}, true);
 		});
 	}
 

@@ -5,6 +5,10 @@
 	<anim x="3" loop="false" y="-19" fps="12" anim="spr_straddown_" name="singDOWN"/>
 	<anim x="-1" loop="false" y="-11" fps="12" anim="spr_stradup_" name="singUP"/>
 	<anim x="-12" loop="false" y="-15" fps="12" anim="spr_stradright_" name="singRIGHT"/>
+	<anim x="8" loop="false" y="-1" fps="12" anim="spr_stradleftalt_" name="singLEFT-alt"/>
+	<anim x="-3" loop="false" y="-19" fps="12" anim="spr_straddownalt_" name="singDOWN-alt"/>
+	<anim x="21" loop="false" y="-1" fps="12" anim="spr_stradupalt_" name="singUP-alt"/>
+	<anim x="-5" loop="false" y="-7" fps="12" anim="spr_stradrightalt_" name="singRIGHT-alt"/>
 	<anim x="7" loop="false" y="-1" fps="12" anim="spr_stradayy" name="ayy"/>
 	<anim x="-6" loop="false" y="-9" fps="12" anim="spr_stradpause" name="paused"/>
 </character>

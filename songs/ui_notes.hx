@@ -1,5 +1,3 @@
-public var noteskin:String = "default";
-
 function create() {
 	Note.swagWidth = 44;
 }
@@ -58,7 +56,7 @@ function onNoteCreation(event) {
 	switch(noteskin) {
 		default:
 			if (!note.isSustainNote)
-				note.animation.addByPrefix('scroll', ['purple', 'blue', 'green', 'red'][event.note.noteData], 0, true);
+				note.animation.addByPrefix('scroll', ['purple_note', 'blue_note', 'green_note', 'red_note'][event.note.noteData], 0, true);
 			else {
 				note.animation.addByPrefix('hold', ['purple_hold', 'blue_hold', 'green_hold', 'red_hold'][event.note.noteData], 0, true);
 				note.animation.addByPrefix('holdend', ['purple_cap', 'blue_cap', 'green_cap', 'red_cap'][event.note.noteData], 0, true);
@@ -93,4 +91,8 @@ function onStrumCreation(event) {
 	strum.animation.addByPrefix('pressed', event.animPrefix, 0, true); // so it'll stop tracing stupid shit
 
 	strum.updateHitbox();
+}
+
+function destroy() {
+	noteskin = "default";
 }

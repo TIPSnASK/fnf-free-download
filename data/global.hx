@@ -22,6 +22,8 @@ window.resize(FlxG.width*2, FlxG.height*2);
 static var initialized:Bool = false;
 static var fromGame:Bool = false; // for things you can go to through the pause menu and stuff
 
+static var noteskin:String = "default";
+
 static var redirectStates:Map<FlxState, String> = [
 	MainMenuState => 'MainMenu',
 	StoryMenuState => 'menus/StoryMenu',
