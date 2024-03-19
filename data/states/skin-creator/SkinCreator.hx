@@ -279,6 +279,10 @@ function postCreate() {
 		var shoes = randomColor();
 		colorSwap.colorReplaceShoes = [shoes.r, shoes.g, shoes.b, 1];
 		colorData.shoes = shoes.color;
+
+		whatDoICallThisVariable = FlxG.random.bool(50);
+		dude.loadGraphic(Paths.image("editors/make-a-dude/" + (whatDoICallThisVariable ? "player-f" : "dude")));
+		dude.screenCenter();
 	}, 180);
 	randomizeButton.color = 0xFFFFFF00;
 	add(randomizeButton);
