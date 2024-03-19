@@ -28,7 +28,7 @@ function create() {
 	dudeRED.color = 0xFFFF0000;
 	dudeRED.shader = new CustomShader("wiggle");
 	dudeRED.shader.wIntensity = 0.025;
-	dudeRED.shader.wStrength = 1;
+	dudeRED.shader.wStrength = 5;
 	dudeRED.shader.wSpeed = 1.5;
 	dudeRED.alpha = 0.5;
 	insert(0, dudeRED);
@@ -38,7 +38,7 @@ function create() {
 	dudeBLUE.color = 0xFF0000FF;
 	dudeBLUE.shader = new CustomShader("wiggle");
 	dudeBLUE.shader.wIntensity = -0.025;
-	dudeBLUE.shader.wStrength = 1;
+	dudeBLUE.shader.wStrength = 5;
 	dudeBLUE.shader.wSpeed = 1.5;
 	dudeBLUE.alpha = 0.5;
 	insert(0, dudeBLUE);

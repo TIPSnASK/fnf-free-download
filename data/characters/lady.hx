@@ -14,7 +14,7 @@ function postCreate() {
 
 	speakerLightSpr = new FunkinSprite();
 	speakerLightSpr.frames = Paths.getFrames("game/stages/speaker-lights");
-	speakerLightSpr.animation.add("hi", [0, 1, 2, 3], 0, true, false, false);
+	speakerLightSpr.animation.add("hi", [0, 3, 2, 1], 0, true, false, false);
 	speakerLightSpr.playAnim("hi", true);
 }
 
@@ -33,7 +33,7 @@ function update(elapsed:Float) {
 
 function beatHit(b) {
 	if (speakerAuto && b > 0) {
-		ladySpeaker.animation.frameIndex = speakerLightSpr.animation.frameIndex = FlxMath.wrap(Std.int(b/speakerInterval), 0, 3);
+		ladySpeaker.animation.curAnim.curFrame = speakerLightSpr.animation.curAnim.curFrame = FlxMath.wrap(Std.int(b/speakerInterval), 0, 3);
 	}
 }
 

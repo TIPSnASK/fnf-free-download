@@ -11,6 +11,8 @@ public var scoreTxtShadow:FunkinText;
 
 public var playerIcon:FreeIcon;
 public var opponentIcon:FreeIcon;
+public var playerIconShadow:FreeIcon;
+public var opponentIconShadow:FreeIcon;
 
 public var uiskin:String = "default";
 
@@ -135,6 +137,16 @@ function postCreate() {
 	playerIcon.y = healthBar.y - (playerIcon.height/2.25);
 	opponentIcon.y = healthBar.y - (opponentIcon.height/2.25);
 
+	playerIconShadow = new FreeIcon("dude-" + uiskin);
+	playerIconShadow.cameras = [camHUD];
+	playerIconShadow.color = 0xFF000000;
+	insert(members.indexOf(healthBar), playerIconShadow);
+
+	opponentIconShadow = new FreeIcon("strad-" + uiskin);
+	opponentIconShadow.cameras = [camHUD];
+	opponentIconShadow.color = 0xFF000000;
+	insert(members.indexOf(healthBar), opponentIconShadow);
+
 	switch(uiskin) {
 		case "gaw":
 			outlineColor = 0xFFFFFFFF;
@@ -166,6 +178,8 @@ function postUpdate(elapsed:Float) {
 
 	playerIcon.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 1, 0)) - 5);
 	opponentIcon.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 1, 0))) - (opponentIcon.width - 10);
+	playerIconShadow.setPosition(playerIcon.x + 2, playerIcon.y + 2);
+	opponentIconShadow.setPosition(opponentIcon.x + (downscroll ? -2 : 2), opponentIcon.y + (downscroll ? -2 : 2));
 
 	playerIcon.health = healthBar.percent / 100;
 	opponentIcon.health = 1 - (healthBar.percent / 100);

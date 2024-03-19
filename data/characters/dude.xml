@@ -5,10 +5,10 @@
 	<anim x="14" loop="false" y="-4" fps="12" anim="spr_dudedown_" name="singDOWN"/>
 	<anim x="7" loop="false" y="9" fps="12" anim="spr_dudeup_" name="singUP"/>
 	<anim x="6" loop="false" y="3" fps="12" anim="spr_duderight_" name="singRIGHT"/>
-	<anim x="-3" loop="false" y="14" fps="12" anim="spr_dudeleftalt_" name="singLEFT-alt"/>
+	<anim x="-4" loop="false" y="19" fps="12" anim="spr_dudeleftalt_" name="singLEFT-alt"/>
 	<anim x="9" loop="false" y="7" fps="12" anim="spr_dudedownalt_" name="singDOWN-alt"/>
 	<anim x="3" loop="false" y="36" fps="12" anim="spr_dudeupalt_" name="singUP-alt"/>
-	<anim x="4" loop="false" y="14" fps="12" anim="spr_duderightalt_" name="singRIGHT-alt"/>
+	<anim x="11" loop="false" y="14" fps="12" anim="spr_duderightalt_" name="singRIGHT-alt"/>
 	<anim x="1" loop="false" y="-5" fps="12" anim="spr_dudeleftmiss" name="singLEFTmiss"/>
 	<anim x="14" loop="false" y="-4" fps="12" anim="spr_dudedownmiss" name="singDOWNmiss"/>
 	<anim x="9" loop="false" y="6" fps="12" anim="spr_dudeupmiss" name="singUPmiss"/>
