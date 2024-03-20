@@ -185,24 +185,36 @@ function stepHit(s) {
 					boyfriend.updateHitbox();
 					dad.color = boyfriend.color = 0xFFFFFFFF;
 
-					dad.x += 80;
+					dad.x += 120; // +40
 					dad.y -= 80;
 
-					boyfriend.x -= 40;
+					boyfriend.x -= 80;
 					boyfriend.y -= 60;
-			}
-	}
-}
 
-function onCameraMove(event) {
-	if (startingSong) camGame.snapToTarget();
-	if (curSong == "stars" && curStep >= 512 && curStep <= 640) {
-		event.position.set(570, 175);
-	} else {
-		switch(curCameraTarget) {
-			case 0: event.position.set(265, 175);
-			case 1: event.position.set(570, 175);
-			case 2: event.position.set(450, 175);
-		}
+					camera.lock(camera.pos[2].x, camera.pos[2].y, true);
+					camera.snap();
+
+					dad.onDraw = (spr:Character) -> {
+						spr.color = 0xFFFFFFFF;
+						spr.offset.set(-spr.globalOffset.x, -spr.globalOffset.y);
+						spr.alpha = 1;
+						spr.draw();
+				
+						spr.setColorTransform(0, 0, 0, 0.5);
+						spr.offset.set(-spr.globalOffset.x, -spr.globalOffset.y + -4);
+						spr.draw();
+					};
+				
+					boyfriend.onDraw = (spr:Character) -> {
+						spr.color = 0xFFFFFFFF;
+						spr.offset.set(-spr.globalOffset.x, -spr.globalOffset.y);
+						spr.alpha = 1;
+						spr.draw();
+				
+						spr.setColorTransform(0, 0, 0, 0.5);
+						spr.offset.set(-spr.globalOffset.x, -spr.globalOffset.y + -4);
+						spr.draw();
+					};
+			}
 	}
 }
