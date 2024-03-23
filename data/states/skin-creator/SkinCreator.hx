@@ -143,30 +143,9 @@ var shoesButton:UIButton;
 function iMightKillYou(picker:UIColorwheel, color:FlxColor) {
 	picker.curColor = color;
 
-	var red:Int = (color >> 16) & 0xff;
-	var green:Int = (color >> 8) & 0xff;
-	var blue:Int = (color) & 0xff;
-
-	var redFloat:Float = red/255;
-	var greenFloat:Float = green/255;
-	var blueFloat:Float = blue/255;
-
-	// copied from FlxColor.hx
-	var hueRad = Math.atan2(Math.sqrt(3) * (greenFloat - blueFloat), 2 * redFloat - greenFloat - blueFloat);
-	var hue:Float = 0;
-	if (hueRad != 0)
-		hue = 180 / Math.PI * hueRad;
-
-	var finalHue = hue < 0 ? hue + 360 : hue;
-
-	picker.hue = finalHue;
-
-	var maxColor:Float = Math.max(redFloat, Math.max(greenFloat, blueFloat));
-	var saturation:Float = (maxColor - Math.min(redFloat, Math.min(greenFloat, blueFloat))) / maxColor;
-
-	picker.saturation = saturation;
-
-	picker.brightness = maxColor;
+	picker.hue = FlxColorHelper.hue(color);
+	picker.saturation = FlxColorHelper.saturation(color);
+	picker.brightness = FlxColorHelper.brightness(color);
 
 	picker.updateWheel();
 }
@@ -244,16 +223,7 @@ function postCreate() {
 
 		function randomColor():{r:Float, g:Float, b:Float, color:FlxColor} {
 			var color:FlxColor = FlxG.random.color(null, null, 1);
-
-			var red:Int = (color >> 16) & 0xff;
-			var green:Int = (color >> 8) & 0xff;
-			var blue:Int = (color) & 0xff;
-	
-			var redFloat:Float = red/255;
-			var greenFloat:Float = green/255;
-			var blueFloat:Float = blue/255;
-
-			return {r: redFloat, g: greenFloat, b: blueFloat, color: color};
+			return {r: FlxColorHelper.redFloat(color), g: FlxColorHelper.greenFloat(color), b: FlxColorHelper.blueFloat(color), color: color};
 		}
 
 		var hat = randomColor();
@@ -355,11 +325,7 @@ function postCreate() {
 		var data:String = "";
 
 		for (color in [colorData.hat, colorData.skin, colorData.hair, colorData.shirt, colorData.stripes, colorData.pants, colorData.shoes]) {
-			var red:Int = (color >> 16) & 0xff;
-			var green:Int = (color >> 8) & 0xff;
-			var blue:Int = (color) & 0xff;
-
-			var arr:Array<Float> = [red, green, blue, 1];
+			var arr:Array<Float> = [FlxColorHelper.red(color), FlxColorHelper.green(color), FlxColorHelper.blue(color), 1];
 			data += "\n" + arr;
 		}
 		data = StringTools.replace(StringTools.replace(data, "]", ""), "[", "");
@@ -404,42 +370,33 @@ function update(elapsed:Float) {
 
 	if (updateColors) {
 		var color:FlxColor = FlxColor.fromString(colorPicker.curColorString);
-		var red:Int = (color >> 16) & 0xff;
-		var green:Int = (color >> 8) & 0xff;
-		var blue:Int = (color) & 0xff;
-	
-		var redFloat:Float = red/255;
-		var greenFloat:Float = green/255;
-		var blueFloat:Float = blue/255;
-
-		var shaderArr:Array<Float> = [redFloat, greenFloat, blueFloat, 1];
-		var dataColor:FlxColor = FlxColor.fromRGBFloat(redFloat, greenFloat, blueFloat);
+		var shaderArr:Array<Float> = [FlxColorHelper.redFloat(color), FlxColorHelper.greenFloat(color), FlxColorHelper.blueFloat(color), 1];
 		
 		// SWITCH STATEMENT IN UPDATE FUNCTION BECAUSE LIFE ISNT GOOD.
 		switch(selectedButton) {
 			case 0: // skin
 				colorSwap.colorReplaceSkin = shaderArr;
-				colorData.skin = dataColor;
+				colorData.skin = color;
 			case 1: // hair
 				colorSwap.colorReplaceHair = shaderArr;
-				colorData.hair = dataColor;
+				colorData.hair = color;
 			case 2: // hat
 				colorSwap.colorReplaceHat = shaderArr;
-				colorData.hat = dataColor;
+				colorData.hat = color;
 				
 			case 3: // shirt
 				colorSwap.colorReplaceShirt = shaderArr;
-				colorData.shirt = dataColor;
+				colorData.shirt = color;
 			case 4: // stripes
 				colorSwap.colorReplaceStripe = shaderArr;
-				colorData.stripes = dataColor;
+				colorData.stripes = color;
 				
 			case 5: // pants
 				colorSwap.colorReplacePants = shaderArr;
-				colorData.pants = dataColor;
+				colorData.pants = color;
 			case 6: // shoes
 				colorSwap.colorReplaceShoes = shaderArr;
-				colorData.shoes = dataColor;
+				colorData.shoes = color;
 		}
 	}
 

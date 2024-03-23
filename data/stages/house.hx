@@ -1,9 +1,12 @@
 // shut up vsc
 import flixel.util.FlxGradient;
+import flixel.util.FlxSpriteUtil;
 
 public var isNightTime:Bool = false;
 var sky:FunkinSprite;
 var houseLights:FunkinSprite;
+var theStupidThing1:FunkinSprite;
+var theStupidThing2:FunkinSprite;
 
 function create() {
 	isNightTime = curSong == "stars";
@@ -28,6 +31,29 @@ function postCreate() {
 		houseLights.loadSprite(Paths.image("game/stages/house/lights"));
 		houseLights.animation.add("lights", [0,1,2,3], 0, true, false, false);
 		houseLights.playAnim("lights", true);
+
+		add(theStupidThing1 = new FunkinSprite().makeSolid(300, 475, 0xFF000000));
+		theStupidThing1.screenCenter();
+		theStupidThing1.x -= 120;
+		theStupidThing1.y -= 25;
+		theStupidThing1.angle = 12.5;
+
+		add(theStupidThing2 = new FunkinSprite().makeSolid(300, 475, 0xFF000000));
+		theStupidThing2.screenCenter();
+		theStupidThing2.x += 400;
+		theStupidThing2.y -= 25;
+		theStupidThing2.angle = -12.5;
+
+		var test:FunkinSprite;
+		test = new FunkinSprite().makeGraphic(50, 50, 0);
+		test = FlxSpriteUtil.drawCircle(test, -1, -1, 25, 0x93FFFFFF);
+		test.screenCenter();
+		test.x += 50;
+		test.y += 80;
+		test.antialiasing = false;
+		test.setGraphicSize(225, 40);
+		test.updateHitbox();
+		add(test);
 
 		for (name => spr in stage.stageSprites) {
 			spr.color = 0xFF261B33;

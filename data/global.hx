@@ -14,6 +14,9 @@ import funkin.options.OptionsMenu;
 import funkin.editors.charter.Charter;
 import funkin.editors.EditorTreeMenu;
 import funkin.options.TreeMenu;
+import karaoke.backend.util.FlxColorHelper;
+
+static var FlxColorHelper = new FlxColorHelper();
 
 FlxG.width = FlxG.initialWidth = 400;
 FlxG.height = FlxG.initialHeight = 400;
