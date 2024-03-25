@@ -9,6 +9,7 @@ import Xml;
 import haxe.Json;
 import sys.FileSystem;
 import sys.io.File;
+import openfl.system.Capabilities;
 
 import funkin.options.OptionsMenu;
 import funkin.editors.charter.Charter;
@@ -186,6 +187,9 @@ function new() {
 	window.resize(FlxG.width*2, FlxG.height*2);
 	window.resizable = false;
 	for (camera in FlxG.cameras.list) camera.setSize(FlxG.width, FlxG.height);
+
+	window.x = (Capabilities.screenResolutionX / 2) - (window.width / 2);
+	window.y = (Capabilities.screenResolutionY / 2) - (window.height / 2);
 }
 
 function preStateSwitch() {
