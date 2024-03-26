@@ -7,7 +7,7 @@
 	"difficulties": [
 		"EASY"
 	],
-	"needsVoices": true,
+	"needsVoices": false,
 	"parsedColor": -7376387,
 	"displayName": "stars",
 	"icon": "strad",

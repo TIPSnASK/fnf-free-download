@@ -6,8 +6,7 @@ function create() {
 
 var colorSwapShader:CustomShader = new CustomShader("dude-colorswap");
 function postCreate() {
-	camGame.followLerp = 0;
-	camGame.scroll.set(0,0);
+	camera.lock(200, 200, true);
 
 	ladyAndTheTramp.shader = colorSwapShader;
 	usePlayerSkin(colorSwapShader);

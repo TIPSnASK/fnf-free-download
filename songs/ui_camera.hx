@@ -10,6 +10,9 @@ public var camera = {
 		_lockPos = {x: x, y: y};
 	},
 
+	// hi guys
+	unlock: () -> {_locked = false;},
+
 	snap: () -> {
 		if (_locked)
 			camGame.scroll.set(_lockPos.x - camGame.width * 0.5, _lockPos.y - camGame.height * 0.5);
@@ -17,12 +20,10 @@ public var camera = {
 			camGame.scroll.set(camera.pos[curCameraTarget].x - camGame.width * 0.5, camera.pos[curCameraTarget].y - camGame.height * 0.5);
 	}
 };
-var _locked:Bool = false;
-var _lockPos:{x:Float, y:Float} = {x: 0, y: 0};
+public var _locked:Bool = false;
+public var _lockPos:{x:Float, y:Float} = {x: 0, y: 0};
 
-function postCreate() {
-	camGame.followLerp = 0.02;
-}
+function postCreate() camGame.followLerp = 0.02;
 
 function onCameraMove(event) {
 	if (startingSong) camGame.snapToTarget();
