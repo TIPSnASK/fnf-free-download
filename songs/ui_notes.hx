@@ -1,4 +1,6 @@
+var lastSwagWidth:Int = 0;
 function create() {
+	lastSwagWidth = Note.swagWidth;
 	Note.swagWidth = 44;
 }
 
@@ -95,4 +97,5 @@ function onStrumCreation(event) {
 
 function destroy() {
 	noteskin = "default";
+	Note.swagWidth = lastSwagWidth;
 }

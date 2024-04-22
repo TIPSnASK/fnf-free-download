@@ -185,7 +185,7 @@ function new() {
 	FlxG.width = FlxG.initialWidth = 400;
 	FlxG.height = FlxG.initialHeight = 400;
 	window.resize(FlxG.width*2, FlxG.height*2);
-	window.resizable = false;
+	window.resizable = true;
 	for (camera in FlxG.cameras.list) camera.setSize(FlxG.width, FlxG.height);
 
 	window.x = (Capabilities.screenResolutionX / 2) - (window.width / 2);
@@ -207,6 +207,7 @@ function preStateSwitch() {
 }
 
 public var fullscreenSound:FlxSound;
+// public var borderCam:FlxCamera;
 function postStateSwitch() {
 	if (FlxG.save.data.freeAUTOHIDEFPS) Framerate.debugMode = 0;
 
@@ -227,7 +228,7 @@ function postStateSwitch() {
 
 	if (FlxG.save.data.freeFPS) {
 		FlxG.drawFramerate = FlxG.updateFramerate = 40;
-	}	
+	}
 }
 
 function update(elapsed:Float) {
