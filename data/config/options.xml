@@ -6,4 +6,5 @@
 	<checkbox id="freeTOLOOKAWAY" name="Pause on Unfocus" desc="Enable this if you prefer want the game to pause when you look away."/>
 	<checkbox id="freeFULLSCREENEASTEREGG" name="Fullscreen Easter Egg" desc="Disable this if you want to be able to fullscreen. It's insanely glitchy though, so be careful!"/>
 	<checkbox id="freeAUTOHIDEFPS" name="Hide FPS Counter" desc="Disable this if you want the FPS counter to be visible by default."/>
+	<checkbox id="freeDXSTRUMS" name="Free Download DX Strums" desc="Enable this if you prefer the way the strums look in FNFFD:DX."/>
 </menu>

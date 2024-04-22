@@ -20,16 +20,20 @@ function onNoteHit(event) {
 	}
 }
 
-function onInputUpdate(event) {
-	for (index => value in event.justPressed)
-		if (value) {
-			var strum:Strum = event.strumLine.members[index];
-			strum.alpha = 0.5;
-			new FlxTimer().start(0.1, (t:FlxTimer) -> {
-				strum.alpha = 1;
-				t.destroy();
-			});
-		}
+if (!FlxG.save.data.freeDXSTRUMS) {
+	function onInputUpdate(event) {
+		for (index => value in event.justPressed)
+			if (value) {
+				var strum:Strum = event.strumLine.members[index];
+				strum.alpha = 0.5;
+				new FlxTimer().start(0.1, (t:FlxTimer) -> {
+					strum.alpha = 1;
+					t.destroy();
+				});
+			}
+	}
+} else {
+	function update(elapsed:Float) for (sL in strumLines.members) if (!sL.cpu) for (strum in sL.members) strum.alpha = ["pressed","confirm"].contains(strum.getAnim()) ? 0.5 : 1;
 }
 
 function onPlayerMiss(event) {
