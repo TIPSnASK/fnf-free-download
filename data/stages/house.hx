@@ -1,18 +1,21 @@
 // shut up vsc
 import flixel.util.FlxGradient;
-import flixel.util.FlxSpriteUtil;
 
 public var isNightTime:Bool = false;
 var sky:FunkinSprite;
 var houseLights:FunkinSprite;
 var theStupidThing1:FunkinSprite;
 var theStupidThing2:FunkinSprite;
+var dumbCircle:FunkinSprite;
+
+var ladyDance:Character;
 
 function create() {
 	isNightTime = curSong == "stars";
 }
 
 function postCreate() {
+	player.cpu = true;
 	if (!isNightTime) {
 		insert(0, sky = new FunkinSprite().makeGraphic(FlxG.width, FlxG.height, 0xFF91CFDD));
 		sky.scrollFactor.set();
@@ -32,6 +35,13 @@ function postCreate() {
 		houseLights.animation.add("lights", [0,1,2,3], 0, true, false, false);
 		houseLights.playAnim("lights", true);
 
+		insert(5, dumbCircle = new FunkinSprite().loadGraphic(Paths.image("game/stages/house/ididntwanttomakethisasprite")));
+		dumbCircle.screenCenter();
+		dumbCircle.x += 140;
+		dumbCircle.y += 80;
+		dumbCircle.antialiasing = false;
+		dumbCircle.alpha = 0.5;
+
 		add(theStupidThing1 = new FunkinSprite().makeSolid(300, 475, 0xFF000000));
 		theStupidThing1.screenCenter();
 		theStupidThing1.x -= 120;
@@ -44,16 +54,7 @@ function postCreate() {
 		theStupidThing2.y -= 25;
 		theStupidThing2.angle = -12.5;
 
-		var test:FunkinSprite;
-		test = new FunkinSprite().makeGraphic(50, 50, 0);
-		test = FlxSpriteUtil.drawCircle(test, -1, -1, 25, 0x93FFFFFF);
-		test.screenCenter();
-		test.x += 50;
-		test.y += 80;
-		test.antialiasing = false;
-		test.setGraphicSize(225, 40);
-		test.updateHitbox();
-		add(test);
+		dumbCircle.alpha = theStupidThing1.alpha = theStupidThing2.alpha = 0;
 
 		for (name => spr in stage.stageSprites) {
 			spr.color = 0xFF261B33;
@@ -104,6 +105,10 @@ function postCreate() {
 		};
 
 		speakerLight = true;
+
+		// ladyDance = new Character(boyfriend.x, boyfriend.y, "lady-stars", true);
+		// player.characters.push(ladyDance);
+		// insert(members.indexOf(boyfriend)+1, ladyDance);
 	}
 }
 
@@ -205,13 +210,18 @@ function stepHit(s) {
 					boyfriend.x += 40;
 					boyfriend.y += 60;
 				case 512:
+					gf.visible = ladySpeaker.visible = houseLights.visible = speakerLight = true;
+					for (name => spr in stage.stageSprites) {
+						spr.visible = true;
+					}
+
 					dad.scale.set(1, 1);
 					dad.updateHitbox();
 					boyfriend.scale.set(1, 1);
 					boyfriend.updateHitbox();
 					dad.color = boyfriend.color = 0xFFFFFFFF;
 
-					dad.x += 120; // +40
+					dad.x += 120;
 					dad.y -= 80;
 
 					boyfriend.x -= 80;
@@ -241,6 +251,68 @@ function stepHit(s) {
 						spr.offset.set(-spr.globalOffset.x, -spr.globalOffset.y + -4);
 						spr.draw();
 					};
+
+					dumbCircle.alpha = (theStupidThing1.alpha = theStupidThing2.alpha = 1) * 0.5;
+				case 576:
+					gf.visible = false;
+					dad.x += 40;
+					boyfriend.x -= 40;
+				case 640:
+					dad.onDraw = (spr:Character) -> {
+						spr.color = 0xFF614C75;
+						spr.offset.set(-spr.globalOffset.x, -spr.globalOffset.y);
+						spr.alpha = 1;
+						spr.draw();
+				
+						spr.setColorTransform(0, 0, 0, 0.45);
+						spr.offset.set(-spr.globalOffset.x + 4, -spr.globalOffset.y);
+						spr.draw();
+					};
+				
+					boyfriend.onDraw = (spr:Character) -> {
+						spr.color = 0xFF614C75;
+						spr.offset.set(-spr.globalOffset.x, -spr.globalOffset.y);
+						spr.alpha = 1;
+						spr.draw();
+				
+						spr.setColorTransform(0, 0, 0, 0.45);
+						spr.offset.set(-spr.globalOffset.x + -4, -spr.globalOffset.y);
+						spr.draw();
+					};
+
+					dumbCircle.alpha = theStupidThing1.alpha = theStupidThing2.alpha = 0;
+
+					dad.x = 260;
+					boyfriend.x = 540;
+					gf.visible = true;
 			}
+	}
+}
+
+function onEvent(e) if (curSong == "stars" && e.event.name == "go off") {
+	if (e.event.params[0] != 2) {
+		var positions:Array<Float> = switch e.event.params[0] {
+			case 0: [212, -70, 450];
+			case 1: [212+225, -70+225, 450+225];
+		};
+		dumbCircle.x = positions[0];
+		dumbCircle.y = 261;
+		dumbCircle.setGraphicSize(257,dumbCircle.height); dumbCircle.updateHitbox();
+
+		theStupidThing1.x = positions[1];
+		theStupidThing1.y = -63;
+
+		theStupidThing2.x = positions[2];
+		theStupidThing2.y = -63;
+	} else {
+		dumbCircle.x = 258;
+		dumbCircle.y = 261;
+		dumbCircle.setGraphicSize(385,dumbCircle.height); dumbCircle.updateHitbox();
+
+		theStupidThing1.x = -15;
+		theStupidThing1.y = -63;
+
+		theStupidThing2.x = 450+225-55;
+		theStupidThing2.y = -63;
 	}
 }

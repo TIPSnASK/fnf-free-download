@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="lady.png" width="714" height="647">
+	<SubTexture name="spr_ladymayy_0" x="233" y="486" width="117" height="153" frameX="-0" frameY="-3" frameWidth="120" frameHeight="157"/>
+	<SubTexture name="spr_ladymayy_1" x="353" y="485" width="117" height="153" frameX="-1" frameY="-1" frameWidth="120" frameHeight="157"/>
+	<SubTexture name="spr_ladymayy_2" x="517" y="1" width="117" height="153" frameX="-1" frameY="-2" frameWidth="120" frameHeight="157"/>
+	<SubTexture name="spr_ladymdown_0" x="1" y="166" width="75" height="159" frameX="-3" frameY="-0" frameWidth="78" frameHeight="159"/>
+	<SubTexture name="spr_ladymdown_1" x="1" y="489" width="76" height="157" frameX="-0" frameY="-2" frameWidth="78" frameHeight="159"/>
+	<SubTexture name="spr_ladymdown_2" x="80" y="489" width="76" height="157" frameX="-2" frameY="-2" frameWidth="78" frameHeight="159"/>
+	<SubTexture name="spr_ladymdown_3" x="294" y="163" width="72" height="158" frameX="-4" frameY="-1" frameWidth="78" frameHeight="159"/>
+	<SubTexture name="spr_ladymdown_4" x="294" y="324" width="74" height="158" frameX="-3" frameY="-1" frameWidth="78" frameHeight="159"/>
+	<SubTexture name="spr_ladymdownmiss_0" x="220" y="1" width="74" height="159" frameX="-0" frameY="-0" frameWidth="74" frameHeight="159"/>
+	<SubTexture name="spr_ladymidle_0" x="220" y="163" width="71" height="159" frameX="-2" frameY="-2" frameWidth="73" frameHeight="162"/>
+	<SubTexture name="spr_ladymidle_1" x="297" y="1" width="71" height="159" frameX="-0" frameY="-3" frameWidth="73" frameHeight="162"/>
+	<SubTexture name="spr_ladymidle_2" x="147" y="1" width="70" height="160" frameX="-2" frameY="-2" frameWidth="73" frameHeight="162"/>
+	<SubTexture name="spr_ladymidle_3" x="147" y="164" width="70" height="160" frameX="-3" frameY="-1" frameWidth="73" frameHeight="162"/>
+	<SubTexture name="spr_ladymidle_4" x="1" y="1" width="70" height="162" frameX="-3" frameY="-0" frameWidth="73" frameHeight="162"/>
+	<SubTexture name="spr_ladymleft_0" x="220" y="325" width="71" height="158" frameX="-8" frameY="-3" frameWidth="82" frameHeight="161"/>
+	<SubTexture name="spr_ladymleft_1" x="444" y="162" width="70" height="157" frameX="-2" frameY="-4" frameWidth="82" frameHeight="161"/>
+	<SubTexture name="spr_ladymleft_2" x="1" y="328" width="71" height="158" frameX="-5" frameY="-3" frameWidth="82" frameHeight="161"/>
+	<SubTexture name="spr_ladymleft_3" x="75" y="328" width="70" height="158" frameX="-8" frameY="-3" frameWidth="82" frameHeight="161"/>
+	<SubTexture name="spr_ladymleft_4" x="75" y="328" width="70" height="158" frameX="-8" frameY="-3" frameWidth="82" frameHeight="161"/>
+	<SubTexture name="spr_ladymleftmiss_0" x="369" y="163" width="70" height="158" frameX="-0" frameY="-0" frameWidth="70" frameHeight="158"/>
+	<SubTexture name="spr_ladympause_0" x="74" y="1" width="70" height="161" frameX="-0" frameY="-0" frameWidth="70" frameHeight="161"/>
+	<SubTexture name="spr_ladymright_0" x="553" y="157" width="77" height="150" frameX="-1" frameY="-0" frameWidth="78" frameHeight="150"/>
+	<SubTexture name="spr_ladymright_1" x="637" y="1" width="76" height="149" frameX="-0" frameY="-1" frameWidth="78" frameHeight="150"/>
+	<SubTexture name="spr_ladymright_2" x="553" y="310" width="76" height="150" frameX="-1" frameY="-0" frameWidth="78" frameHeight="150"/>
+	<SubTexture name="spr_ladymright_3" x="553" y="463" width="77" height="150" frameX="-1" frameY="-0" frameWidth="78" frameHeight="150"/>
+	<SubTexture name="spr_ladymright_4" x="632" y="310" width="76" height="150" frameX="-2" frameY="-0" frameWidth="78" frameHeight="150"/>
+	<SubTexture name="spr_ladymrightmiss_0" x="473" y="480" width="77" height="151" frameX="-0" frameY="-0" frameWidth="77" frameHeight="151"/>
+	<SubTexture name="spr_ladymup_0" x="444" y="322" width="70" height="155" frameX="-0" frameY="-2" frameWidth="71" frameHeight="158"/>
+	<SubTexture name="spr_ladymup_1" x="159" y="486" width="71" height="156" frameX="-0" frameY="-1" frameWidth="71" frameHeight="158"/>
+	<SubTexture name="spr_ladymup_2" x="371" y="1" width="70" height="158" frameX="-1" frameY="-0" frameWidth="71" frameHeight="158"/>
+	<SubTexture name="spr_ladymup_3" x="371" y="324" width="70" height="158" frameX="-1" frameY="-0" frameWidth="71" frameHeight="158"/>
+	<SubTexture name="spr_ladymup_4" x="371" y="324" width="70" height="158" frameX="-1" frameY="-0" frameWidth="71" frameHeight="158"/>
+	<SubTexture name="spr_ladymupmiss_0" x="444" y="1" width="70" height="158" frameX="-0" frameY="-0" frameWidth="70" frameHeight="158"/>
+</TextureAtlas>

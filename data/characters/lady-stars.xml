@@ -1,0 +1,16 @@
+<!DOCTYPE codename-engine-character>
+<character x="0" camx="12" camy="68" flipX="true" isPlayer="true" antialiasing="false" holdTime="8">
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_ladymidle" name="idle"/>
+
+	<anim x="12" loop="false" y="-5" fps="12" anim="spr_ladymleft_" name="singLEFT-alt"/>
+	<anim x="7" loop="false" y="-4" fps="12" anim="spr_ladymdown_" name="singDOWN-alt"/>
+	<anim x="-3" loop="false" y="-9" fps="12" anim="spr_ladymup_" name="singUP-alt"/>
+	<anim x="3" loop="false" y="-12" fps="12" anim="spr_ladymright_" name="singRIGHT-alt"/>
+
+	<anim x="1" loop="false" y="-6" fps="12" anim="spr_ladymleftmiss" name="singLEFTmiss"/>
+	<anim x="4" loop="false" y="-4" fps="12" anim="spr_ladymdownmiss" name="singDOWNmiss"/>
+	<anim x="-3" loop="false" y="-9" fps="12" anim="spr_ladymupmiss" name="singUPmiss"/>
+	<anim x="1" loop="false" y="-12" fps="12" anim="spr_ladymrightmiss" name="singRIGHTmiss"/>
+	<anim x="-3" loop="false" y="-1" fps="12" anim="spr_ladympause" name="paused"/>
+	<anim x="33" loop="false" y="-11" fps="12" anim="spr_ladymayy" name="ayy"/>
+</character>
