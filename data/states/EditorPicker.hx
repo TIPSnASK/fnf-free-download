@@ -26,7 +26,7 @@ function postCreate() {
         sprites[dumbIndex].remove(stupidShit);
     
         stupidShit = new FlxSprite();
-        stupidShit.loadGraphic(Paths.file('data/states/editors/' + i + '/icon.png'), true, 128, 128);
+        stupidShit.loadGraphic(Paths.file('data/states/editors/${i}/icon.png'), true, 128, 128);
 		stupidShit.antialiasing = true;
 
         var frames = [];

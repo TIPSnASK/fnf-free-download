@@ -12,25 +12,25 @@
 
 // why arent they responding to me :-(
 
-uniform vec4 colorReplaceHat;
 uniform vec4 colorReplaceSkin;
 uniform vec4 colorReplaceHair;
+uniform vec4 colorReplaceDye;
 
 uniform vec4 colorReplaceShirt;
-uniform vec4 colorReplaceStripe;
 
-uniform vec4 colorReplacePants;
+uniform vec4 colorReplaceShorts;
+uniform vec4 colorReplaceSocks;
 uniform vec4 colorReplaceShoes;
 
-vec4 colorHat = vec4(140.0/255.0, 151.0/255.0, 194.0/255.0, 1.0);
-vec4 colorSkin = vec4(238.0/255.0, 214.0/255.0, 196.0/255.0, 1.0);
-vec4 colorHair = vec4(71.0/255.0, 62.0/255.0, 56.0/255.0, 1.0);
+vec4 colorSkin = vec4(243.0/255.0, 224.0/255.0, 203.0/255.0, 1.0);
+vec4 colorHair = vec4(198.0/255.0, 192.0/255.0, 179.0/255.0, 1.0);
+vec4 colorDye = vec4(88.0/255.0, 61.0/255.0, 95.0/255.0, 1.0);
 
-vec4 colorShirt = vec4(215.0/255.0, 121.0/255.0, 156.0/255.0, 1.0);
-vec4 colorStripe = vec4(101.0/255.0, 54.0/255.0, 98.0/255.0, 1.0);
+vec4 colorShirt = vec4(63.0/255.0, 114.0/255.0, 112.0/255.0, 1.0);
 
-vec4 colorPants = vec4(97.0/255.0, 87.0/255.0, 146.0/255.0, 1.0);
-vec4 colorShoes = vec4(56.0/255.0, 54.0/255.0, 68.0/255.0, 1.0);
+vec4 colorShorts = vec4(44.0/255.0, 63.0/255.0, 62.0/255.0, 1.0);
+vec4 colorSocks = vec4(187.0/255.0, 201.0/255.0, 208.0/255.0, 1.0);
+vec4 colorShoes = vec4(53.0/255.0, 69.0/255.0, 77.0/255.0, 1.0);
 
 void main()
 {
@@ -39,20 +39,20 @@ void main()
 	
 	float range = 3.0 / 255.0;
 
-	if(abs(pixelColor.r - colorHat.r) <= range && abs(pixelColor.g - colorHat.g) <= range && abs(pixelColor.b - colorHat.b) <= range)
-		pixelColor.rgb = colorReplaceHat.rgb;
 	if(abs(pixelColor.r - colorSkin.r) <= range && abs(pixelColor.g - colorSkin.g) <= range && abs(pixelColor.b - colorSkin.b) <= range)
 		pixelColor.rgb = colorReplaceSkin.rgb;
 	if(abs(pixelColor.r - colorHair.r) <= range && abs(pixelColor.g - colorHair.g) <= range && abs(pixelColor.b - colorHair.b) <= range)
 		pixelColor.rgb = colorReplaceHair.rgb;
+	if(abs(pixelColor.r - colorDye.r) <= range && abs(pixelColor.g - colorDye.g) <= range && abs(pixelColor.b - colorDye.b) <= range)
+		pixelColor.rgb = colorReplaceDye.rgb;
 
 	if(abs(pixelColor.r - colorShirt.r) <= range && abs(pixelColor.g - colorShirt.g) <= range && abs(pixelColor.b - colorShirt.b) <= range)
 		pixelColor.rgb = colorReplaceShirt.rgb;
-	if(abs(pixelColor.r - colorStripe.r) <= range && abs(pixelColor.g - colorStripe.g) <= range && abs(pixelColor.b - colorStripe.b) <= range)
-		pixelColor.rgb = colorReplaceStripe.rgb;
 
-	if(abs(pixelColor.r - colorPants.r) <= range && abs(pixelColor.g - colorPants.g) <= range && abs(pixelColor.b - colorPants.b) <= range)
-		pixelColor.rgb = colorReplacePants.rgb;
+	if(abs(pixelColor.r - colorShorts.r) <= range && abs(pixelColor.g - colorShorts.g) <= range && abs(pixelColor.b - colorShorts.b) <= range)
+		pixelColor.rgb = colorReplaceShorts.rgb;
+	if(abs(pixelColor.r - colorSocks.r) <= range && abs(pixelColor.g - colorSocks.g) <= range && abs(pixelColor.b - colorSocks.b) <= range)
+		pixelColor.rgb = colorReplaceSocks.rgb;
 	if(abs(pixelColor.r - colorShoes.r) <= range && abs(pixelColor.g - colorShoes.g) <= range && abs(pixelColor.b - colorShoes.b) <= range)
 		pixelColor.rgb = colorReplaceShoes.rgb;
 

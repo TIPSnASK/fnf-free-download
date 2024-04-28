@@ -30,12 +30,12 @@ var dialogFormats:Array<FlxTextFormatMarkerPair> = [];
 var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
 
 function create() {
-	if (!Assets.exists(Paths.file("songs/" + song + "/cutscene.xml"))) {
+	if (!Assets.exists(Paths.file('songs/${song}/cutscene.xml'))) {
 		close();
 		return;
 	}
 
-	xml = Xml.parse(Assets.getText(Paths.file("songs/" + song + "/cutscene.xml")));
+	xml = Xml.parse(Assets.getText(Paths.file('songs/${song}/cutscene.xml')));
 	curElements = [for (i in xml.elementsNamed(dumb)) for (k in i.elements()) k];
 	for (i in curElements)
 		if (i.nodeType == 1)

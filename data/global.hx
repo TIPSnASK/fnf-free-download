@@ -138,6 +138,53 @@ static function loadDudeSkin(shader:CustomShader, name:String):Bool {
 	return whatDoINameThisVariable;
 }
 
+static function loadLadySkin(shader:CustomShader, name:String):Void {
+	var path:String = Paths.txt('skins/lady-${name}');
+	var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
+	var dumbData:Array<String> = [];
+
+	if (Assets.exists(path))
+		dumbData = CoolUtil.coolTextFile(path);
+	else {
+		for (dumb in userSkins.skins) {
+			if (dumb.name == 'lady-${name}') {
+				dumbData = coolText(dumb.data);
+				break;
+			}
+		}
+	}
+
+	if (dumbData != []) {
+		for (index => line in dumbData) {
+			var lineData:Array<Float> = [for (ass in line.split(",")) Std.parseFloat(StringTools.trim(ass))/255];
+
+			// Invalid Cast
+			// because life isnt good
+			switch(index) {
+				case 0: // skin
+					shader.colorReplaceSkin = lineData;
+				case 1: // hair
+					shader.colorReplaceHair = lineData;
+				case 2: // dye
+					shader.colorReplaceDye = lineData;
+
+				case 3: // shirt
+					shader.colorReplaceShirt = lineData;
+
+				case 4: // shorts
+					shader.colorReplaceShorts = lineData;
+				case 5: // socks
+					shader.colorReplaceSocks = lineData;
+				case 6: // shoes
+					shader.colorReplaceShoes = lineData;
+			}
+		}
+	} else {
+		trace("that skin doesnt exist!");
+		loadLadySkin(shader, "default");
+	}
+}
+
 static function iKnowWhatYouAre():Bool {
 	var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
 	var yeah:Bool = false;
@@ -155,6 +202,10 @@ static function iKnowWhatYouAre():Bool {
 
 static function usePlayerSkin(shader:CustomShader):Bool { // for convenience
 	return loadDudeSkin(shader, Json.parse(File.getContent("mods/free-download-skins.json")).selected);
+}
+
+static function useLadySkin(shader:CustomShader):Bool { // for convenience
+	return loadLadySkin(shader, Json.parse(File.getContent("mods/free-download-skins.json")).selectedLady == null ? "default" : Json.parse(File.getContent("mods/free-download-skins.json")).selectedLady);
 }
 
 static function playMenuMusic() {

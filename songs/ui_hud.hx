@@ -126,23 +126,23 @@ function postCreate() {
 	// ref.alpha = 0.9;
 	// insert(0, ref);
 
-	playerIcon = new FreeIcon("dude-" + uiskin);
+	playerIcon = new FreeIcon('dude-${uiskin}');
 	playerIcon.cameras = [camHUD];
 	add(playerIcon);
 
-	opponentIcon = new FreeIcon("strad-" + uiskin);
+	opponentIcon = new FreeIcon('strad-${uiskin}');
 	opponentIcon.cameras = [camHUD];
 	add(opponentIcon);
 
 	playerIcon.y = healthBar.y - (playerIcon.height/2.25);
 	opponentIcon.y = healthBar.y - (opponentIcon.height/2.25);
 
-	playerIconShadow = new FreeIcon("dude-" + uiskin);
+	playerIconShadow = new FreeIcon('dude-${uiskin}');
 	playerIconShadow.cameras = [camHUD];
 	playerIconShadow.color = 0xFF000000;
 	insert(members.indexOf(healthBar), playerIconShadow);
 
-	opponentIconShadow = new FreeIcon("strad-" + uiskin);
+	opponentIconShadow = new FreeIcon('strad-${uiskin}');
 	opponentIconShadow.cameras = [camHUD];
 	opponentIconShadow.color = 0xFF000000;
 	insert(members.indexOf(healthBar), opponentIconShadow);
@@ -172,7 +172,7 @@ var timer:Float = 0;
 function postUpdate(elapsed:Float) {
 	timer += elapsed;
 
-	scoreTxt.text = 'score: ' + songScore + ' | misses: ' + misses;
+	scoreTxt.text = 'score: ${songScore} | misses: ${misses}';
 
 	flowBar.y = Std.int((healthBar.y - 18) + (Math.sin(timer * 4.5) + 1) * 1.25); // tank you wizard 🙏
 

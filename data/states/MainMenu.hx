@@ -22,7 +22,7 @@ function create() {
 	options = new FunkinSprite();
 	options.frames = Paths.getSparrowAtlas('menus/main-menu/options');
 	for (index=>name in optionList)
-		options.animation.addByPrefix(name, 'spr_titlewords2_' + index, 0, true);
+		options.animation.addByPrefix(name, 'spr_titlewords2_${index}', 0, true);
 	options.scale.set(2, 2);
 	options.updateHitbox();
 	options.screenCenter();
@@ -32,9 +32,9 @@ function create() {
 
 function update(elapsed:Float) {
 	if (controls.ACCEPT) {
-		if (Assets.exists(Paths.script('data/states/menus/' + optionList[curSelected]))) {
+		if (Assets.exists(Paths.script('data/states/menus/${optionList[curSelected]}'))) {
 			FlxG.sound.play(Paths.sound("menus/snd_josh")).persist = true;
-			FlxG.switchState(new ModState('menus/' + optionList[curSelected]));
+			FlxG.switchState(new ModState('menus/${optionList[curSelected]}'));
 		} else if (optionList[curSelected] != "Settings")
 			trace(optionList[curSelected] + ': yooooooooo');
 		else if (optionList[curSelected] == "Settings") {

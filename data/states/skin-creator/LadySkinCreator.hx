@@ -10,12 +10,12 @@ import sys.io.File;
 import sys.FileSystem;
 
 var STUPIDFUCKINGCAMERA:FlxCamera;
-var dude:FunkinSprite;
-var colorSwap:CustomShader = new CustomShader("dude-colorswap");
+var lady:FunkinSprite;
+var colorSwap:CustomShader = new CustomShader("lady-colorswap");
 var dumbZoom:Float = 1.4;
 var dumbPos:{x:Float, y:Float} = {x: 0, y: 0};
 var colorPicker:UIColorwheel;
-var dudeName:UITextBox;
+var ladyName:UITextBox;
 
 var saveButton:UIButton;
 var loadButton:UIButton;
@@ -35,12 +35,12 @@ var buttonArr:Array<UIButton> = [];
 var colorData = {
 	skin: 0xFF000000,
 	hair: 0xFF000000,
-	hat: 0xFF000000,
+	dye: 0xFF000000,
 	
 	shirt: 0xFF000000,
-	stripes: 0xFF000000,
 	
-	pants: 0xFF000000,
+	shorts: 0xFF000000,
+	socks: 0xFF000000,
 	shoes: 0xFF000000
 };
 
@@ -48,7 +48,7 @@ var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
 
 function loadSkin(name:String) {
 	updateColors = false;
-	var path:String = Paths.txt('skins/${name}');
+	var path:String = Paths.txt('skins/lady-${name}');
 
 	var dumbData:Array<String> = [];
 	var yup:Bool = false;
@@ -57,7 +57,7 @@ function loadSkin(name:String) {
 		dumbData = CoolUtil.coolTextFile(path);
 
 	for (dumb in userSkins.skins) {
-		if (dumb.name == name) {
+		if (dumb.name == 'lady-${name}') {
 			dumbData = coolText(dumb.data);
 			if (dumb.clickedGenderButton != null)
 				whatDoICallThisVariable = dumb.clickedGenderButton;
@@ -73,26 +73,26 @@ function loadSkin(name:String) {
 			// Invalid Cast
 			// because life isnt good
 			switch(index) {
-				case 0: // hat
-					colorSwap.colorReplaceHat = lineData;
-					colorData.hat = theFlxColor;
-				case 1: // skin
-					colorSwap.colorReplaceSkin = lineData;
-					colorData.skin = theFlxColor;
-				case 2: // hair
-					colorSwap.colorReplaceHair = lineData;
-					colorData.hair = theFlxColor;
+                case 0: // skin
+                    colorSwap.colorReplaceSkin = lineData;
+                    colorData.skin = theFlxColor;
+				case 1: // hair
+                    colorSwap.colorReplaceHair = lineData;
+                    colorData.hair = theFlxColor;
+				case 2: // hat
+					colorSwap.colorReplaceDye = lineData;
+					colorData.dye = theFlxColor;
 
 				case 3: // shirt
 					colorSwap.colorReplaceShirt = lineData;
 					colorData.shirt = theFlxColor;
-				case 4: // stripe
-					colorSwap.colorReplaceStripe = lineData;
-					colorData.stripes = theFlxColor;
+				case 4: // shorts
+					colorSwap.colorReplaceShorts = lineData;
+					colorData.shorts = theFlxColor;
 
-				case 5: // pants
-					colorSwap.colorReplacePants = lineData;
-					colorData.pants = theFlxColor;
+				case 5: // socks
+					colorSwap.colorReplaceSocks = lineData;
+					colorData.socks = theFlxColor;
 				case 6: // shoes
 					colorSwap.colorReplaceShoes = lineData;
 					colorData.shoes = theFlxColor;
@@ -100,11 +100,11 @@ function loadSkin(name:String) {
 		}
 
 		if (whatDoICallThisVariable == true) {
-			dude.loadGraphic(Paths.image('editors/make-a-dude/${(whatDoICallThisVariable ? "player-f" : "dude")}'));
-			dude.screenCenter();
+			lady.loadGraphic(Paths.image('editors/make-a-lady/${(whatDoICallThisVariable ? "player-f" : "lady")}'));
+			lady.screenCenter();
 		}
 	} else {
-		dudeName.label.text = "that skin doesnt exist!";
+		ladyName.label.text = "that skin doesnt exist!";
 		loadSkin("default");
 	}
 }
@@ -119,24 +119,24 @@ function create() {
 	bg.scrollFactor.set(0, 0.5);
 	add(bg);
 
-	dude = new FunkinSprite().loadGraphic(Paths.image("editors/make-a-dude/dude"));
-	dude.screenCenter();
-	dude.shader = colorSwap;
-	add(dude);
+	lady = new FunkinSprite().loadGraphic(Paths.image("editors/make-a-lady/lady"));
+	lady.screenCenter();
+	lady.shader = colorSwap;
+	add(lady);
 
-	loadSkin(userSkins.selected);
+	loadSkin(userSkins.selectedLady);
 }
 
 var showPickerButton:UIButton;
 
 var skinButton:UIButton; // what!
 var hairButton:UIButton;
-var hatButton:UIButton;
+var dyeButton:UIButton;
 
 var shirtButton:UIButton;
-var stripesButton:UIButton;
+var shortsButton:UIButton;
 
-var pantsButton:UIButton;
+var socksButton:UIButton;
 var shoesButton:UIButton;
 
 // the things i'll do because abstracts are fucking stupid
@@ -155,7 +155,7 @@ function postCreate() {
 	STUPIDFUCKINGCAMERA = new FlxCamera();
 	STUPIDFUCKINGCAMERA.bgColor = 0;
 	FlxG.cameras.add(STUPIDFUCKINGCAMERA, false);
-		
+
 	var dumbBar1:FunkinSprite = new FunkinSprite().makeSolid(FlxG.width, FlxG.height/10, 0xFF000000);
 	dumbBar1.zoomFactor = 0;
 	add(dumbBar1);
@@ -202,19 +202,19 @@ function postCreate() {
 	showPickerButton = new UIButton(5, 46, "show color picker", () -> {
 		colorPicker.visible = !colorPicker.visible;
 		if (colorPicker.visible) {
-			dumbZoom = 0.8;
-			dumbPos.y += 85;
+			dumbZoom = 0.6;
+			dumbPos.y += 110;
 		} else {
 			dumbZoom = 1.4;
-			dumbPos.y -= 85;
+			dumbPos.y -= 110;
 		}
 	}, 128);
 	add(showPickerButton);
 
 	genderButton = new UIButton(5, 46 + showPickerButton.bHeight + 7, "the gender button", () -> {
 		whatDoICallThisVariable = !whatDoICallThisVariable;
-		dude.loadGraphic(Paths.image('editors/make-a-dude/${(whatDoICallThisVariable ? "player-f" : "dude")}'));
-		dude.screenCenter();
+		// lady.loadGraphic(Paths.image('editors/make-a-lady/(whatDoICallThisVariable ? "player-f" : "lady")'));
+		// lady.screenCenter();
 	}, 128);
 	add(genderButton);
 
@@ -226,9 +226,9 @@ function postCreate() {
 			return {r: FlxColorHelper.redFloat(color), g: FlxColorHelper.greenFloat(color), b: FlxColorHelper.blueFloat(color), color: color};
 		}
 
-		var hat = randomColor();
-		colorSwap.colorReplaceHat = [hat.r, hat.g, hat.b, 1];
-		colorData.hat = hat.color;
+		var dye = randomColor();
+		colorSwap.colorReplaceDye = [dye.r, dye.g, dye.b, 1];
+		colorData.dye = dye.color;
 		var hair = randomColor();
 		colorSwap.colorReplaceHair = [hair.r, hair.g, hair.b, 1];
 		colorData.hair = hair.color;
@@ -236,20 +236,20 @@ function postCreate() {
 		var shirt = randomColor();
 		colorSwap.colorReplaceShirt = [shirt.r, shirt.g, shirt.b, 1];
 		colorData.shirt = shirt.color;
-		var stripe = randomColor();
-		colorSwap.colorReplaceStripe = [stripe.r, stripe.g, stripe.b, 1];
-		colorData.stripes = stripe.color;
+		var shorts = randomColor();
+		colorSwap.colorReplaceShorts = [shorts.r, shorts.g, shorts.b, 1];
+		colorData.shorts = shorts.color;
 
-		var pants = randomColor();
-		colorSwap.colorReplacePants = [pants.r, pants.g, pants.b, 1];
-		colorData.pants = pants.color;
+		var socks = randomColor();
+		colorSwap.colorReplaceSocks = [socks.r, socks.g, socks.b, 1];
+		colorData.socks = socks.color;
 		var shoes = randomColor();
 		colorSwap.colorReplaceShoes = [shoes.r, shoes.g, shoes.b, 1];
 		colorData.shoes = shoes.color;
 
 		whatDoICallThisVariable = FlxG.random.bool(50);
-		dude.loadGraphic(Paths.image('editors/make-a-dude/${(whatDoICallThisVariable ? "player-f" : "dude")}'));
-		dude.screenCenter();
+		// lady.loadGraphic(Paths.image('editors/make-a-lady/${(whatDoICallThisVariable ? "player-f" : "lady")}'));
+		// lady.screenCenter();
 	}, 180);
 	randomizeButton.color = 0xFFFFFF00;
 	add(randomizeButton);
@@ -258,22 +258,22 @@ function postCreate() {
 	var w = 72;
 	skinButton = new UIButton(FlxG.width - (w + 5), 0, "skin", null, w, 32);
 	hairButton = new UIButton(FlxG.width - (w + 5), 0, "hair", null, w, 32);
-	hatButton = new UIButton(FlxG.width - (w + 5), 0, "hat", null, w, 32);
+	dyeButton = new UIButton(FlxG.width - (w + 5), 0, "dye", null, w, 32);
 	add(skinButton);
 	add(hairButton);
-	add(hatButton);
+	add(dyeButton);
 
 	shirtButton = new UIButton(FlxG.width - (w + 5), 0, "shirt", null, w, 32);
-	stripesButton = new UIButton(FlxG.width - (w + 5), 0, "stripes", null, w, 32);
+	shortsButton = new UIButton(FlxG.width - (w + 5), 0, "shorts", null, w, 32);
 	add(shirtButton);
-	add(stripesButton);
+	add(shortsButton);
 
-	pantsButton = new UIButton(FlxG.width - (w + 5), 0, "pants", null, w, 32);
+	socksButton = new UIButton(FlxG.width - (w + 5), 0, "socks", null, w, 32);
 	shoesButton = new UIButton(FlxG.width - (w + 5), 0, "shoes", null, w, 32);
-	add(pantsButton);
+	add(socksButton);
 	add(shoesButton);
 
-	buttonArr = [skinButton, hairButton, hatButton, shirtButton, stripesButton, pantsButton, shoesButton];
+	buttonArr = [skinButton, hairButton, dyeButton, shirtButton, shortsButton, socksButton, shoesButton];
 	for (spr in buttonArr) {
 		spr.y = 46 + (39.5 * (buttonArr.indexOf(spr)));
 		spr.cameras = [STUPIDFUCKINGCAMERA];
@@ -285,12 +285,12 @@ function postCreate() {
 			var separateLoopStatementBecauseLifeIsntGoodVarHate = [
 				colorData.skin,
 				colorData.hair,
-				colorData.hat,
+				colorData.dye,
 		
 				colorData.shirt,
-				colorData.stripes,
-		
-				colorData.pants,
+                
+				colorData.shorts,
+				colorData.socks,
 				colorData.shoes,
 			];
 			iMightKillYou(colorPicker, separateLoopStatementBecauseLifeIsntGoodVarHate[buttonArr.indexOf(spr)]);
@@ -309,31 +309,31 @@ function postCreate() {
 	loadButton.color = 0xFF0000FF;
 
 	cancelButton = new UIButton(0, dumbBar2.y-37, "cancel", () -> {
-		FlxG.switchState(new UIState(true, "skin-creator/ChooseASkin"));
+		FlxG.switchState(new UIState(true, "skin-creator/ChooseLadySkin"));
 	}, 72, 32);
 	cancelButton.x = loadButton.x-loadButton.bWidth-5;
 	add(cancelButton);
 	cancelButton.color = 0xFFFF0000;
 	
-	dudeName = new UITextBox(5, dumbBar2.y-37, userSkins.selected, FlxG.width-242, 32);
-	add(dudeName);
+	ladyName = new UITextBox(5, dumbBar2.y-37, userSkins.selectedLady, FlxG.width-242, 32);
+	add(ladyName);
 
 	saveButton.callback = () -> {
 		var data:String = "";
 
-		for (color in [colorData.hat, colorData.skin, colorData.hair, colorData.shirt, colorData.stripes, colorData.pants, colorData.shoes]) {
+		for (color in [colorData.skin, colorData.hair, colorData.dye, colorData.shirt, colorData.shorts, colorData.socks, colorData.shoes]) {
 			var arr:Array<Float> = [FlxColorHelper.red(color), FlxColorHelper.green(color), FlxColorHelper.blue(color), 1];
 			data += '\n${arr}';
 		}
 		data = StringTools.replace(StringTools.replace(data, "]", ""), "[", "");
 
 		var stupid = {
-			name: StringTools.startsWith(dudeName.label.text, 'lady-') ? StringTools.replace(dudeName.label.text, 'lady-', '') : dudeName.label.text,
+			name: 'lady-${StringTools.startsWith(ladyName.label.text, 'lady-') ? StringTools.replace(ladyName.label.text, 'lady-', '') : ladyName.label.text}',
 			data: data,
 			clickedGenderButton: whatDoICallThisVariable
 		};
 
-		if (Assets.exists(Paths.txt('skins/${stupid.name}')))
+		if (Assets.exists(Paths.txt('skins/lady-${stupid.name}')))
 			stupid.name = 'user-${stupid.name}';
 
 		for (dumb in userSkins.skins) {
@@ -350,16 +350,16 @@ function postCreate() {
 	};
 
 	loadButton.callback = () -> {
-		loadSkin(dudeName.label.text);
+		loadSkin(ladyName.label.text);
 	};
 
-	for (i in [dumbBar1, dumbBar2, dumbText, dumberText, creditAvery, colorPicker, showPickerButton, genderButton, dudeName, saveButton, loadButton, cancelButton, randomizeButton])
+	for (i in [dumbBar1, dumbBar2, dumbText, dumberText, creditAvery, colorPicker, showPickerButton, genderButton, ladyName, saveButton, loadButton, cancelButton, randomizeButton])
 		i.cameras = [STUPIDFUCKINGCAMERA];
 }
 
 function update(elapsed:Float) {
 	if (FlxG.keys.justPressed.ESCAPE) {
-		FlxG.switchState(new UIState(true, "skin-creator/ChooseASkin"));
+		FlxG.switchState(new UIState(true, "skin-creator/ChooseLadySkin"));
 	}
 
 	for (hate in buttonArr)
@@ -377,20 +377,20 @@ function update(elapsed:Float) {
 			case 1: // hair
 				colorSwap.colorReplaceHair = shaderArr;
 				colorData.hair = color;
-			case 2: // hat
-				colorSwap.colorReplaceHat = shaderArr;
-				colorData.hat = color;
+			case 2: // dye
+				colorSwap.colorReplaceDye = shaderArr;
+				colorData.dye = color;
 				
 			case 3: // shirt
 				colorSwap.colorReplaceShirt = shaderArr;
 				colorData.shirt = color;
-			case 4: // stripes
-				colorSwap.colorReplaceStripe = shaderArr;
-				colorData.stripes = color;
 				
-			case 5: // pants
-				colorSwap.colorReplacePants = shaderArr;
-				colorData.pants = color;
+			case 4: // shorts
+				colorSwap.colorReplaceShorts = shaderArr;
+				colorData.shorts = color;
+            case 5: // socks
+                colorSwap.colorReplaceSocks = shaderArr;
+                colorData.socks = color;
 			case 6: // shoes
 				colorSwap.colorReplaceShoes = shaderArr;
 				colorData.shoes = color;

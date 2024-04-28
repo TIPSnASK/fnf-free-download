@@ -129,6 +129,7 @@ function update(elapsed:Float) {
 			difficulties: [weekndData[curSelected].rating]
 		};
 
+		PlayState.playCutscenes = true;
 		PlayState.loadWeek(convertedData, weekndData[curSelected].rating);
 		FlxG.switchState(new PlayState());
 	}

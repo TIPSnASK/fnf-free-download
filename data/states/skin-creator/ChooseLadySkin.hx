@@ -14,7 +14,7 @@ var camUI:FlxCamera;
 var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
 var backButton:UIButton;
 var editButton:UIButton;
-var ladyButton:UIButton;
+var dudeButton:UIButton;
 
 var yourName:UITextBox;
 var theyAddedPronounsToFreeDownload:UITextBox;
@@ -22,9 +22,9 @@ var theyAddedPronounsToFreeDownload:UITextBox;
 var skinText:UIText;
 var enterText:UIText;
 var arrows:UIText;
-var dude:FunkinSprite;
+var lady:FunkinSprite;
 
-var camZoom:Float = 1.4;
+var camZoom:Float = 1;
 
 var selectedFormat:FlxTextFormat = new FlxTextFormat(0xFF00FF62, true);
 var notSelectedFormat:FlxTextFormat = new FlxTextFormat(0xFFFF0055, true);
@@ -33,26 +33,31 @@ var markupRules:Array<FlxTextFormatMarkerPair> = [new FlxTextFormatMarkerPair(se
 var curSelected:Int = 0;
 var skins:Array<{data:String, name:String}> = [];
 
-var dudeColors:CustomShader;
+var ladyColors:CustomShader;
 var selectSound:FlxSound;
+
+function convert(theThing, lady:Bool) {
+	return {clickedGenderButton: theThing.clickedGenderButton, data: theThing.data, name: lady ? !StringTools.startsWith(theThing.name, 'lady-') ? 'lady-${theThing.name}' : theThing.name : StringTools.replace(theThing.name, "lady-", "")};
+}
 
 function create() {
 	playMenuMusic();
 
 	for (i in Paths.getFolderContent("data/skins")) {
-		if (!StringTools.startsWith(i, "lady-"))
+		if (StringTools.startsWith(i, "lady-"))
 			skins.push({
-				name: StringTools.replace(i, ".txt", ""),
+				name: StringTools.replace(StringTools.replace(i, "lady-", ""), ".txt", ""),
 				data: Assets.getText(Paths.txt('skins/${StringTools.replace(i, ".txt", "")}'))
 			});
 	}
 	
 	for (i in userSkins.skins)
-		if (!StringTools.startsWith(i.name, "lady-"))
-			skins.push(i);
+		if (StringTools.startsWith(i.name, "lady-")) {
+			skins.push(convert(i, false));
+		}
 
 	for (index => data in skins) {
-		if (userSkins.selected == data.name)
+		if (userSkins.selectedLady == data.name)
 			curSelected = index;
 	}
 
@@ -63,11 +68,11 @@ function create() {
 	bg.zoomFactor = 0.25;
 	add(bg);
 
-	dude = new FunkinSprite().loadGraphic(Paths.image("editors/make-a-dude/dude"));
-	dude.screenCenter();
-	add(dude);
+	lady = new FunkinSprite().loadGraphic(Paths.image("editors/make-a-lady/lady"));
+	lady.screenCenter();
+	add(lady);
 
-	skinText = new UIText(0, dude.y - 55, FlxG.width, "you shuoldnt be seeing this text.......", 16, 0xFFFFFFFF, true);
+	skinText = new UIText(0, lady.y - 55, FlxG.width, "you shuoldnt be seeing this text.......", 16, 0xFFFFFFFF, true);
 	skinText.alignment = 'center';
 	skinText.antialiasing = false;
 	// lunarcleint figured this out thank you lunar holy shit 🙏
@@ -89,7 +94,7 @@ function create() {
 	arrows.screenCenter(FlxAxes.Y);
 	add(arrows);
 
-	enterText = new UIText(0, dude.y + dude.height + 15, FlxG.width, "press enter to select\npress X to delete", 16, 0xFFFFFFFF, true);
+	enterText = new UIText(0, lady.y + lady.height + 15, FlxG.width, "press enter to select\npress X to delete", 16, 0xFFFFFFFF, true);
 	enterText.alignment = 'center';
 	enterText.antialiasing = false;
 	// lunarcleint figured this out thank you lunar holy shit 🙏
@@ -99,27 +104,15 @@ function create() {
 	enterText.borderSize = 2;
 	add(enterText);
 
-	dude.shader = dudeColors = new CustomShader("dude-colorswap");
+	lady.shader = ladyColors = new CustomShader("lady-colorswap");
 	updateSkin();
 
-	selectSound = FlxG.sound.load(Paths.sound("gameplay/ayy/dude"));
+	selectSound = FlxG.sound.load(Paths.sound("gameplay/ayy/lady"));
 }
 
-var whatDoIFuckingCallThisDamnVariable:Bool = false;
 function updateSkin() {
-	var what:Bool = loadDudeSkin(dudeColors, skins[curSelected].name);
-
-	if (what && whatDoIFuckingCallThisDamnVariable != true) {
-		dude.loadGraphic(Paths.image("editors/make-a-dude/player-f"));
-		dude.screenCenter();
-		whatDoIFuckingCallThisDamnVariable = true;
-	} else if (!what && whatDoIFuckingCallThisDamnVariable != false) {
-		dude.loadGraphic(Paths.image("editors/make-a-dude/dude"));
-		dude.screenCenter();
-		whatDoIFuckingCallThisDamnVariable = false;
-	}
-
-	skinText.text =  '${skins[curSelected].name}\n${(skins[curSelected].name == userSkins.selected ? "$[SELECTED]$" : "%[UNSELECTED]%")}';
+	loadLadySkin(ladyColors, skins[curSelected].name);
+	skinText.text =  '${skins[curSelected].name}\n${(skins[curSelected].name == userSkins.selectedLady ? "$[SELECTED]$" : "%[UNSELECTED]%")}';
 	skinText.applyMarkup(skinText.text, markupRules);
 }
 
@@ -152,62 +145,62 @@ function postCreate() {
 	add(backButton);
 
 	editButton = new UIButton(FlxG.width - backButton.bWidth - 4, 4, "skin creator", () -> {
-		FlxG.switchState(new UIState(true, "skin-creator/SkinCreator"));
+		FlxG.switchState(new UIState(true, "skin-creator/LadySkinCreator"));
 	}, backButton.bWidth, 32);
 	add(editButton);
 
-	ladyButton = new UIButton(5, dumbBar2.y + 4, "lady", () -> {FlxG.switchState(new UIState(true, "skin-creator/ChooseLadySkin"));}, backButton.bWidth-1.25, 32);
-	add(ladyButton);
+	dudeButton = new UIButton(5, dumbBar2.y + 4, "dude", () -> {FlxG.switchState(new UIState(true, "skin-creator/ChooseASkin"));}, backButton.bWidth-1.25, 32);
+	add(dudeButton);
 
-	yourName = new UITextBox(ladyButton.x + ladyButton.bWidth + 5, dumbBar2.y + 4, (userSkins.name == null || userSkins.name == "") ? "type your name" : userSkins.name, ladyButton.bWidth, 32);
+	yourName = new UITextBox(dudeButton.x + dudeButton.bWidth + 5, dumbBar2.y + 4, (userSkins.name == null || userSkins.name == "") ? "type your name" : userSkins.ladyName, dudeButton.bWidth, 32);
 	add(yourName);
 
-	theyAddedPronounsToFreeDownload = new UITextBox(yourName.x + yourName.bWidth + 5, dumbBar2.y + 4, (userSkins.pronouns == null || userSkins.pronouns == "") ? "they/them/theirs" : userSkins.pronouns, ladyButton.bWidth, 32);
+	theyAddedPronounsToFreeDownload = new UITextBox(yourName.x + yourName.bWidth + 5, dumbBar2.y + 4, (userSkins.pronouns == null || userSkins.pronouns == "") ? "they/them/theirs" : userSkins.ladyPronouns, dudeButton.bWidth, 32);
 	add(theyAddedPronounsToFreeDownload);
 
-	for (i in [dumbBar1, dumbBar2, dumbText, backButton, editButton, ladyButton, yourName, theyAddedPronounsToFreeDownload])
+	for (i in [dumbBar1, dumbBar2, dumbText, backButton, editButton, dudeButton, yourName, theyAddedPronounsToFreeDownload])
 		i.cameras = [camUI];
 }
 
 function destroy() {
-	userSkins.name = yourName.label.text;
-	userSkins.pronouns = theyAddedPronounsToFreeDownload.label.text;
+	userSkins.ladyName = yourName.label.text;
+	userSkins.ladyPronouns = theyAddedPronounsToFreeDownload.label.text;
 	File.saveContent("mods/free-download-skins.json", Json.stringify(userSkins));
 }
 
-var deletingDude:Bool = false;
+var deletingLady:Bool = false;
 var canDelete:Bool = true;
 var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
 function update(elapsed:Float) {
 	if (!yourName.focused && !theyAddedPronounsToFreeDownload.focused) {
-		if (controls.BACK && !deletingDude) {
+		if (controls.BACK && !deletingLady) {
 			FlxG.switchState(fromGame ? new PlayState() : new MainMenuState());
-		} else if (controls.BACK && deletingDude)  {
-			deletingDude = false;
+		} else if (controls.BACK && deletingLady)  {
+			deletingLady = false;
 			enterText.text = "press enter to select\npress X to delete";
 		}
 
-		if ((controls.LEFT_P || controls.RIGHT_P) && !deletingDude) {
+		if ((controls.LEFT_P || controls.RIGHT_P) && !deletingLady) {
 			curSelected = FlxMath.wrap(curSelected + (controls.LEFT_P ? -1 : 1), 0, skins.length-1);
 			updateSkin();
 			arrows.x += controls.LEFT_P ? -5 : 5;
-			dude.x += controls.LEFT_P ? -10 : 10;
+			lady.x += controls.LEFT_P ? -10 : 10;
 		}
 
-		if (controls.ACCEPT && !deletingDude) {
-			userSkins.selected = skins[curSelected].name;
+		if (controls.ACCEPT && !deletingLady) {
+			userSkins.selectedLady = skins[curSelected].name;
 			File.saveContent("mods/free-download-skins.json", Json.stringify(userSkins));
 			updateSkin();
 
-			dude.scale.set(1.1, 1.1);
+			lady.scale.set(1.1, 1.1);
 			selectSound.play(true);
 		}
 
 		if (FlxG.keys.justPressed.X && canDelete) {
-			if (!deletingDude) {
-				if (userSkins.skins.contains(skins[curSelected])) {
+			if (!deletingLady) {
+				if (userSkins.skins.contains(convert(skins[curSelected], true))) {
 					enterText.text = "press X again to delete this skin\npress BACK to cancel";
-					deletingDude = true;
+					deletingLady = true;
 				} else {
 					enterText.text = "you can't delete this one silly!"; // it's not a user-created skin
 					canDelete = false;
@@ -219,25 +212,25 @@ function update(elapsed:Float) {
 				}
 			} else {
 				for (dumb in userSkins.skins) {
-					if (dumb.name == skins[curSelected].name) {
-						if (dumb.name == userSkins.selected) {
-							userSkins.selected = "default";
+					if (dumb.name == skins[curSelected].ladyName) {
+						if (dumb.name == userSkins.selectedLady) {
+							userSkins.selectedLady = "default";
 						}
 						userSkins.skins.remove(dumb);
 					}
 				}
 				File.saveContent("mods/free-download-skins.json", Json.stringify(userSkins));
 
-				FlxG.switchState(new UIState(true, "skin-creator/ChooseASkin"));
+				FlxG.switchState(new UIState(true, "skin-creator/ChooseLadySkin"));
 			}
 		}
 	}
 
 	skinText.x = arrows.x = lerp(arrows.x, 0, 0.12);
-	skinText.alpha = dude.alpha = lerp(dude.alpha, 1, 0.12);
-	dude.x = lerp(dude.x, 146, 0.24);
-	dude.scale.x = lerp(dude.scale.x, 1, 0.12);
-	dude.scale.y = lerp(dude.scale.y, 1, 0.12);
+	skinText.alpha = lady.alpha = lerp(lady.alpha, 1, 0.12);
+	lady.x = lerp(lady.x, 163, 0.24);
+	lady.scale.x = lerp(lady.scale.x, 1, 0.12);
+	lady.scale.y = lerp(lady.scale.y, 1, 0.12);
 
 	FlxG.camera.zoom = lerp(FlxG.camera.zoom, camZoom, 0.06);
 }
