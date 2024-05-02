@@ -1,5 +1,6 @@
 import Xml;
 import flixel.addons.display.FlxBackdrop;
+import flixel.group.FlxSpriteGroup;
 import funkin.editors.ui.UIState;
 import funkin.editors.ui.UIText;
 import karaoke.game.FreeIcon;

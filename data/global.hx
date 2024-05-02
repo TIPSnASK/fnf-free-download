@@ -9,6 +9,9 @@ import Xml;
 import sys.FileSystem;
 import sys.io.File;
 import openfl.system.Capabilities;
+import flixel.ui.FlxBar;
+import flixel.ui.FlxBar.FlxBarFillDirection;
+import flixel.group.FlxSpriteGroup;
 
 import karaoke.backend.util.FlxColorHelper;
 
@@ -163,6 +166,9 @@ function new() {
 
 	window.x = (Capabilities.screenResolutionX / 2) - (window.width / 2);
 	window.y = (Capabilities.screenResolutionY / 2) - (window.height / 2);
+
+	FlxG.mouse.load(Paths.image("cursor"), 1.25);
+	FlxG.mouse.useSystemCursor = false;
 }
 
 function preStateSwitch() {
@@ -180,12 +186,18 @@ function preStateSwitch() {
 }
 
 public var fullscreenSound:FlxSound;
-// public var borderCam:FlxCamera;
+public var volumeCam:FlxCamera;
+public var volumeTray:FunkinSprite;
+public var volumeBar:FlxBar;
+public var volumeGroup:FlxSpriteGroup;
+var _hideSTTimer:FlxTimer;
+var _stAlphaTween:FlxTween;
 function postStateSwitch() {
 	if (FlxG.save.data.freeAUTOHIDEFPS) Framerate.debugMode = 0;
 
 	FlxSoundTray.volumeUpChangeSFX = Paths.sound("volume/snd_ribbit1");
 	FlxSoundTray.volumeDownChangeSFX = Paths.sound("volume/snd_ribbit2");
+	FlxG.sound.volumeHandler = soundTray;
 	FlxG.sound.soundTray.alpha = 0;
 
 	window.title = "Made with FNF: Codename Engine";
@@ -199,25 +211,66 @@ function postStateSwitch() {
 
 	FlxG.autoPause = FlxG.save.data.freeTOLOOKAWAY; // sorry but i gotta be biblically accurate or else.....
 
-	if (FlxG.save.data.freeFPS) {
-		FlxG.drawFramerate = FlxG.updateFramerate = 40;
-	}
+	if (FlxG.save.data.freeFPS) FlxG.drawFramerate = FlxG.updateFramerate = 40;
+
+	volumeCam = new FlxCamera();
+	volumeCam.bgColor = 0;
+	FlxG.cameras.add(volumeCam, false);
+
+	volumeGroup = new FlxSpriteGroup();
+	volumeGroup.cameras = [volumeCam];
+	FlxG.state.add(volumeGroup);
+
+	volumeTray = new FunkinSprite();
+	volumeTray.frames = Paths.getSparrowAtlas("volume");
+	volumeTray.animation.addByPrefix("unmuted", "unmuted", 0, true);
+	volumeTray.animation.addByPrefix("muted", "muted", 0, true);
+	volumeGroup.add(volumeTray);
+
+	volumeBar = new FlxBar(354, 134, FlxBarFillDirection.BOTTOM_TO_TOP, 36, 121, null, "", 0, 1, false);
+	volumeBar.createFilledBar(0xFF555660, 0xFFDEE0FF, false);
+	volumeGroup.add(volumeBar);
+
+	volumeGroup.alpha = 0;
+
+	_hideSTTimer = new FlxTimer();
 }
 
+function soundTray(volume:Float) {
+	FlxTween.cancelTweensOf(volumeGroup, ["alpha"]);
+	FlxTween.tween(volumeGroup, {alpha: 1}, 0.25, {ease: FlxEase.cubeOut});
+	_hideSTTimer.cancel();
+	if (volume != _vol) volumeGroup.y = volume > _vol ? -5 : 5;
+	_vol = volume;
+	volumeTray.playAnim(volume < 0.1 ? 'muted' : 'unmuted');
+
+	_hideSTTimer.start(0.5, (t:FlxTimer) -> {FlxTween.tween(volumeGroup, {alpha: 0}, 0.5, {ease: FlxEase.cubeIn});});
+}
+
+var pressed:Bool = false; // workaround
+var _vol:Float = 0;
 function update(elapsed:Float) {
 	if (FlxG.fullscreen && FlxG.save.data.freeFULLSCREENEASTEREGG) {
 		fullscreenSound.play(true);
 		FlxG.fullscreen = false;
 	}
+
+	if (FlxG.mouse.justPressed && !pressed) {FlxG.sound.play(Paths.sound("sfx/snd_clickdown"), 0.5); pressed = true;}
+	if (FlxG.mouse.justReleased && pressed) {FlxG.sound.play(Paths.sound("sfx/snd_clickup"), 0.5); pressed = false;}
+
+	volumeBar.value = CoolUtil.fpsLerp(volumeBar.value, _vol, 0.25);
+	volumeGroup.y = CoolUtil.fpsLerp(volumeGroup.y, 0, 0.25);
 }
 
 function destroy() {
-	initialized = null;
-	fromGame = null;
+	initialized = fromGame = noteskin = editingSkinType = currentSkinToEdit = null;
 	FlxG.width = FlxG.initialWidth = 1280;
 	FlxG.height = FlxG.initialHeight = 720;
 	window.resize(FlxG.width, FlxG.height);
 	window.resizable = true;
 	FlxG.autoPause = true;
 	FlxG.drawFramerate = FlxG.updateFramerate = Options.framerate;
+
+	FlxG.sound.volumeHandler = null;
+	FlxG.sound.soundTray.alpha = 1;
 }
