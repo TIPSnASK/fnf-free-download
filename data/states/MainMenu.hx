@@ -44,7 +44,7 @@ function update(elapsed:Float) {
 	}
 
 	if (controls.LEFT_P || controls.RIGHT_P)
-		FlxG.switchState(new UIState(true, "skin-creator/ChooseASkin"));
+		FlxG.switchState(new UIState(true, "skins/SkinEditor"));
 
 	if (FlxG.keys.justPressed.SEVEN) {
 		persistentUpdate = false;

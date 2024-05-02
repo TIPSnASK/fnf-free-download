@@ -6,15 +6,10 @@ import funkin.backend.system.framerate.Framerate;
 import flixel.util.FlxSpriteUtil;
 import flixel.util.FlxGradient;
 import Xml;
-import haxe.Json;
 import sys.FileSystem;
 import sys.io.File;
 import openfl.system.Capabilities;
 
-import funkin.options.OptionsMenu;
-import funkin.editors.charter.Charter;
-import funkin.editors.EditorTreeMenu;
-import funkin.options.TreeMenu;
 import karaoke.backend.util.FlxColorHelper;
 
 static var FlxColorHelper = new FlxColorHelper();
@@ -28,11 +23,61 @@ static var fromGame:Bool = false; // for things you can go to through the pause 
 
 static var noteskin:String = "default";
 
+static var editingSkinType:String = "dude";
+static var currentSkinToEdit:String = "default";
+
 static var redirectStates:Map<FlxState, String> = [
 	MainMenuState => 'MainMenu',
 	StoryMenuState => 'menus/StoryMenu',
 	FreeplayState => 'menus/Freeplay'
 ];
+
+static function getSkinXml(type:String, name:String):Xml {
+	var defXml:Xml = Xml.parse(Assets.getText(Paths.xml("def-skins"))).firstElement();
+	var elements = [for (i in defXml.elementsNamed(type)) i];
+	var returnXml:Xml = null;
+	for (skin in elements) {
+		if (skin.get("name") == name) {
+			returnXml = skin;
+			break;
+		}
+	}
+	return returnXml;
+}
+
+// dumbass name but its funny
+static function shaderifySkinXml(shader:CustomShader, xml:Xml) {
+	switch xml.nodeName {
+		default: // um??
+		case "dude":
+			shader.colorReplaceHat = FlxColorHelper.vec4(FlxColor.fromString(xml.get("hat")));
+			shader.colorReplaceSkin = FlxColorHelper.vec4(FlxColor.fromString(xml.get("skin")));
+			shader.colorReplaceHair = FlxColorHelper.vec4(FlxColor.fromString(xml.get("hair")));
+			
+			shader.colorReplaceShirt = FlxColorHelper.vec4(FlxColor.fromString(xml.get("shirt")));
+			shader.colorReplaceStripe = FlxColorHelper.vec4(FlxColor.fromString(xml.get("stripe")));
+			
+			shader.colorReplacePants = FlxColorHelper.vec4(FlxColor.fromString(xml.get("pants")));
+			shader.colorReplaceShoes = FlxColorHelper.vec4(FlxColor.fromString(xml.get("shoes")));
+		case "lady":
+			shader.colorReplaceSkin = FlxColorHelper.vec4(FlxColor.fromString(xml.get("skin")));
+			shader.colorReplaceHair = FlxColorHelper.vec4(FlxColor.fromString(xml.get("hair")));
+			shader.colorReplaceDye = FlxColorHelper.vec4(FlxColor.fromString(xml.get("dye")));
+			
+			shader.colorReplaceShirt = FlxColorHelper.vec4(FlxColor.fromString(xml.get("shirt")));
+			
+			shader.colorReplaceShorts = FlxColorHelper.vec4(FlxColor.fromString(xml.get("shorts")));
+			shader.colorReplaceSocks = FlxColorHelper.vec4(FlxColor.fromString(xml.get("socks")));
+			shader.colorReplaceShoes = FlxColorHelper.vec4(FlxColor.fromString(xml.get("shoes")));
+	}
+	if (xml.exists("fav"))
+		return FlxColor.fromString(xml.get("fav"));
+	else return null;
+}
+
+static function applySkin(shader:CustomShader, type:String, name:String) {
+	return shaderifySkinXml(shader, getSkinXml(type, name));
+}
 
 static function flash(cam:FlxCamera, data:{color:FlxColor, time:Float, force:Bool}, onComplete:Void->Void) {
 	if (FlxG.save.data.freeFLASH) {
@@ -86,128 +131,6 @@ static function coolText(text:String):Array<String> {
 	return [for(line in text.split("\n")) if ((trim = StringTools.trim(line)) != "" && !StringTools.startsWith(trim, "#")) trim];
 }
 
-static function loadDudeSkin(shader:CustomShader, name:String):Bool {
-	var path:String = Paths.txt("skins/" + name);
-	var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
-	var dumbData:Array<String> = [];
-	var whatDoINameThisVariable:Bool = false;
-
-	if (Assets.exists(path))
-		dumbData = CoolUtil.coolTextFile(path);
-	else {
-		for (dumb in userSkins.skins) {
-			if (dumb.name == name) {
-				dumbData = coolText(dumb.data);
-				if (dumb.clickedGenderButton != null && dumb.clickedGenderButton == true)
-					whatDoINameThisVariable = true;
-				break;
-			}
-		}
-	}
-
-	if (dumbData != []) {
-		for (index => line in dumbData) {
-			var lineData:Array<Float> = [for (ass in line.split(",")) Std.parseFloat(StringTools.trim(ass))/255];
-
-			// Invalid Cast
-			// because life isnt good
-			switch(index) {
-				case 0: // hat
-					shader.colorReplaceHat = lineData;
-				case 1: // skin
-					shader.colorReplaceSkin = lineData;
-				case 2: // hair
-					shader.colorReplaceHair = lineData;
-
-				case 3: // shirt
-					shader.colorReplaceShirt = lineData;
-				case 4: // stripe
-					shader.colorReplaceStripe = lineData;
-
-				case 5: // pants
-					shader.colorReplacePants = lineData;
-				case 6: // shoes
-					shader.colorReplaceShoes = lineData;
-			}
-		}
-	} else {
-		trace("that skin doesnt exist!");
-		loadDudeSkin(shader, "default");
-	}
-
-	return whatDoINameThisVariable;
-}
-
-static function loadLadySkin(shader:CustomShader, name:String):Void {
-	var path:String = Paths.txt('skins/lady-${name}');
-	var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
-	var dumbData:Array<String> = [];
-
-	if (Assets.exists(path))
-		dumbData = CoolUtil.coolTextFile(path);
-	else {
-		for (dumb in userSkins.skins) {
-			if (dumb.name == 'lady-${name}') {
-				dumbData = coolText(dumb.data);
-				break;
-			}
-		}
-	}
-
-	if (dumbData != []) {
-		for (index => line in dumbData) {
-			var lineData:Array<Float> = [for (ass in line.split(",")) Std.parseFloat(StringTools.trim(ass))/255];
-
-			// Invalid Cast
-			// because life isnt good
-			switch(index) {
-				case 0: // skin
-					shader.colorReplaceSkin = lineData;
-				case 1: // hair
-					shader.colorReplaceHair = lineData;
-				case 2: // dye
-					shader.colorReplaceDye = lineData;
-
-				case 3: // shirt
-					shader.colorReplaceShirt = lineData;
-
-				case 4: // shorts
-					shader.colorReplaceShorts = lineData;
-				case 5: // socks
-					shader.colorReplaceSocks = lineData;
-				case 6: // shoes
-					shader.colorReplaceShoes = lineData;
-			}
-		}
-	} else {
-		trace("that skin doesnt exist!");
-		loadLadySkin(shader, "default");
-	}
-}
-
-static function iKnowWhatYouAre():Bool {
-	var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
-	var yeah:Bool = false;
-
-	for (dumb in userSkins.skins) {
-		if (dumb.name == userSkins.selected) {
-			if (dumb.clickedGenderButton != null)
-				yeah = dumb.clickedGenderButton;
-			break;
-		}
-	}
-
-	return yeah;
-}
-
-static function usePlayerSkin(shader:CustomShader):Bool { // for convenience
-	return loadDudeSkin(shader, Json.parse(File.getContent("mods/free-download-skins.json")).selected);
-}
-
-static function useLadySkin(shader:CustomShader):Bool { // for convenience
-	return loadLadySkin(shader, Json.parse(File.getContent("mods/free-download-skins.json")).selectedLady == null ? "default" : Json.parse(File.getContent("mods/free-download-skins.json")).selectedLady);
-}
-
 static function playMenuMusic() {
 	if (FlxG.sound.music == null || !FlxG.sound.music.playing) {
 		CoolUtil.playMusic(Paths.music('mus_menu'), true, 1, true, 110);
@@ -226,12 +149,11 @@ function new() {
 	if (FlxG.save.data.freeFULLSCREENEASTEREGG == null) FlxG.save.data.freeFULLSCREENEASTEREGG = true;
 	if (FlxG.save.data.freeAUTOHIDEFPS == null) FlxG.save.data.freeAUTOHIDEFPS = true;
 
+	if (!FileSystem.exists('mods/fnffdcne-data.xml'))
+		File.saveContent('mods/fnffdcne-data.xml', '<data>\n\t<skins selecteddude="default" selectedlady="default"></skins>\n\t<identities dudename="Dude" dudeprns="He/Him/His" ladyname="Lady" ladyprns="She/Her/Hers"/>\n<data>');
+
 	window.title = "Made with FNF: Codename Engine";
 	changeWindowIcon("default");
-
-	if (!FileSystem.exists("mods/free-download-skins.json")) {
-		File.saveContent("mods/free-download-skins.json", "{\"selected\": \"default\", \"skins\": []}");
-	}
 
 	FlxG.width = FlxG.initialWidth = 400;
 	FlxG.height = FlxG.initialHeight = 400;

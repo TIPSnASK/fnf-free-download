@@ -61,4 +61,11 @@ class FlxColorHelper extends flixel.FlxBasic {
 
 	public function rgb(color:FlxColor):FlxColor
 		return color & 0x00ffffff;
+
+	// SHADER HELPERS
+	public function vec3(color:FlxColor):Array<Float>
+		return [redFloat(color), greenFloat(color), blueFloat(color)];
+
+	public function vec4(color:FlxColor):Array<Float>
+		return [redFloat(color), greenFloat(color), blueFloat(color), alphaFloat(color)];
 }

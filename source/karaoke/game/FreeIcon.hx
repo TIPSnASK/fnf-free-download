@@ -5,9 +5,12 @@ class FreeIcon extends funkin.backend.FunkinSprite {
 		20 => 0, // normal icon
 	];
 
-	public function new(char:String = "dude") {
+	public var debug:Bool = false;
+
+	public function new(char:String = "dude", debug:Bool = false) {
 		super();
-		health = 0.5;
+		this.debug = debug;
+		if (!debug) health = 0.5;
 		var path = Paths.image("game/icons/" + char);
 		if (!Assets.exists(path)) path = Paths.image("game/icons/dude");
 
@@ -22,13 +25,13 @@ class FreeIcon extends funkin.backend.FunkinSprite {
 		if (frames.frames.length >= 3)
 			healthSteps[80] = 2; // winning icon
 
-		scrollFactor.set();
+		if (!debug) scrollFactor.set();
 	}
 
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
-		if (animation.curAnim != null) {
+		if (animation.curAnim != null && !debug) {
 			var i:Int = -1;
 			var oldKey:Int = -1;
 			for(k=>icon in healthSteps) {
