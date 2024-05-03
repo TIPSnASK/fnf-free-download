@@ -1,4 +1,4 @@
-<skins>
+<skins default="yeah">
 	<dude name="default" fav="#F1F471" hat="#8c97c2" skin="#eed6c4" hair="#473e38" shirt="#d7799c" stripe="#653662" pants="#615792" shoes="#383644"/>
 	<dude name="statue" fav="#7f7f7f" hat="#7f7f7f" skin="#7f7f7f" hair="#7f7f7f" shirt="#7f7f7f" stripe="#7f7f7f" pants="#7f7f7f" shoes="#7f7f7f"/>
 

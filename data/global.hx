@@ -35,11 +35,18 @@ static var redirectStates:Map<FlxState, String> = [
 	FreeplayState => 'menus/Freeplay'
 ];
 
-static function getSkinXml(type:String, name:String):Xml {
+static function getAllSkinXmls(type:String):Array<Xml> {
 	var defXml:Xml = Xml.parse(Assets.getText(Paths.xml("def-skins"))).firstElement();
-	var elements = [for (i in defXml.elementsNamed(type)) i];
+	var userXml:Xml = Xml.parse(File.getContent('mods/fnffdcne-data.xml')).firstElement();
+	var userSkinsXml:Xml = [for (_i in userXml.elementsNamed('skins')) _i][0];
+	var elements:Array<Xml> = [for (i in defXml.elementsNamed(type)) i];
+	for (i in userSkinsXml) if (i.nodeName == type) elements.push(i);
+	return elements;
+}
+
+static function getSkinXml(type:String, name:String):Xml {
 	var returnXml:Xml = null;
-	for (skin in elements) {
+	for (skin in getAllSkinXmls(type)) {
 		if (skin.get("name") == name) {
 			returnXml = skin;
 			break;
@@ -153,7 +160,7 @@ function new() {
 	if (FlxG.save.data.freeAUTOHIDEFPS == null) FlxG.save.data.freeAUTOHIDEFPS = true;
 
 	if (!FileSystem.exists('mods/fnffdcne-data.xml'))
-		File.saveContent('mods/fnffdcne-data.xml', '<data>\n\t<skins selecteddude="default" selectedlady="default"></skins>\n\t<identities dudename="Dude" dudeprns="He/Him/His" ladyname="Lady" ladyprns="She/Her/Hers"/>\n<data>');
+		File.saveContent('mods/fnffdcne-data.xml', '<data>\n\t<skins selecteddude="default" selectedlady="default"></skins>\n\t<identities dudename="Dude" dudeprns="He/Him/His" ladyname="Lady" ladyprns="She/Her/Hers"/>\n</data>');
 
 	window.title = "Made with FNF: Codename Engine";
 	changeWindowIcon("default");
@@ -167,7 +174,7 @@ function new() {
 	window.x = (Capabilities.screenResolutionX / 2) - (window.width / 2);
 	window.y = (Capabilities.screenResolutionY / 2) - (window.height / 2);
 
-	FlxG.mouse.load(Paths.image("cursor"), 1.25);
+	FlxG.mouse.load(Paths.image("cursor"), 1.25, -8, -5);
 	FlxG.mouse.useSystemCursor = false;
 }
 

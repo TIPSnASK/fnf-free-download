@@ -34,7 +34,7 @@ function create() {
 
 	var stupidArray:Array<String> = CoolUtil.coolTextFile(Paths.txt('titlescreen/introText'));
 	if (stupidArray.contains('')) stupidArray.remove('');
-	curWacky = stupidArray[FlxG.random.int(0, stupidArray.length)].split('--');
+	curWacky = stupidArray[FlxG.random.int(0, stupidArray.length-1)].split('--');
 
 	var bg:FunkinSprite = new FunkinSprite().loadGraphic(Paths.image('menus/backgrounds/1'));
 	bg.scale.set(2, 2);
