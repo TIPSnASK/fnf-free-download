@@ -9,7 +9,7 @@
 	<sprite path="1" dude="true"/>
 	
 	<talk character="dude">
-		uh...[wait:0.5] lady,[wait:0.25] I think I hit a dog on my way over here
+		uh...[wait:0.5] [lady:1],[wait:0.25] I think I hit a dog on my way over here
 	</talk>
 	<talk character="lady">
 		!!!

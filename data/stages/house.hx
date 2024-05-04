@@ -15,7 +15,6 @@ function create() {
 }
 
 function postCreate() {
-	player.cpu = true;
 	if (!isNightTime) {
 		insert(0, sky = new FunkinSprite().makeGraphic(FlxG.width, FlxG.height, 0xFF91CFDD));
 		sky.scrollFactor.set();

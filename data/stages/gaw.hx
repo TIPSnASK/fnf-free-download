@@ -9,7 +9,7 @@ function postCreate() {
 	camera.lock(200, 200, true);
 
 	ladyAndTheTramp.shader = colorSwapShader;
-	usePlayerSkin(colorSwapShader);
+	applyPlayerSkin(colorSwapShader, 'dude');
 	ladyAndTheTramp.setColorTransform(1.25, 1.25, 1.25, 1, 0, 0, 0, 0);
 }
 

@@ -27,7 +27,7 @@ var dudeColors:CustomShader = new CustomShader("dude-colorswap");
 var dialogEvents:Array<{name:String, index:Int, value:String}> = [];
 var dialogFormats:Array<FlxTextFormatMarkerPair> = [];
 
-var userSkins = Json.parse(File.getContent("mods/free-download-skins.json"));
+var identities:Xml = getIdentityXml();
 
 function create() {
 	if (!Assets.exists(Paths.file('songs/${song}/cutscene.xml'))) {
@@ -86,7 +86,7 @@ function create() {
 
 	add(dialogText);
 
-	loadDudeSkin(dudeColors, Json.parse(File.getContent("mods/free-download-skins.json")).selected);
+	applyPlayerSkin(dudeColors, 'dude');
 
 	next();
 }
@@ -156,8 +156,9 @@ function next() {
 			dialogText.text = "";
 
 			speakerData = IniUtil.parseAsset(Paths.ini("dialog/" + element.get("character")));
-			speakerText.text = StringTools.contains(speakerData["DisplayName"], "Dude") ? Json.parse(File.getContent("mods/free-download-skins.json")).name : speakerData["DisplayName"];
-			speakerText.color = dialogText.color = FlxColor.fromString(speakerData["Color"]);
+			var _isDude:Bool = StringTools.contains(speakerData["DisplayName"], "Dude");
+			speakerText.text = _isDude ? identities.get('dudename') : speakerData["DisplayName"];
+			speakerText.color = dialogText.color = speakerData["DisplayName"] == "Dude" ? getFavColor('dude') : FlxColor.fromString(speakerData["Color"]);
 			dialog = XMLUtil.fixXMLText(getInnerData(element));
 			talkSound = FlxG.sound.load(Paths.sound("dialog/" + speakerData["TalkSound"]));
 			talkSound.volume = 0.8;
@@ -196,20 +197,20 @@ function next() {
 					var replacer:String = switch fuck[0] {
 						default:
 							"";
-						case "pronoun":
-							userSkins.pronouns.split("/")[Std.parseInt(hate.split(":")[1])];
-						case "player":
+						case "dudeprns" | "ladyprns":
+							identities.get(fuck[0]).split("/")[Std.parseInt(hate.split(":")[1])];
+						case "dude" | "lady":
 							var theThing:String = switch (Std.parseInt(fuck[1])) {
 								case 0: // Normal
-									userSkins.name;
+									identities.get('${fuck[0]}name');
 								case 1: // lowercase
-									userSkins.name.toLowerCase();
+									identities.get('${fuck[0]}name').toLowerCase();
 								case 2: // UPPERCASE
-									userSkins.name.toUpperCase();
+									identities.get('${fuck[0]}name').toUpperCase();
 							};
 							theThing;
 					}
-					dialog = StringTools.replace(dialog, "[" + hate + "]", replacer);
+					dialog = StringTools.replace(dialog, '[${hate}]', replacer);
 				}
 
 				for (i in dumb) {

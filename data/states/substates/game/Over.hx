@@ -20,7 +20,7 @@ function create() {
 	dude.animation.frameIndex = 0;
 	dude.screenCenter();
 	dude.alpha = 0;
-	usePlayerSkin(dude.shader = new CustomShader("dude-colorswap"));
+	applyPlayerSkin(dude.shader = new CustomShader("dude-colorswap"), 'dude');
 	add(dude);
 	
 	dudeRED = dude.clone();

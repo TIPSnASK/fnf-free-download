@@ -79,6 +79,8 @@ function updateSkinName() {
 }
 
 function postCreate() {
+	playMenuMusic();
+
 	camUI = new FlxCamera();
 	camUI.bgColor = 0;
 	FlxG.cameras.add(camUI, false);
@@ -131,6 +133,7 @@ function postCreate() {
 				xml.removeChild([for (_i in xml.elementsNamed('skins')) _i][0]);
 				xml.insertChild(_xmlParent, 0);
 				File.saveContent('mods/fnffdcne-data.xml', xml.toString());
+				FlxG.sound.play(Paths.sound('sfx/snd_doorslam'), 0.75).persist = true;
 				FlxG.switchState(new UIState(true, "skins/SkinSelector"));
 			}
 		}
@@ -155,6 +158,7 @@ function postCreate() {
 			acceptButton.color = 0xFF808080;
 			editButton.field.text = 'yes';
 			editButton.color = 0xFF00FF00;
+			FlxG.sound.play(Paths.sound('gameplay/snd_owch'), 0.75);
 		} else {
 			_isDeleting = !(canScroll = true);
 			deleteButton.field.text = 'delete';
@@ -211,7 +215,7 @@ function update(e:Float) {
 	_timer += e;
 
 	if (!name.focused && !pronouns.focused) {
-		if (FlxG.keys.justPressed.ESCAPE) FlxG.switchState(new ModState("MainMenu"));
+		if (FlxG.keys.justPressed.ESCAPE) FlxG.switchState(fromGame ? new PlayState() : new ModState("MainMenu"));
 
 		if ((controls.LEFT_P || controls.RIGHT_P) && canScroll) {
 			var _val:Int = (controls.LEFT_P ? -1 : 1);

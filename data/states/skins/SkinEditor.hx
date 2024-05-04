@@ -47,6 +47,8 @@ var	pantsButton:FlxSpriteGroup;
 var	shoesButton:FlxSpriteGroup;
 
 function create() {
+	playMenuMusic();
+	
 	var bg:FunkinSprite = new FunkinSprite().loadGraphic(Paths.image("menus/backgrounds/1"));
 	// just accidentally remade the options menu background after i Gave up on the options menu im gonna fucking
 	bg.setColorTransform(1.2, 0.8, 0.4, 1, 0, 0, 0, 0);

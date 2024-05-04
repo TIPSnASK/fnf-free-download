@@ -35,6 +35,21 @@ static var redirectStates:Map<FlxState, String> = [
 	FreeplayState => 'menus/Freeplay'
 ];
 
+static function getFavColor(type:String):FlxColor {
+	var userXml:Xml = Xml.parse(File.getContent('mods/fnffdcne-data.xml')).firstElement();
+	return FlxColor.fromString(getSkinXml(type, [for (_i in userXml.elementsNamed('skins')) _i][0].get('selected${type}')).get('fav'));
+}
+
+static function applyPlayerSkin(shader:CustomShader, type:String):FlxColor {
+	var userXml:Xml = Xml.parse(File.getContent('mods/fnffdcne-data.xml')).firstElement();
+	return applySkin(shader, type, [for (_i in userXml.elementsNamed('skins')) _i][0].get('selected${type}'));
+}
+
+static function getIdentityXml():Xml {
+	var userXml:Xml = Xml.parse(File.getContent('mods/fnffdcne-data.xml')).firstElement();
+	return [for (_i in userXml.elementsNamed('identities')) _i][0];
+}
+
 static function getAllSkinXmls(type:String):Array<Xml> {
 	var defXml:Xml = Xml.parse(Assets.getText(Paths.xml("def-skins"))).firstElement();
 	var userXml:Xml = Xml.parse(File.getContent('mods/fnffdcne-data.xml')).firstElement();

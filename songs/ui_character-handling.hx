@@ -1,20 +1,20 @@
 function postCreate() {
-	for (sL in strumLines.members) {
-		for (index => char in sL.characters) {
-			if (StringTools.contains(char.curCharacter, "dude") && iKnowWhatYouAre()) {
-				sL.characters.remove(char);
-				remove(char);
-				var charPosName:String = sL.position == null ? (switch(sL.type) {
-					case 0: "dad";
-					case 1: "boyfriend";
-					case 2: "girlfriend";
-				}) : sL.position;
-				char = new Character(char.x, char.y, StringTools.replace(char.curCharacter, "dude", "player-f"), !stage.isCharFlipped(charPosName, sL.type == 1));
-				stage.applyCharStuff(char, charPosName, index);
-				sL.characters.push(char);
-			}
-		}
-	}
+	// for (sL in strumLines.members) {
+	// 	for (index => char in sL.characters) {
+	// 		if (StringTools.contains(char.curCharacter, "dude") && iKnowWhatYouAre()) {
+	// 			sL.characters.remove(char);
+	// 			remove(char);
+	// 			var charPosName:String = sL.position == null ? (switch(sL.type) {
+	// 				case 0: "dad";
+	// 				case 1: "boyfriend";
+	// 				case 2: "girlfriend";
+	// 			}) : sL.position;
+	// 			char = new Character(char.x, char.y, StringTools.replace(char.curCharacter, "dude", "player-f"), !stage.isCharFlipped(charPosName, sL.type == 1));
+	// 			stage.applyCharStuff(char, charPosName, index);
+	// 			sL.characters.push(char);
+	// 		}
+	// 	}
+	// }
 }
 
 function onGamePause(event) {

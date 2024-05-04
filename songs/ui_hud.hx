@@ -72,7 +72,7 @@ function postCreate() {
 
 	healthBar = new FlxBar(0, 358, FlxBarFillDirection.RIGHT_TO_LEFT, FlxG.width*0.695, 15, this, 'health', 0, maxHealth);
 	healthBar.scrollFactor.set();
-	healthBar.createFilledBar(0xFF800080, 0xFFFFFF00);
+	healthBar.createFilledBar(0xFF800080, getFavColor('dude'));
 	healthBar.cameras = [camHUD];
 	healthBar.screenCenter(FlxAxes.X);
 
@@ -128,6 +128,8 @@ function postCreate() {
 
 	playerIcon = new FreeIcon('dude-${uiskin}');
 	playerIcon.cameras = [camHUD];
+	playerIcon.shader = new CustomShader('player-icon');
+	playerIcon.shader.favColor = FlxColorHelper.vec4(getFavColor('dude'));
 	add(playerIcon);
 
 	opponentIcon = new FreeIcon('strad-${uiskin}');
