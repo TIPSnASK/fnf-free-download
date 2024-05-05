@@ -7,6 +7,7 @@ import flixel.addons.display.FlxBackdrop;
 import Reflect;
 import flixel.text.FlxText.FlxTextFormat;
 import flixel.text.FlxText.FlxTextFormatMarkerPair;
+import funkin.backend.system.Conductor;
 
 var titleText:FunkinText; // its like a reference
 var curMenu:MenuData;
@@ -76,7 +77,7 @@ function setupMenu(?menuData:MenuData = null, ?parent:MenuData = null) {
 		sprites = [];
 		camY = curSelected = 0;
 	} else {
-		var _xml:Xml = Xml.parse('<menu name="Options"></menu>').firstElement();
+		var _xml:Xml = Xml.parse(Assets.getText(Paths.xml('config/base-options'))).firstElement();
 		for (i in _options) _xml.addChild(i.firstElement());
 		curMenu = new MenuData(_xml);
 	}
@@ -85,17 +86,18 @@ function setupMenu(?menuData:MenuData = null, ?parent:MenuData = null) {
 
 	titleText.text = curMenu.data.get('name');
 
+	var _baseCheck:Dynamic = (curMenu.data.exists('base') && curMenu.data.get('base') == 'true') ? FlxG.save.data : FlxG.save.data;
 	for (index => node in [for (_i in curMenu.data.elements()) _i]) {
 		var _value:Dynamic = null;
 		if (node.exists('id')) {
-			if (Reflect.field(FlxG.save.data, node.get('id')) == null) Reflect.setField(FlxG.save.data, node.get('id'), switch node.nodeName {
+			if (Reflect.field(_baseCheck, node.get('id')) == null) Reflect.setField(_baseCheck, node.get('id'), switch node.nodeName {
 				case 'checkbox': false;
 				case 'number': Std.parseFloat(node.get('min'));
 				case 'choice': [for (_g in node.elementsNamed('value')) _g][0].get('value');
 			});
-			_value = Reflect.field(FlxG.save.data, node.get('id'));
+			_value = Reflect.field(_baseCheck, node.get('id'));
 		}
-		var option = new MenuOption(25, 182 + (25 * index), FlxG.width, '${node.get('name')}', 18, true, node, _value);
+		var option = new MenuOption(25, 182 + (25 * index), FlxG.width, '${node.get('name')}', 18, true, node, _baseCheck, _value);
 		option.font = Paths.font("COMIC.TTF");
 		option.textField.antiAliasType = 0;
 		option.textField.sharpness = 400;
@@ -139,13 +141,17 @@ function update(e:Float) {
 				var _values:Array<String> = [for (i in sprites[curSelected].extra['choices']) i.get('value')];
 				var _names:Array<String> = [for (i in sprites[curSelected].extra['choices']) i.get('name')];
 				Reflect.setField(
-					FlxG.save.data, sprites[curSelected].data.get('id'),
+					sprites[curSelected].optionParent, sprites[curSelected].data.get('id'),
 					sprites[curSelected].value = _values[FlxMath.wrap(_values.indexOf(sprites[curSelected].value) + (controls.LEFT_P ? -1 : 1), 0, _values.length-1)]
 				);
 				updateOption(sprites[curSelected]);
+				// if ((curMenu.data.exists('base') && curMenu.data.get('base') == 'true')) Options.__flush();
 			case 'number':
-				Reflect.setField(FlxG.save.data, sprites[curSelected].data.get('id'), sprites[curSelected].value = FlxMath.wrap(sprites[curSelected].value + (controls.LEFT_P ? -Std.parseFloat(sprites[curSelected].data.get('change')) : Std.parseFloat(sprites[curSelected].data.get('change'))), Std.parseFloat(sprites[curSelected].data.get('min')), Std.parseFloat(sprites[curSelected].data.get('max'))));
+				Reflect.setField(sprites[curSelected].optionParent, sprites[curSelected].data.get('id'), sprites[curSelected].value = FlxMath.wrap(sprites[curSelected].value + (controls.LEFT_P ? -Std.parseFloat(sprites[curSelected].data.get('change')) : Std.parseFloat(sprites[curSelected].data.get('change'))), Std.parseFloat(sprites[curSelected].data.get('min')), Std.parseFloat(sprites[curSelected].data.get('max'))));
 				updateOption(sprites[curSelected]);
+				if (sprites[curSelected].data.get('id') == 'songOffset' && (curMenu.data.exists('base') && curMenu.data.get('base') == 'true'))
+					Conductor.songOffset = sprites[curSelected].value;
+				// if ((curMenu.data.exists('base') && curMenu.data.get('base') == 'true')) Options.__flush();
 		}
 	}
 
@@ -154,11 +160,13 @@ function update(e:Float) {
 			// default: trace('you selected what???');
 			case 'menu': setupMenu(sprites[curSelected], curMenu);
 			case 'checkbox':
-				Reflect.setField(FlxG.save.data, sprites[curSelected].data.get('id'), !sprites[curSelected].value);
+				Reflect.setField(sprites[curSelected].optionParent, sprites[curSelected].data.get('id'), !sprites[curSelected].value);
 				sprites[curSelected].value = !sprites[curSelected].value;
 				updateOption(sprites[curSelected]);
 		}
 	} if (controls.BACK) {
+		// Options.save();
+		// Options.applySettings();
 		if (curMenu.parent != null)
 			setupMenu(curMenu.parent);
 		else FlxG.switchState(new ModState('MainMenu'));
