@@ -7,7 +7,7 @@ class MenuOption extends funkin.backend.FunkinText {
 	public var value:Dynamic = null;
 	public var extra:Map<String, Dynamic> = [];
 	public var optionParent:Dynamic = null;
-	public function new(xPos:Float = 0, yPos:Float = 0, fwidth:Float = 0, ?txt:String, sizeVal:Int = 16, bord:Bool = true, xml:Xml, _optionParent:Dynamic, _value:Dynamic) {
+	public function new(xPos:Float = 0, yPos:Float = 0, fwidth:Float = 0, ?txt:String, sizeVal:Int = 16, bord:Bool = true, xml:Xml, _value:Dynamic) {
 		data = xml;
 		value = _value;
 	}
