@@ -1,15 +1,24 @@
 <menu name="Options" desc="hi">
+	<callback name="Controls" desc="Change Controls for Player 1 and Player 2! [HAVEN'T REMADE MENU, USE AT YOUR OWN RISK]"/>
 	<menu base="true" name="Gameplay" desc="Change Gameplay options such as Downscroll, Scroll Speed, Naughtyness...">
 		<checkbox id="downscroll" name="Downscroll" desc="If checked, notes will go from up to down instead of down to up, as if they're falling."/>
 		<checkbox id="ghostTapping" name="Ghost Tapping" desc="If unchecked, trying to hit any strum that have no note that can be hit will cause a miss."/>
-		<number id="songOffset" name="Song Offset" min="-999" max="999" change="1"/>
+		<number id="songOffset" name="Song Offset" min="-999" max="999" change="1" desc="Changes the offset that songs should start with."/>
 		<checkbox id="naughtyness" name="Naughtyness" desc="If unchecked, will censor the Week 7 cutscenes"/>
 		<checkbox id="camZoomOnBeat" name="Camera Zoom On Beat" desc="If unchecked, will stop the camera from zooming in every 4 beats"/>
 	</menu>
 	<menu base="true" name="Appearance" desc="Change Appearance options such as Flashing menus...">
-		
+		<number id="framerate" name="Framerate" desc="Pretty self explanatory, isn't it?" min="30" max="240" change="10"/>
+		<checkbox id="antialiasing" name="Antialiasing" desc="If unchecked, will disable antialiasing on every sprite. Can boost performances at the cost of sharper, more pixely sprites."/>
+		<checkbox id="colorHealthBar" name="Colored Healthbar" desc="If unchecked, the game will use the orginal red/green health bar from the week 6 fnf game."/>
+		<checkbox id="week6PixelPerfect" name="Pixel Perfect Effect" desc="If checked, Week 6 will have a pixel perfect effect to it enabled, aligning every pixel on the screen."/>
+		<checkbox id="gameplayShaders" name="Gameplay Shaders" desc="If unchecked, gameplay shaders (visual effects like Thorns's Chromatic Aberration) wont be loaded; this may be helpful on weak devices."/>
+		<checkbox id="flashingMenu" name="Flashing Menu" desc="If unchecked, will disable menu flashing when you select an option in the Main Menu, and other flashes will be slower."/>
+		<checkbox id="lowMemoryMode" name="Low Memory Mode" desc="If checked, will disable certain background elements in stages to reduce memory usage."/>
+		<checkbox id="gpuOnlyBitmaps" name="VRAM-Only Sprites" desc="If checked, will only store the bitmaps in the GPU, freeing a LOT of memory (EXPERIMENTAL). Turning this off will consume a lot of memory, especially on bigger sprites. If you aren't sure, leave this on."/>
+		<checkbox id="autoPause" name="Auto Pause" desc="If checked, switching windows will pause the game."/>
 	</menu>
 	<menu base="true" name="Miscellaneous" desc="Use this menu to reset save data or engine settings.">
-		
+		<callback name="Reset Save Data" desc="Select this option to reset save data. This will remove all of your highscores."/>
 	</menu>
 </menu>

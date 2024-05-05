@@ -5,7 +5,7 @@ import funkin.editors.ui.UIState;
 
 var itemArray:Array<FunkinText> = [];
 var pauseCam:FlxCamera;
-var menuItems = ['Resume', 'Restart', 'Options', "Change Skin", 'Quit'];
+var menuItems = ['Resume', 'Restart', 'Options', 'Quit'];
 var curSelected:Int = 0;
 var parentDisabler:FunkinParentDisabler;
 // var pauseMusic:FlxSound;
@@ -82,10 +82,8 @@ function selectItem(selected:String) {
 			parentDisabler.reset();
 			FlxG.resetState();
 		case 'Options':
-			FlxG.switchState(new OptionsMenu());
-		case 'Change Skin':
 			fromGame = true;
-			FlxG.switchState(new UIState(true, "skins/SkinSelector"));
+			FlxG.switchState(new ModState('menus/Settings'));
 		case 'Quit':
 			fromGame = false;
 			if (PlayState.isStoryMode)

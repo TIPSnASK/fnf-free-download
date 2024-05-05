@@ -170,7 +170,6 @@ function new() {
 	if (FlxG.save.data.freeINTROSPLASH == null) FlxG.save.data.freeINTROSPLASH = true;
 	if (FlxG.save.data.freeFLASH == null) FlxG.save.data.freeFLASH = true;
 	if (FlxG.save.data.freeFPS == null) FlxG.save.data.freeFPS = true;
-	if (FlxG.save.data.freeTOLOOKAWAY == null) FlxG.save.data.freeTOLOOKAWAY = false;
 	if (FlxG.save.data.freeFULLSCREENEASTEREGG == null) FlxG.save.data.freeFULLSCREENEASTEREGG = true;
 	if (FlxG.save.data.freeAUTOHIDEFPS == null) FlxG.save.data.freeAUTOHIDEFPS = true;
 
