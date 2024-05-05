@@ -26,7 +26,7 @@ static var fromGame:Bool = false; // for things you can go to through the pause 
 
 static var noteskin:String = "default";
 
-static var editingSkinType:String = "dude";
+static var editingSkinType:String = "lady";
 static var currentSkinToEdit:String = "default";
 
 static var redirectStates:Map<FlxState, String> = [

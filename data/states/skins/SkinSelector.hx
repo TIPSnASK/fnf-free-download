@@ -215,7 +215,7 @@ function update(e:Float) {
 	_timer += e;
 
 	if (!name.focused && !pronouns.focused) {
-		if (FlxG.keys.justPressed.ESCAPE) FlxG.switchState(fromGame ? new PlayState() : new ModState("MainMenu"));
+		if (controls.BACK) FlxG.switchState(fromGame ? new PlayState() : new ModState("MainMenu"));
 
 		if ((controls.LEFT_P || controls.RIGHT_P) && canScroll) {
 			var _val:Int = (controls.LEFT_P ? -1 : 1);

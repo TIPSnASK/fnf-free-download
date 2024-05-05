@@ -180,8 +180,8 @@ function postUpdate(elapsed:Float) {
 
 	playerIcon.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 1, 0)) - 5);
 	opponentIcon.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 1, 0))) - (opponentIcon.width - 10);
-	playerIconShadow.setPosition(playerIcon.x + 2, playerIcon.y + 2);
-	opponentIconShadow.setPosition(opponentIcon.x + (downscroll ? -2 : 2), opponentIcon.y + (downscroll ? -2 : 2));
+	playerIconShadow.setPosition(playerIcon.x + 2, playerIcon.y + (downscroll ? -2 : 2));
+	opponentIconShadow.setPosition(opponentIcon.x + 2, opponentIcon.y + (downscroll ? -2 : 2));
 
 	playerIcon.health = healthBar.percent / 100;
 	opponentIcon.health = 1 - (healthBar.percent / 100);

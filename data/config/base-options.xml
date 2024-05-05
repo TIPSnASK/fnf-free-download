@@ -1,0 +1,15 @@
+<menu name="Options" desc="hi">
+	<menu base="true" name="Gameplay" desc="Change Gameplay options such as Downscroll, Scroll Speed, Naughtyness...">
+		<checkbox id="downscroll" name="Downscroll" desc="If checked, notes will go from up to down instead of down to up, as if they're falling."/>
+		<checkbox id="ghostTapping" name="Ghost Tapping" desc="If unchecked, trying to hit any strum that have no note that can be hit will cause a miss."/>
+		<number id="songOffset" name="Song Offset" min="-999" max="999" change="1"/>
+		<checkbox id="naughtyness" name="Naughtyness" desc="If unchecked, will censor the Week 7 cutscenes"/>
+		<checkbox id="camZoomOnBeat" name="Camera Zoom On Beat" desc="If unchecked, will stop the camera from zooming in every 4 beats"/>
+	</menu>
+	<menu base="true" name="Appearance" desc="Change Appearance options such as Flashing menus...">
+		
+	</menu>
+	<menu base="true" name="Miscellaneous" desc="Use this menu to reset save data or engine settings.">
+		
+	</menu>
+</menu>

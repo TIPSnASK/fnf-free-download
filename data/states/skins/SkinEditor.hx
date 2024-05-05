@@ -35,15 +35,17 @@ var name:UITextBox;
 
 var saveButton:UIButton;
 
-// dude
 var	hatButton:FlxSpriteGroup;
 var	hairButton:FlxSpriteGroup;
+var	dyeButton:FlxSpriteGroup;
 var	skinButton:FlxSpriteGroup;
 
 var	shirtButton:FlxSpriteGroup;
 var	stripeButton:FlxSpriteGroup;
 
 var	pantsButton:FlxSpriteGroup;
+var	shortsButton:FlxSpriteGroup;
+var	socksButton:FlxSpriteGroup;
 var	shoesButton:FlxSpriteGroup;
 
 function create() {
@@ -149,13 +151,34 @@ function postCreate() {
 				spr.members[1].shader = skin;
 				buttons.add(spr);
 			}
+		case 'lady':
+			var _xml:Xml = getSkinXml(editingSkinType, currentSkinToEdit);
+
+			var namesArr:Array<String> = ['hair', 'dye', 'skin', 'shirt', 'shorts', 'socks', 'shoes', 'fav'];
+			var spriteArr:Array<FlxSpriteGroup> = [hairButton, dyeButton, skinButton, shirtButton, shortsButton, socksButton, shoesButton, favButton];
+
+			for (index => spr in spriteArr) {
+				colors.set(namesArr[index], FlxColor.fromString(_xml.get(namesArr[index])));
+				spr = IconButton.create(35*FlxMath.wrap(index, 0, 4), 35*Math.floor(index/5), 'editors/skins/icons/${editingSkinType}', namesArr[index], () -> {
+					currentlyColoring = namesArr[index];
+
+					var __color = colors.get(namesArr[index]);
+					colorPicker.curColor = __color;
+					colorPicker.saturation = FlxColorHelper.saturation(__color);
+					colorPicker.brightness = FlxColorHelper.brightness(__color);
+					colorPicker.hue = FlxColorHelper.hue(__color);
+					colorPicker.updateWheel();
+				}, 32, 32);
+				spr.members[1].shader = skin;
+				buttons.add(spr);
+			}
 	}
 }
 
 var _timer:Float = 0.0;
 function update(e:Float) {
 	_timer += e;
-	if (FlxG.keys.justPressed.ESCAPE) FlxG.switchState(new UIState(true, "skins/SkinSelector"));
+	if (controls.BACK && !name.focused) FlxG.switchState(new UIState(true, "skins/SkinSelector"));
 
 	icon.y = 115 + (Math.sin(_timer * 7) + 1) * 2; // tank you wizard 🙏
 
@@ -165,12 +188,15 @@ function update(e:Float) {
 		switch currentlyColoring {
 			case 'hat': skin.colorReplaceHat = FlxColorHelper.vec4(_color);
 			case 'hair': skin.colorReplaceHair = FlxColorHelper.vec4(_color);
+			case 'dye': skin.colorReplaceDye = FlxColorHelper.vec4(_color);
 			case 'skin': skin.colorReplaceSkin = FlxColorHelper.vec4(_color);
 
 			case 'shirt': skin.colorReplaceShirt = FlxColorHelper.vec4(_color);
 			case 'stripe': skin.colorReplaceStripe = FlxColorHelper.vec4(_color);
 
 			case 'pants': skin.colorReplacePants = FlxColorHelper.vec4(_color);
+			case 'shorts': skin.colorReplaceShorts = FlxColorHelper.vec4(_color);
+			case 'socks': skin.colorReplaceSocks = FlxColorHelper.vec4(_color);
 			case 'shoes': skin.colorReplaceShoes = FlxColorHelper.vec4(_color);
 
 			case 'fav': fav.favColor = FlxColorHelper.vec4(_color);
