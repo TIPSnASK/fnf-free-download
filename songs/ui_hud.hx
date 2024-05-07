@@ -98,7 +98,7 @@ function postCreate() {
 	scoreTxt.scrollFactor.set();
 	scoreTxt.borderSize = 2;
 	scoreTxt.cameras = [camHUD];
-	scoreTxt.font = Paths.font("COMIC.TTF");
+	scoreTxt.font = Paths.font("Pixellari.ttf");
 
 	// WON'T WORK IF YOU GOT CODENAME THROUGH ACTION BUILDS!!
 	scoreTxt.onDraw = (spr:FunkinText) -> {
@@ -110,8 +110,6 @@ function postCreate() {
 		spr.offset.set();
 		spr.draw();
 	};
-
-	add(scoreTxt);
 
 	// lunarcleint figured this out thank you lunar holy shit 🙏
 	scoreTxt.textField.antiAliasType = 0; // advanced
@@ -168,6 +166,8 @@ function postCreate() {
 			};
 			scoreTxt.setFormat(scoreTxt.font, scoreTxt.size, 0xFF000000, scoreTxt.alignment, scoreTxt.borderStyle, 0xFFFFFFFF);
 	}
+
+	add(scoreTxt);
 }
 
 var timer:Float = 0;

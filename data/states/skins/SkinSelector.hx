@@ -107,7 +107,9 @@ function postCreate() {
 	// lunarcleint figured this out thank you lunar holy shit 🙏
 	name.label.textField.antiAliasType = 0; // advanced
 	name.label.textField.sharpness = 400; // max i think idk thats what it says
-	name.label.font = Paths.font("COMIC.TTF");
+	name.label.font = Paths.font("Pixellari.ttf");
+	name.label.size = 16;
+	name.label.borderSize = 2;
 	add(name);
 
 	pronouns = new UITextBox(name.x, name.y+29, identitiesXml.get('${editingSkinType}prns'), 172, 24, false);
@@ -116,7 +118,9 @@ function postCreate() {
 	// lunarcleint figured this out thank you lunar holy shit 🙏
 	pronouns.label.textField.antiAliasType = 0; // advanced
 	pronouns.label.textField.sharpness = 400; // max i think idk thats what it says
-	pronouns.label.font = Paths.font("COMIC.TTF");
+	pronouns.label.font = Paths.font("Pixellari.ttf");
+	pronouns.label.size = 16;
+	pronouns.label.borderSize = 2;
 	add(pronouns);
 
 	var _isDeleting:Bool = false;
@@ -144,7 +148,9 @@ function postCreate() {
 	// lunarcleint figured this out thank you lunar holy shit 🙏
 	editButton.field.textField.antiAliasType = 0; // advanced
 	editButton.field.textField.sharpness = 400; // max i think idk thats what it says
-	editButton.field.font = Paths.font("COMIC.TTF");
+	editButton.field.font = Paths.font("Pixellari.ttf");
+	editButton.field.size = 16;
+	editButton.field.borderSize = 2;
 	add(editButton);
 
 	deleteButton = new UIButton(editButton.x + editButton.bWidth + 5, editButton.y, 'delete', null, FlxG.width/4 + 4, pronouns.bHeight);
@@ -162,7 +168,7 @@ function postCreate() {
 		} else {
 			_isDeleting = !(canScroll = true);
 			deleteButton.field.text = 'delete';
-			acceptButton.field.text = 'accept';
+			acceptButton.field.text = 'select';
 			acceptButton.color = 0xFF00FF00;
 			editButton.field.text = 'edit';
 			editButton.color = 0xFFFFFF00;
@@ -174,7 +180,9 @@ function postCreate() {
 	// lunarcleint figured this out thank you lunar holy shit 🙏
 	deleteButton.field.textField.antiAliasType = 0; // advanced
 	deleteButton.field.textField.sharpness = 400; // max i think idk thats what it says
-	deleteButton.field.font = Paths.font("COMIC.TTF");
+	deleteButton.field.font = Paths.font("Pixellari.ttf");
+	deleteButton.field.size = 16;
+	deleteButton.field.borderSize = 2;
 	add(deleteButton);
 
 	acceptButton = new UIButton(name.x + name.bWidth + 5, name.y, 'select', () -> {
@@ -192,7 +200,9 @@ function postCreate() {
 	// lunarcleint figured this out thank you lunar holy shit 🙏
 	acceptButton.field.textField.antiAliasType = 0; // advanced
 	acceptButton.field.textField.sharpness = 400; // max i think idk thats what it says
-	acceptButton.field.font = Paths.font("COMIC.TTF");
+	acceptButton.field.font = Paths.font("Pixellari.ttf");
+	acceptButton.field.size = 16;
+	acceptButton.field.borderSize = 2;
 	add(acceptButton);
 
 	skinName = new UIText(0, 5, FlxG.width, '');
@@ -202,7 +212,9 @@ function postCreate() {
 	// lunarcleint figured this out thank you lunar holy shit 🙏
 	skinName.textField.antiAliasType = 0; // advanced
 	skinName.textField.sharpness = 400; // max i think idk thats what it says
-	skinName.font = Paths.font("COMIC.TTF");
+	skinName.font = Paths.font("Pixellari.ttf");
+	skinName.size = 16;
+	skinName.borderSize = 2;
 	add(skinName);
 
 	for (_index => _data in skins)

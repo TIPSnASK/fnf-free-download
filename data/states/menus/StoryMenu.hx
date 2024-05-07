@@ -56,14 +56,14 @@ function create() {
 			}
 		}
 
-		var text:FunkinText = new FunkinText(400*index, 10, 400, weekndData[index].name, 24, false);
+		var text:FunkinText = new FunkinText(400*index, 12, 400, weekndData[index].name, 32, false);
 		text.alignment = 'center';
 		text.antialiasing = false;
 		text.color = weekndData[index].color;
 		// lunarcleint figured this out thank you lunar holy shit 🙏
 		text.textField.antiAliasType = 0; // advanced
 		text.textField.sharpness = 400; // max i think idk thats what it says
-		text.font = Paths.font("COMICBD.TTF");
+		text.font = Paths.font("Pixellari.ttf");
 		add(text);
 
 		gradientText(text, [
@@ -89,7 +89,7 @@ function create() {
 	ratingTxt.scrollFactor.set();
 	add(ratingTxt);
 
-	whyDoYouLookLikeThat = new FunkinText(10, 275, FlxG.width-20, 'PLAY', 24, false);
+	whyDoYouLookLikeThat = new FunkinText(10, 275, FlxG.width-20, 'PLAY', 32, false);
 	whyDoYouLookLikeThat.alignment = 'center';
 	whyDoYouLookLikeThat.antialiasing = false;
 	whyDoYouLookLikeThat.scrollFactor.set();
@@ -99,7 +99,7 @@ function create() {
 		// lunarcleint figured this out thank you lunar holy shit 🙏
 		text.textField.antiAliasType = 0; // advanced
 		text.textField.sharpness = 400; // max i think idk thats what it says
-		text.font = Paths.font("COMIC" + (text == whyDoYouLookLikeThat ? "BD" : "") + ".TTF");
+		text.font = Paths.font("Pixellari.ttf");
 	}
 
 	updateStuff();

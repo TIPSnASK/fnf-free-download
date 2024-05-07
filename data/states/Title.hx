@@ -10,6 +10,8 @@ var logo:FunkinSprite;
 var finished:Bool = false;
 var transitioning:Bool = false;
 
+var splashText:FunkinText;
+
 function create() {
 	var introGuys:FunkinSprite = new FunkinSprite().loadGraphic(Paths.image('menus/spr_bing'));
 	introGuys.alpha = 0.001;
@@ -63,6 +65,19 @@ function create() {
 	enterThingy.setPosition(5, FlxG.height-enterThingy.height-5);
 	titleGroup.add(enterThingy);
 
+	var _splashTextArray:Array<String> = CoolUtil.coolTextFile(Paths.txt('titlescreen/splashtext'));
+	splashText = new FunkinText(185, logo.y + logo.height - 10, 200, _splashTextArray[FlxG.random.int(0, _splashTextArray.length-1)], 16, true);
+	splashText.alignment = 'center';
+	splashText.antialiasing = false;
+	// lunarcleint figured this out thank you lunar holy shit 🙏
+	splashText.textField.antiAliasType = 0; // advanced
+	splashText.textField.sharpness = 400; // max i think idk thats what it says
+	splashText.font = Paths.font("Pixellari.ttf");
+	splashText.borderSize = 2;
+	splashText.angle = -10;
+	splashText.color = FlxG.random.color(0xFF8B8B8B, 0xFFFFFFFF, 1, false);
+	titleGroup.add(splashText);
+
 	titleGroup.visible = false;
 }
 
@@ -81,6 +96,8 @@ function update(elapsed:Float) {
 	timer += elapsed;
 
 	enterThingy.alpha = FlxMath.bound((Math.sin(timer * 5) + 1) * 0.5, 0.2, 1); // tank you wizard 🙏
+	splashText.y = logo.y + logo.height - 10 + (Math.sin(timer * 4) + 1) * 2; // tank you wizard 🙏
+	splashText.x = 185 + (Math.sin(timer * 8) + 1) * 2; // tank you wizard 🙏
 
 	people.animation.curAnim.frameRate = 12*(Conductor.bpm/150);
 
@@ -100,6 +117,9 @@ function update(elapsed:Float) {
 function beatHit() {
 	if (!transitioning)
 		people.playAnim('idle', true);
+
+	splashText.scale.set(1.25, 1.25);
+	FlxTween.tween(splashText, {'scale.x': 1, 'scale.y': 1}, 0.5, {ease: FlxEase.backOut});
 
 	FlxTween.cancelTweensOf(logo);
 	logo.scale.set(2.15, 2.15);
@@ -139,7 +159,7 @@ function newLine(lines:Array<String>) {
 		// lunarcleint figured this out thank you lunar holy shit 🙏
 		text.textField.antiAliasType = 0; // advanced
 		text.textField.sharpness = 400; // max i think idk thats what it says
-		text.font = Paths.font("COMIC.TTF");
+		text.font = Paths.font("Pixellari.ttf");
 		textGroup.add(text);
 	}
 }

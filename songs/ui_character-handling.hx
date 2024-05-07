@@ -27,7 +27,7 @@ function onGamePause(event) {
 			character.playAnim("paused", true);
 
 			new FlxTimer().start(.001, (t:FlxTimer) -> {
-				if (character != null)
+				if (FlxG.state == PlayState.instance)
 					character.playAnim(data.anim.name, true, data.context, false, data.anim.curFrame);
 				if (t != null)
 					t.destroy();

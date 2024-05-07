@@ -13,12 +13,6 @@ Everything seen here (except *most* of the code) belongs Tyler_mon, Funne, and D
 the port's being made on a dev build so some stuff probably wont work yet until the engine releases an update publicly.
 hopefully if everything goes right though, it'll work fine on public builds
 
-im probably not gonna try to make it look pixel perfect considering how hard it is to make one game look like another, but i at least want it to be playable
-
-
-
-lotta shitty (and rushed) code by the way. there's a lot for me to do
-
 # **Links**
 [FNF Free Download](https://gamejolt.com/games/fridaynightfunkin/705302)
 
@@ -27,3 +21,6 @@ lotta shitty (and rushed) code by the way. there's a lot for me to do
 [Codename Engine Discord Server](https://discord.gg/engUJd9RTA)
 
 [Forum Post (Codename Engine Discord Server)](https://discord.com/channels/860561967383445535/1187063802118799492)
+
+# **Fonts Used**
+[Pixellari](https://www.dafont.com/pixellari.font)

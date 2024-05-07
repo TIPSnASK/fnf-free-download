@@ -61,11 +61,11 @@ function create() {
 	dialogBox.visible = false;
 	add(dialogBox);
 
-	speakerText = new FunkinText(dialogBox.x + 10, dialogBox.y - 25, FlxG.width - (dialogBox.x*2) - 20, 'Name', 14, true);
+	speakerText = new FunkinText(dialogBox.x + 10, dialogBox.y - 25, FlxG.width - (dialogBox.x*2) - 20, 'Name', 16, true);
 	speakerText.alignment = "left";
 	speakerText.antialiasing = false;
 	speakerText.cameras = [cutsceneCam];
-	speakerText.font = Paths.font("COMICBD.TTF");
+	speakerText.font = Paths.font("Pixellari.ttf");
 	speakerText.textField.antiAliasType = 0;
 	speakerText.textField.sharpness = 400;
 	speakerText.borderSize = 2;
@@ -73,11 +73,11 @@ function create() {
 	add(speakerText);
 
 	// JUST FOUND OUT THAT THERE'S GRADIENTS ON ALL OF THE TEXTS IM NOT FUCKING DOING THAT OH MY GOD IM GONNA KMS
-	dialogText = new FunkinText(dialogBox.x + 20, dialogBox.y + 25, dialogBox.width - (dialogBox.x*2) - 20, 'SAMPLE TEXT', 14, true);
+	dialogText = new FunkinText(dialogBox.x + 20, dialogBox.y + 25, dialogBox.width - (dialogBox.x*2) - 20, 'SAMPLE TEXT', 16, true);
 	dialogText.alignment = "left";
 	dialogText.antialiasing = false;
 	dialogText.cameras = [cutsceneCam];
-	dialogText.font = Paths.font("COMICBD.TTF");
+	dialogText.font = Paths.font("Pixellari.ttf");
 	dialogText.textField.antiAliasType = 0;
 	dialogText.textField.sharpness = 400;
 	dialogText.borderStyle = FlxTextBorderStyle.OUTLINE;

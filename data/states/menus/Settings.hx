@@ -45,7 +45,7 @@ function create() {
 	add(bg);
 
 	titleText = new FunkinText(25, 25, FlxG.width - 50, "Title", 24, true);
-	titleText.font = Paths.font("COMIC.TTF");
+	titleText.font = Paths.font("Pixellari.ttf");
 	titleText.textField.antiAliasType = 0;
 	titleText.textField.sharpness = 400;
 	titleText.borderSize = 2;
@@ -61,8 +61,8 @@ function create() {
 		spr.draw();
 	}
 
-	descText = new FunkinText(25, 60, FlxG.width - 120, "Description", 12, true);
-	descText.font = Paths.font("COMIC.TTF");
+	descText = new FunkinText(25, 60, FlxG.width - 60, "Description", 16, true);
+	descText.font = Paths.font("Pixellari.ttf");
 	descText.textField.antiAliasType = 0;
 	descText.textField.sharpness = 400;
 	descText.borderSize = 2;
@@ -124,8 +124,8 @@ function setupMenu(?menuData:MenuData = null, ?parent:MenuData = null) {
 			});
 			_value = Reflect.field(_baseCheck, node.get('id'));
 		}
-		var option = new MenuOption(25, 182 + (25 * index), FlxG.width, '${node.get('name')}', 18, true, node, _baseCheck, _value);
-		option.font = Paths.font("COMIC.TTF");
+		var option = new MenuOption(25, 182 + (25 * index), FlxG.width, '${node.get('name')}', 16, true, node, _baseCheck, _value);
+		option.font = Paths.font("Pixellari.ttf");
 		option.textField.antiAliasType = 0;
 		option.textField.sharpness = 400;
 		option.borderSize = 2;
@@ -234,6 +234,6 @@ function onOptionChange(option:MenuOption) {
 		openSubState(new ModSubState('skins/substates/CharacterSelect'));
 	} else if (option.data.get('name') == "Controls") {
 		persistentUpdate = !(persistentDraw = true);
-		openSubState(new KeybindsOptions());
+		openSubState(new ModSubState('substates/options/SetKeybinds'));
 	}
 }

@@ -1,5 +1,5 @@
 <menu name="Options" desc="hi">
-	<callback name="Controls" desc="Change Controls for Player 1 and Player 2! [HAVEN'T REMADE MENU, USE AT YOUR OWN RISK]"/>
+	<callback name="Controls" desc="Change Controls for Player 1 and Player 2!"/>
 	<menu base="true" name="Gameplay" desc="Change Gameplay options such as Downscroll, Scroll Speed, Naughtyness...">
 		<checkbox id="downscroll" name="Downscroll" desc="If checked, notes will go from up to down instead of down to up, as if they're falling."/>
 		<checkbox id="ghostTapping" name="Ghost Tapping" desc="If unchecked, trying to hit any strum that have no note that can be hit will cause a miss."/>

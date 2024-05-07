@@ -3,7 +3,6 @@
 import funkin.editors.EditorPicker;
 import funkin.menus.ModSwitchMenu;
 import funkin.options.OptionsMenu;
-
 import funkin.editors.ui.UIState;
 
 var bg:FunkinSprite;
@@ -35,16 +34,8 @@ function update(elapsed:Float) {
 		if (Assets.exists(Paths.script('data/states/menus/${optionList[curSelected]}'))) {
 			FlxG.sound.play(Paths.sound("menus/snd_josh")).persist = true;
 			FlxG.switchState(new ModState('menus/${optionList[curSelected]}'));
-		} else if (optionList[curSelected] != "Settings")
-			trace(optionList[curSelected] + ': yooooooooo');
-		else if (optionList[curSelected] == "Settings") {
-			FlxG.sound.play(Paths.sound("menus/snd_josh")).persist = true;
-			FlxG.switchState(new OptionsMenu());
 		}
 	}
-
-	if (controls.LEFT_P || controls.RIGHT_P)
-		FlxG.switchState(new UIState(true, "skins/SkinSelector"));
 
 	if (FlxG.keys.justPressed.SEVEN) {
 		persistentUpdate = false;

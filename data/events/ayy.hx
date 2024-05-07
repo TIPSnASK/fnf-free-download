@@ -6,15 +6,15 @@ function onEvent(e)
 		if (Std.parseInt(e.event.params[1]) == -1)
 			for (character in strumLines.members[e.event.params[0]].characters) {
 				character.playAnim(animToPlay, true, "MISS");
-				if (Assets.exists(Paths.sound("gameplay/ayy/" + character.curCharacter))) {
-					FlxG.sound.play(Paths.sound("gameplay/ayy/" + character.curCharacter));
+				if (!StringTools.contains(character.curCharacter, 'lady') && Assets.exists(Paths.sound('gameplay/ayy/${character.curCharacter}'))) {
+					FlxG.sound.play(Paths.sound('gameplay/ayy/${character.curCharacter}'));
 				}
 			}
 		else {
 			var character:Character = strumLines.members[e.event.params[0]].characters[Std.parseInt(e.event.params[1])];
 			character.playAnim(animToPlay, true, "MISS");
-			if (Assets.exists(Paths.sound("gameplay/ayy/" + character.curCharacter))) {
-				FlxG.sound.play(Paths.sound("gameplay/ayy/" + character.curCharacter));
+			if (!StringTools.contains(character.curCharacter, 'lady') && Assets.exists(Paths.sound('gameplay/ayy/${character.curCharacter}'))) {
+				FlxG.sound.play(Paths.sound('gameplay/ayy/${character.curCharacter}'));
 			}
 		}
 	}

@@ -101,10 +101,22 @@ function postCreate() {
 
 	colorPicker = new UIColorwheel(90, 240, 0xFFFFFFFF);
 	colorPicker.cameras = [camUI];
+	for (i in [colorPicker.colorHexTextBox, colorPicker.rgbNumSteppers[0], colorPicker.rgbNumSteppers[1], colorPicker.rgbNumSteppers[2]]) {
+		i.label.textField.antiAliasType = 0; // advanced
+		i.label.textField.sharpness = 400; // max i think idk thats what it says
+		i.label.font = Paths.font("Pixellari.ttf");
+		i.label.size = 16;
+		i.label.borderSize = 2;
+	}
 	add(colorPicker);
 
 	name = new UITextBox(buttons.x, buttons.y-28, currentSkinToEdit, 172, 24, false);
 	name.cameras = [camUI];
+	name.label.textField.antiAliasType = 0; // advanced
+	name.label.textField.sharpness = 400; // max i think idk thats what it says
+	name.label.font = Paths.font("Pixellari.ttf");
+	name.label.size = 16;
+	name.label.borderSize = 2;
 	add(name);
 
 	// gender button will be inbetween here when i make the portrait for the thing
@@ -127,6 +139,11 @@ function postCreate() {
 	}, name.bWidth, name.bHeight);
 	saveButton.cameras = [camUI];
 	saveButton.color = 0xFF00FF00;
+	saveButton.field.textField.antiAliasType = 0; // advanced
+	saveButton.field.textField.sharpness = 400; // max i think idk thats what it says
+	saveButton.field.font = Paths.font("Pixellari.ttf");
+	saveButton.field.size = 16;
+	saveButton.field.borderSize = 2;
 	add(saveButton);
 
 	switch editingSkinType {

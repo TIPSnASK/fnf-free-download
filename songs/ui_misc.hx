@@ -1,10 +1,12 @@
 function create() {
-	if (playCutscenes)
-		cutscene = Paths.script('data/scripts/cutscene');
+	// if (playCutscenes)
+	// 	cutscene = Paths.script('data/scripts/cutscene');
 }
 
 function postCreate() {
 	camZoomingStrength = 0;
+
+	player.cpu = FlxG.save.data.freeBOTPLAY;
 }
 
 function onGamePause(event) {

@@ -30,12 +30,12 @@ function create() {
 	FlxG.sound.play(Paths.sound("sfx/snd_recordscratch"), 0.8);
 
 	// stupid fucking way of doing this but idc
-	var pausedTxt = new FunkinText(8, 12, FlxG.width, "PAUSED", 54, true);
-	var pausedTxtNoOutline = new FunkinText(8, 12, FlxG.width, "PAUSED", 54, false);
+	var pausedTxt = new FunkinText(8, 12, FlxG.width, "PAUSED", 48, true);
+	var pausedTxtNoOutline = new FunkinText(8, 12, FlxG.width, "PAUSED", 48, false);
 
 	for (i in [pausedTxt, pausedTxtNoOutline]) {
 		i.cameras = [pauseCam];
-		i.font = Paths.font("COMIC.TTF");
+		i.font = Paths.font("Pixellari.ttf");
 		i.textField.antiAliasType = 0;
 		i.textField.sharpness = 400;
 		i.borderSize = 3;
@@ -46,9 +46,9 @@ function create() {
 
 	for (index => line in menuItems) {
 		var lastHeight:Float = (CoolUtil.last(itemArray) == null ? 0 : CoolUtil.last(itemArray).height);
-		var text = new FunkinText(8, 97 + ((lastHeight/1.1)*itemArray.length), FlxG.width, line, 12, true);
+		var text = new FunkinText(8, 97 + ((lastHeight/1.1)*itemArray.length), FlxG.width, line, 16, true);
 		text.cameras = [pauseCam];
-		text.font = Paths.font("COMIC.TTF");
+		text.font = Paths.font("Pixellari.ttf");
 		text.textField.antiAliasType = 0;
 		text.textField.sharpness = 400;
 		text.borderSize = 2;

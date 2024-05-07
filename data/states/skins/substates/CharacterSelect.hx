@@ -22,7 +22,7 @@ function create() {
 
 		var txt:FunkinText = new FunkinText(spr.x, spr.y + spr.height, spr.width, name, 16, true);
 		txt.cameras = [subCam];
-		txt.font = Paths.font("COMIC.TTF");
+		txt.font = Paths.font("Pixellari.ttf");
 		txt.textField.antiAliasType = 0;
 		txt.textField.sharpness = 400;
 		txt.borderSize = 2;
