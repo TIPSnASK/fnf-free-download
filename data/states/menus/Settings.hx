@@ -167,7 +167,7 @@ function updateOption(option:MenuOption) {
 		case 'choice':
 			var _values:Array<String> = [for (i in option.extra['choices']) i.get('value')];
 			var _names:Array<String> = [for (i in option.extra['choices']) i.get('name')];
-			': &${_names[_values.indexOf(option.value)]}&';
+			': &< ${_names[_values.indexOf(option.value)]} >&';
 	}}';
 	option.applyMarkup(option.text, markupRules);
 }

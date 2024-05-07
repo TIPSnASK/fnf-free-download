@@ -31,6 +31,7 @@ function create() {
 	}
 
 	var weekndFiles = Paths.getFolderContent('data/weeknds');
+	var gay:Array<FlxColor> = rainbow(weekndFiles.length, 1, 0.8, 1);
 	for (index=>weeknd in weekndFiles) {
 		weeknd = StringTools.replace(weeknd, '.xml', '');
 		var xml:Xml = Xml.parse(Assets.getText(Paths.xml('weeknds/' + weeknd))).firstElement();
@@ -67,7 +68,7 @@ function create() {
 		add(text);
 
 		gradientText(text, [
-			weekndData[index].color,
+			gay[index],
 			FlxColor.fromRGB(
 				(((weekndData[index].color >> 16) & 0xff)) - 64,
 				(((weekndData[index].color >> 8) & 0xff)) - 64,

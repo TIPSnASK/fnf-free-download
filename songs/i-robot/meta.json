@@ -1,4 +1,6 @@
 {
+	"displayName": "i, robot",
 	"bpm": 95,
+	"icon": "teachvee",
 	"needsVoices": false
 }

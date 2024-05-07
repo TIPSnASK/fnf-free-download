@@ -130,6 +130,14 @@ static function gradientText(text:FlxText, colors:Array<FlxColor>) {
 	);
 }
 
+// thanks katie 🔥
+static function rainbow(amount:Int, s:Float, b:Float, a:Float):Array<FlxColor> {
+	var _colors:Array<FlxColor> = [];
+	for (_i in 0...amount)
+		_colors.push(FlxColor.fromHSB(_i/amount*360, s, b, a));
+	return _colors;
+}
+
 static function getInnerData(xml:Xml) {
 	var it = xml.iterator();
 	if (!it.hasNext())

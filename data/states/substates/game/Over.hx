@@ -65,8 +65,8 @@ function create() {
 		_canPressEnter = true;
 	});
 
-	retryText = new FunkinText(0, 75, FlxG.width, "retry?", 14, true);
-	retryText.font = Paths.font("COMIC.TTF");
+	retryText = new FunkinText(0, 75, FlxG.width, "retry?", 16, true);
+	retryText.font = Paths.font("Pixellari.ttf");
 	retryText.textField.antiAliasType = 0;
 	retryText.textField.sharpness = 400;
 	retryText.borderSize = 0;

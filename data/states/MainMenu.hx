@@ -3,7 +3,7 @@
 import funkin.editors.EditorPicker;
 import funkin.menus.ModSwitchMenu;
 import funkin.options.OptionsMenu;
-import funkin.editors.ui.UIState;
+import funkin.backend.MusicBeatState;
 
 var bg:FunkinSprite;
 var options:FunkinSprite;
@@ -33,6 +33,7 @@ function update(elapsed:Float) {
 	if (controls.ACCEPT) {
 		if (Assets.exists(Paths.script('data/states/menus/${optionList[curSelected]}'))) {
 			FlxG.sound.play(Paths.sound("menus/snd_josh")).persist = true;
+			MusicBeatState.skipTransIn = MusicBeatState.skipTransOut = optionList[curSelected] == 'Discord';
 			FlxG.switchState(new ModState('menus/${optionList[curSelected]}'));
 		}
 	}

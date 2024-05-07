@@ -6,7 +6,9 @@ function create() {
 function postCreate() {
 	camZoomingStrength = 0;
 
-	player.cpu = FlxG.save.data.freeBOTPLAY;
+	for (sL in strumLines.members)
+		if (!sL.cpu)
+			sL.cpu = FlxG.save.data.freeBOTPLAY;
 }
 
 function onGamePause(event) {

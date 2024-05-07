@@ -21,8 +21,9 @@ function create() {
 	image.scale.set(1, 1);
 	add(image);
 
-	var _splashTextArray:Array<String> = CoolUtil.coolTextFile(Paths.txt('secret'));
-	var text:FunkinText = new FunkinText(0, 0, 0, FlxG.random.int(0, 100) == 64 ? "THE SERVER IS GONE, WHY ARE YOU STILL LOOKING FOR IT?" : _splashTextArray[FlxG.random.int(0, _splashTextArray.length-1)], 16, false);
+	var _splashTextArray:Array<String> = CoolUtil.coolTextFile(Paths.txt('titlescreen/splashtext'));
+	var text:FunkinText = new FunkinText(0, 0, 0, FlxG.save.data.sawFDDiscordDisclaimer != true ? 'THE SERVER IS GONE. - ' : FlxG.random.int(0, 10) == 5 ? "THE SERVER IS GONE, WHY ARE YOU STILL LOOKING FOR IT?" : '${_splashTextArray[FlxG.random.int(0, _splashTextArray.length-1)]} - ', 16, false);
+	if (FlxG.save.data.sawFDDiscordDisclaimer == null) FlxG.save.data.sawFDDiscordDisclaimer = true;
 	text.antialiasing = false;
 	// lunarcleint figured this out thank you lunar holy shit 🙏
 	text.textField.antiAliasType = 0; // advanced
