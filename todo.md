@@ -2,7 +2,7 @@
 - story mode
 	- pre and post banners
 ### game
-- cutscenes (do after all songs are ported)
+- figure out why sometimes the noteskin just doesnt load
 - weeknds:
 	- tutorial
 		- make dude and lady shader for bg sprite
@@ -11,3 +11,4 @@
 	- 2
 	- 3
 	- 4
+- cutscenes
