@@ -45,6 +45,8 @@ var notSelectedFormat:FlxTextFormat = new FlxTextFormat(0xFFFF0055, true);
 var markupRules:Array<FlxTextFormatMarkerPair> = [new FlxTextFormatMarkerPair(selectedFormat, "$"), new FlxTextFormatMarkerPair(notSelectedFormat, "%")];
 
 function create() {
+	FlxG.mouse.visible = true;
+
 	bg = new FunkinSprite().loadGraphic(Paths.image("menus/backgrounds/4"));
 	bg.scale.set(1, 1);
 	bg.zoomFactor = 0.25;
@@ -227,7 +229,10 @@ function update(e:Float) {
 	_timer += e;
 
 	if (!name.focused && !pronouns.focused) {
-		if (controls.BACK) FlxG.switchState(new ModState('menus/Settings'));
+		if (controls.BACK) {
+			FlxG.mouse.visible = false;
+			FlxG.switchState(new ModState('menus/Settings'));
+		}
 
 		if ((controls.LEFT_P || controls.RIGHT_P) && canScroll) {
 			var _val:Int = (controls.LEFT_P ? -1 : 1);

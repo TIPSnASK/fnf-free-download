@@ -5,7 +5,7 @@ import funkin.editors.ui.UIState;
 
 var itemArray:Array<FunkinText> = [];
 var pauseCam:FlxCamera;
-var menuItems = ['Resume', 'Restart', 'Options', 'Quit'];
+var menuItems = ['Resume', 'Restart', 'Controls', 'Options', 'Quit'];
 var curSelected:Int = 0;
 var parentDisabler:FunkinParentDisabler;
 // var pauseMusic:FlxSound;
@@ -81,6 +81,8 @@ function selectItem(selected:String) {
 		case 'Restart':
 			parentDisabler.reset();
 			FlxG.resetState();
+		case 'Controls':
+			openSubState(new ModSubState('substates/options/SetKeybinds'));
 		case 'Options':
 			fromGame = true;
 			FlxG.switchState(new ModState('menus/Settings'));

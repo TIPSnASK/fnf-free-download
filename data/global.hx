@@ -200,6 +200,7 @@ function new() {
 
 	FlxG.mouse.load(Paths.image("cursor"), 1.25, -8, -5);
 	FlxG.mouse.useSystemCursor = false;
+	FlxG.mouse.visible = false;
 }
 
 function preStateSwitch() {
@@ -239,8 +240,6 @@ function postStateSwitch() {
 
 	fullscreenSound = FlxG.sound.load(Paths.sound("sfx/snd_weirdnoise"));
 	fullscreenSound.persist = true;
-
-	FlxG.autoPause = FlxG.save.data.freeTOLOOKAWAY;
 
 	if (FlxG.save.data.freeFPS) FlxG.drawFramerate = FlxG.updateFramerate = 40;
 	else FlxG.drawFramerate = FlxG.updateFramerate = Options.framerate;
@@ -302,7 +301,6 @@ function destroy() {
 	FlxG.height = FlxG.initialHeight = 720;
 	window.resize(FlxG.width, FlxG.height);
 	window.resizable = true;
-	FlxG.autoPause = true;
 	FlxG.drawFramerate = FlxG.updateFramerate = Options.framerate;
 
 	FlxG.sound.volumeHandler = null;

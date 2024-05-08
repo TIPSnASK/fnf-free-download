@@ -28,7 +28,11 @@ var options:Array<{name:String, state:FlxState}> = [
 var subCam:FlxCamera;
 var curSelected:Int = 0;
 
+var _lastMouseVisible:Bool = FlxG.mouse.visible;
+
 function create() {
+	FlxG.mouse.visible = true;
+
 	subCam = new FlxCamera();
 	subCam.bgColor = 0;
 	FlxG.cameras.add(subCam, false);
@@ -77,4 +81,5 @@ function update(elapsed:Float) {
 
 function onClose() {
 	FlxG.cameras.remove(subCam, true);
+	FlxG.mouse.visible = _lastMouseVisible;
 }

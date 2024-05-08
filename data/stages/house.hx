@@ -105,9 +105,9 @@ function postCreate() {
 
 		speakerLight = true;
 
-		// ladyDance = new Character(boyfriend.x, boyfriend.y, "lady-stars", true);
-		// player.characters.push(ladyDance);
-		// insert(members.indexOf(boyfriend)+1, ladyDance);
+		ladyDance = new Character(boyfriend.x, boyfriend.y, "lady-stars", true);
+		player.characters.push(ladyDance);
+		insert(members.indexOf(boyfriend)+1, ladyDance);
 	}
 }
 

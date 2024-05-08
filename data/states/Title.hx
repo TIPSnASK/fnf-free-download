@@ -1,3 +1,6 @@
+import flixel.text.FlxText.FlxTextFormat;
+import flixel.text.FlxText.FlxTextFormatMarkerPair;
+
 var titleGroup:FlxSpriteGroup;
 var textGroup:FlxSpriteGroup;
 
@@ -11,6 +14,14 @@ var finished:Bool = false;
 var transitioning:Bool = false;
 
 var splashText:FunkinText;
+
+var dxFormat:FlxTextFormat = new FlxTextFormat(0xFF00FF62, true);
+var freemixFormat:FlxTextFormat = new FlxTextFormat(0xFFFF0055, true);
+
+var markupRules:Array<FlxTextFormatMarkerPair> = [
+	new FlxTextFormatMarkerPair(dxFormat, "||"),
+	new FlxTextFormatMarkerPair(freemixFormat, "_+_"),
+];
 
 function create() {
 	var introGuys:FunkinSprite = new FunkinSprite().loadGraphic(Paths.image('menus/spr_bing'));
@@ -76,6 +87,7 @@ function create() {
 	splashText.borderSize = 2;
 	splashText.angle = -10;
 	splashText.color = FlxG.random.color(0xFF8B8B8B, 0xFFFFFFFF, 1, false);
+	splashText.applyMarkup(splashText.text, markupRules);
 	titleGroup.add(splashText);
 
 	titleGroup.visible = false;

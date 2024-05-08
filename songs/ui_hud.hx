@@ -183,6 +183,6 @@ function postUpdate(elapsed:Float) {
 	playerIconShadow.setPosition(playerIcon.x + 2, playerIcon.y + (downscroll ? -2 : 2));
 	opponentIconShadow.setPosition(opponentIcon.x + 2, opponentIcon.y + (downscroll ? -2 : 2));
 
-	playerIcon.health = healthBar.percent / 100;
-	opponentIcon.health = 1 - (healthBar.percent / 100);
+	playerIcon.health = playerIconShadow.health = healthBar.percent / 100;
+	opponentIcon.health = opponentIconShadow.health = 1 - (healthBar.percent / 100);
 }

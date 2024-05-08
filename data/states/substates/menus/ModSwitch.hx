@@ -14,6 +14,7 @@ function create() {
 	FlxG.cameras.add(subCam, false);
 
 	for (i in modList) if (!FileSystem.isDirectory('mods/${i}')) modList.remove(i);
+	modList.push('[ DISABLE MODS ]');
 
 	for (index => name in modList) {
 		var option = new FunkinText(25, 182 + (45 * index), FlxG.width, name, 32, true);
@@ -61,7 +62,8 @@ function update(elapsed:Float) {
 
 	if (controls.ACCEPT) {
 		close();
-		ModsFolder.switchMod(modList[curSelected]);
+		if (modList[curSelected] != '[ DISABLE MODS ]') ModsFolder.switchMod(modList[curSelected]);
+		else ModsFolder.switchMod('');
 		return;
 	}
 
