@@ -240,9 +240,10 @@ function postStateSwitch() {
 	fullscreenSound = FlxG.sound.load(Paths.sound("sfx/snd_weirdnoise"));
 	fullscreenSound.persist = true;
 
-	FlxG.autoPause = FlxG.save.data.freeTOLOOKAWAY; // sorry but i gotta be biblically accurate or else.....
+	FlxG.autoPause = FlxG.save.data.freeTOLOOKAWAY;
 
 	if (FlxG.save.data.freeFPS) FlxG.drawFramerate = FlxG.updateFramerate = 40;
+	else FlxG.drawFramerate = FlxG.updateFramerate = Options.framerate;
 
 	volumeCam = new FlxCamera();
 	volumeCam.bgColor = 0;
@@ -265,6 +266,8 @@ function postStateSwitch() {
 	volumeGroup.alpha = 0;
 
 	_hideSTTimer = new FlxTimer();
+
+	FlxG.mouse.useSystemCursor = false;
 }
 
 function soundTray(volume:Float) {

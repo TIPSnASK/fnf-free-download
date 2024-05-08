@@ -1,8 +1,6 @@
 ### menus
-- editor picker
 - story mode
 	- pre and post banners
-- mod switch
 ### game
 - cutscenes (do after all songs are ported)
 - weeknds:

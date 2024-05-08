@@ -3,6 +3,7 @@ import flixel.addons.display.FlxBackdrop;
 import flixel.util.FlxSpriteUtil;
 import funkin.backend.assets.ModsFolder;
 import haxe.io.Path;
+import funkin.backend.MusicBeatState;
 
 var wiggle:CustomShader = new CustomShader('wiggle');
 var wiggle2:CustomShader = new CustomShader('wiggle');
@@ -87,6 +88,7 @@ function update(e:Float) {
 	}
 
 	if (controls.BACK) {
+		MusicBeatState.skipTransIn = MusicBeatState.skipTransOut = true;
 		ModsFolder.switchMod(ModsFolder.currentModFolder);
 	}
 }

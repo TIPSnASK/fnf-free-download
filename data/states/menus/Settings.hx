@@ -173,11 +173,9 @@ function updateOption(option:MenuOption) {
 }
 
 function select(index:Int) {
-	curSelected = index;
-	camY = sprites[index].y - 182;
+	camY = sprites[curSelected = index].y - 182;
 	titleText.text = sprites[index].data.get('name');
 	descText.text = sprites[index].data.exists('desc') ? sprites[index].data.get('desc') : 'No description provided.';
-	// for (_index => option in sprites) option.alpha = _index == index ? 1 : 0.5;
 }
 
 var _timer:Float = 0;

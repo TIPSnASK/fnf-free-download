@@ -1,6 +1,5 @@
 // holy shit this is literally all of the fucking code 😭
 
-import funkin.editors.EditorPicker;
 import funkin.menus.ModSwitchMenu;
 import funkin.options.OptionsMenu;
 import funkin.backend.MusicBeatState;
@@ -32,7 +31,7 @@ function create() {
 function update(elapsed:Float) {
 	if (controls.ACCEPT) {
 		if (Assets.exists(Paths.script('data/states/menus/${optionList[curSelected]}'))) {
-			FlxG.sound.play(Paths.sound("menus/snd_josh")).persist = true;
+			FlxG.sound.play(Paths.sound("menus/snd_josh")).persist = optionList[curSelected] != 'Discord';
 			MusicBeatState.skipTransIn = MusicBeatState.skipTransOut = optionList[curSelected] == 'Discord';
 			FlxG.switchState(new ModState('menus/${optionList[curSelected]}'));
 		}
@@ -40,12 +39,12 @@ function update(elapsed:Float) {
 
 	if (FlxG.keys.justPressed.SEVEN) {
 		persistentUpdate = false;
-		openSubState(new EditorPicker());
+		openSubState(new ModSubState('substates/editors/EditorSelect'));
 	}
 	
 	if (controls.SWITCHMOD) {
 		persistentUpdate = false;
-		openSubState(new ModSwitchMenu());
+		openSubState(new ModSubState('substates/menus/ModSwitch'));
 	}
 
 	if (controls.UP_P) curSelected --;
