@@ -6,7 +6,7 @@ import funkin.backend.MusicBeatState;
 
 var bg:FunkinSprite;
 var options:FunkinSprite;
-var optionList:Array<String> = ['StoryMenu', 'Freeplay', 'Settings', 'Discord'];
+var optionList:Array<String> = ['StoryMenu', 'Freeplay', 'Settings', 'Discord', 'Credits'];
 var curSelected:Int = 0;
 
 function create() {
@@ -47,10 +47,12 @@ function update(elapsed:Float) {
 		openSubState(new ModSubState('substates/menus/ModSwitch'));
 	}
 
-	if (controls.UP_P) curSelected --;
-	if (controls.DOWN_P) curSelected ++;
-	curSelected = FlxMath.wrap(curSelected, 0, optionList.length-1);
-	options.playAnim(optionList[curSelected], true);
+	if (controls.DOWN_P || controls.UP_P) {
+		curSelected = FlxMath.wrap(curSelected + (controls.DOWN_P ? 1 : -1), 0, optionList.length-1);
+		options.playAnim(optionList[curSelected], true);
+		options.x = (optionList[curSelected] != 'Credits' ? -22 : 0);
+		options.y = (optionList[curSelected] != 'Credits' ? -22 : 0);
+	}
 
-	bg.y = CoolUtil.fpsLerp(bg.y, -150 * curSelected, 0.06);
+	bg.y = CoolUtil.fpsLerp(bg.y, -125 * curSelected, 0.06);
 }

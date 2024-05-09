@@ -15,8 +15,8 @@ var transitioning:Bool = false;
 
 var splashText:FunkinText;
 
-var dxFormat:FlxTextFormat = new FlxTextFormat(0xFF00FF62, true);
-var freemixFormat:FlxTextFormat = new FlxTextFormat(0xFFFF0055, true);
+var dxFormat:FlxTextFormat = new FlxTextFormat(0xFFFF9100, true);
+var freemixFormat:FlxTextFormat = new FlxTextFormat(0xFFFF0095, true);
 
 var markupRules:Array<FlxTextFormatMarkerPair> = [
 	new FlxTextFormatMarkerPair(dxFormat, "||"),
@@ -28,6 +28,8 @@ function create() {
 	introGuys.alpha = 0.001;
 	introGuys.scale.set(2, 2);
 	introGuys.updateHitbox();
+	introGuys.shader = new CustomShader('player-icon');
+	introGuys.shader.favColor = FlxColorHelper.vec4(getFavColor('dude'));	
 	add(introGuys);
 
 	new FlxTimer().start(0.75, () -> {

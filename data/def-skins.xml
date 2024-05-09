@@ -1,6 +1,7 @@
 <skins default="yeah">
 	<dude name="default" fav="#F1F471" hat="#8c97c2" skin="#eed6c4" hair="#473e38" shirt="#d7799c" stripe="#653662" pants="#615792" shoes="#383644"/>
 	<dude name="statue" fav="#7f7f7f" hat="#7f7f7f" skin="#7f7f7f" hair="#7f7f7f" shirt="#7f7f7f" stripe="#7f7f7f" pants="#7f7f7f" shoes="#7f7f7f"/>
+	<dude name="mario" fav="#A80000" hat="#A80000" skin="#FFD5BC" hair="#7F3300" shirt="#A80000" stripe="#A80000" pants="#003DA8" shoes="#7F3300"/>
 
 	<lady name="default" fav="#92F0D0" skin="#F3E0CB" hair="#C6C0B3" dye="#583D5F" shirt="#3F7270" shorts="#2C3F3E" socks="#BBC9D0" shoes="#35454D"/>
 	<lady name="statue" fav="#7f7f7f" skin="#7f7f7f" hair="#7f7f7f" dye="#7f7f7f" shirt="#7f7f7f" shorts="#7f7f7f" socks="#7f7f7f" shoes="#7f7f7f"/>

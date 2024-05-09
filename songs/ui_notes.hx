@@ -58,8 +58,8 @@ function onNoteCreation(event) {
 	event.cancel();
 	
 	var note = event.note;
-	note.frames = Paths.getFrames('game/notes/free-' + noteskin);
-	switch(noteskin) {
+	note.frames = Paths.getFrames('game/notes/free-${noteskin}');
+	switch noteskin {
 		default:
 			if (!note.isSustainNote)
 				note.animation.addByPrefix('scroll', ['purple_note', 'blue_note', 'green_note', 'red_note'][event.note.noteData], 0, true);
@@ -81,7 +81,7 @@ function onNoteCreation(event) {
 
 function onStrumCreation(event) {
     event.cancelAnimation();
-	event.strum.setPosition(FlxG.width*(switch(event.player) {
+	event.strum.setPosition(FlxG.width*(switch event.player {
 		default: 0.53;
 		case 0: 0.025;
 	}) + (Note.swagWidth * event.strumID), 24);
@@ -92,7 +92,7 @@ function onStrumCreation(event) {
 	event.cancel();
 	
 	var strum = event.strum;
-	strum.frames = Paths.getFrames('game/notes/free-' + noteskin);
+	strum.frames = Paths.getFrames('game/notes/free-${noteskin}');
 	strum.animation.addByPrefix('static', event.animPrefix, 0, true);
 	strum.animation.addByPrefix('pressed', event.animPrefix, 0, true); // so it'll stop tracing stupid shit
 
