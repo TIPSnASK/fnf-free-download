@@ -53,7 +53,7 @@ function postUpdate(elapsed:Float) {
 			}
 
 			if (fpsDivideVal != -1)
-				character.animation.curAnim.frameRate = character.animDatas[character.getAnimName()].fps*(Conductor.bpm/fpsDivideVal);
+				character.animation.curAnim.frameRate = character.animDatas[character.getAnimName()].fps*((Conductor.bpm >= 150 ? Conductor.bpm * 0.75 : Conductor.bpm)/fpsDivideVal);
 		}
 	}
 }

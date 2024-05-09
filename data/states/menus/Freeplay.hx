@@ -1,16 +1,15 @@
 import haxe.Json;
 import haxe.io.Path;
-import sys.FileSystem;
 import funkin.backend.assets.ModsFolder;
 import funkin.savedata.FunkinSave;
 import Xml;
 import flixel.text.FlxText.FlxTextFormat;
 import flixel.text.FlxText.FlxTextFormatMarkerPair;
 
-var weeknds:Array<Xml> = [for (i in FileSystem.readDirectory('mods/${ModsFolder.currentModFolder}/data/weeknds/')) Xml.parse(Assets.getText(Paths.file('data/weeknds/${i}'))).firstElement()];
+var weeknds:Array<Xml> = [for (i in Paths.getFolderContent('data/weeknds/')) Xml.parse(Assets.getText(Paths.file('data/weeknds/${i}'))).firstElement()];
 var songs:Array<Xml> = [];
 
-var _songsFolder:Array<String> = [for (i in FileSystem.readDirectory('mods/${ModsFolder.currentModFolder}/songs/')) Path.withoutExtension(i)];
+var _songsFolder:Array<String> = [for (i in Paths.getFolderDirectories('songs/')) Path.withoutExtension(i)];
 var _textArray:Array<FunkinText> = [];
 var _iconArray:Array<FunkinSprite> = [];
 var _infoArray:Array<FunkinText> = [];
@@ -58,7 +57,7 @@ function create() {
 			_textArray.push(text);
 
 			var meta:Json = Json.parse(Assets.getText(Paths.file('songs/${songNode.get('name')}/meta.json')));
-			var icon:FunkinSprite = new FunkinSprite(FlxG.width - 175).loadGraphic(Paths.image('menus/freeplay/characters/${meta.icon}'));
+			var icon:FunkinSprite = new FunkinSprite(FlxG.width - 175).loadGraphic(Assets.exists(Paths.image('menus/freeplay/characters/${meta.icon}')) ? Paths.image('menus/freeplay/characters/${meta.icon}') : Paths.image('menus/freeplay/characters/strad'));
 			icon.scrollFactor.set(1, 5);
 			icon.y = (-icon.height - 52) - 630 + (202 * (weekndIndex+songIndex));
 			add(icon);
