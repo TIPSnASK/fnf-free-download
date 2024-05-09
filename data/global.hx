@@ -55,7 +55,7 @@ static function getAllSkinXmls(type:String):Array<Xml> {
 	var userXml:Xml = Xml.parse(File.getContent('mods/fnffdcne-data.xml')).firstElement();
 	var userSkinsXml:Xml = [for (_i in userXml.elementsNamed('skins')) _i][0];
 	var elements:Array<Xml> = [for (i in defXml.elementsNamed(type)) i];
-	for (i in userSkinsXml) if (i.nodeName == type) elements.push(i);
+	for (i in userSkinsXml.elementsNamed(type)) if (i.nodeName == type) elements.push(i);
 	return elements;
 }
 
