@@ -34,6 +34,9 @@ function postCreate() {
 		houseLights.animation.add("lights", [0,1,2,3], 0, true, false, false);
 		houseLights.playAnim("lights", true);
 
+		insert(6, cyan = new FunkinSprite(95, 104).loadGraphic(Paths.image("game/stages/house/cyan")));
+		cyan.kill();
+
 		insert(5, dumbCircle = new FunkinSprite().loadGraphic(Paths.image("game/stages/house/ididntwanttomakethisasprite")));
 		dumbCircle.screenCenter();
 		dumbCircle.x += 140;
@@ -105,9 +108,10 @@ function postCreate() {
 
 		speakerLight = true;
 
-		ladyDance = new Character(boyfriend.x, boyfriend.y, "lady-stars", true);
+		ladyDance = new Character(boyfriend.x + 75, boyfriend.y - 55, "lady-stars", true);
 		player.characters.push(ladyDance);
 		insert(members.indexOf(boyfriend)+1, ladyDance);
+		ladyDance.kill();
 	}
 }
 
@@ -208,6 +212,8 @@ function stepHit(s) {
 
 					boyfriend.x += 40;
 					boyfriend.y += 60;
+
+					flash(camGame, {color: 0xFFFFFFFF, time: 0.1, force: true}, null);
 				case 512:
 					gf.visible = ladySpeaker.visible = houseLights.visible = speakerLight = true;
 					for (name => spr in stage.stageSprites) {
@@ -252,10 +258,26 @@ function stepHit(s) {
 					};
 
 					dumbCircle.alpha = (theStupidThing1.alpha = theStupidThing2.alpha = 1) * 0.5;
+
+					flash(camGame, {color: 0xFFFFFFFF, time: 0.1, force: true}, null);
+				case 528, 544: flash(camGame, {color: 0xFFFFFFFF, time: 0.1, force: true}, null);
 				case 576:
 					gf.visible = false;
 					dad.x += 40;
 					boyfriend.x -= 40;
+					ladyDance.revive();
+					ladyDance.x -= 85;
+					ladyDance.onDraw = (spr:Character) -> {
+						spr.color = 0xFFFFFFFF;
+						spr.offset.set(-spr.globalOffset.x, -spr.globalOffset.y);
+						spr.alpha = 1;
+						spr.draw();
+				
+						spr.setColorTransform(0, 0, 0, 0.5);
+						spr.offset.set(-spr.globalOffset.x, -spr.globalOffset.y + -4);
+						spr.draw();
+					};
+					flash(camGame, {color: 0xFFFFFFFF, time: 0.1, force: true}, null);
 				case 640:
 					dad.onDraw = (spr:Character) -> {
 						spr.color = 0xFF614C75;
@@ -284,7 +306,11 @@ function stepHit(s) {
 					dad.x = 260;
 					boyfriend.x = 540;
 					gf.visible = true;
-			}
+					ladyDance.kill();
+					camera.unlock();
+					cyan.revive();
+					flash(camGame, {color: 0xFFFFFFFF, time: 0.1, force: true}, null);
+		}
 	}
 }
 

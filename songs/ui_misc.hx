@@ -1,3 +1,5 @@
+var _speed:Float = 1;
+
 function create() {
 	// if (playCutscenes)
 	// 	cutscene = Paths.script('data/scripts/cutscene');
@@ -9,6 +11,14 @@ function postCreate() {
 	for (sL in strumLines.members)
 		if (!sL.cpu)
 			sL.cpu = FlxG.save.data.freeBOTPLAY;
+}
+
+function postUpdate(e:Float) {
+	if (FlxG.keys.pressed.TWO) _speed -= 0.01;
+	if (FlxG.keys.justPressed.THREE) _speed = 1;
+	if (FlxG.keys.pressed.FOUR) _speed += 0.01;
+	
+	FlxG.timeScale = inst.pitch = vocals.pitch = _speed;
 }
 
 function onGamePause(event) {
