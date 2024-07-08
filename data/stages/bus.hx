@@ -23,3 +23,10 @@ function create() {
 	sky.scrollFactor.set();
 	sky.zoomFactor = 0;
 }
+
+function postCreate() {
+	camera.pos[0].x += 93;
+	camera.pos[1].x -= 64;
+	camera.pos[1].y += 5;
+	// camera.pos[]
+}

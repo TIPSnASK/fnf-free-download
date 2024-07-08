@@ -268,7 +268,7 @@ function postStateSwitch() {
 
 	_hideSTTimer = new FlxTimer();
 
-	FlxG.mouse.useSystemCursor = false;
+	FlxG.mouse.useSystemCursor = FlxG.save.data.freeCURSOR;
 }
 
 function soundTray(volume:Float) {

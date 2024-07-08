@@ -26,14 +26,28 @@ if (!FlxG.save.data.freeDXSTRUMS) {
 			if (value) {
 				var strum:Strum = event.strumLine.members[index];
 				strum.alpha = 0.5;
+				strum.color = 0xFF808080;
 				new FlxTimer().start(0.1, (t:FlxTimer) -> {
 					strum.alpha = 1;
+					strum.color = 0xFFFFFFFF;
 					t.destroy();
 				});
 			}
 	}
 } else {
-	function update(elapsed:Float) for (sL in strumLines.members) if (!sL.cpu) for (strum in sL.members) strum.alpha = ["pressed","confirm"].contains(strum.getAnim()) ? 0.5 : 1;
+	function update(elapsed:Float) for (sL in strumLines.members) if (!sL.cpu) for (strum in sL.members) {
+		strum.color = ["pressed","confirm"].contains(strum.getAnim()) ? 0xFF979797 : 0xFFFFFFFF;
+	}
+}
+
+function postUpdate(elapsed:Float) {
+	for (sl in strumLines.members) {
+		for (note in sl.notes.members)
+			if (note.isSustainNote)
+				note.y -= 24;
+			else
+				note.y -= 5;
+	}
 }
 
 function onPlayerMiss(event) {

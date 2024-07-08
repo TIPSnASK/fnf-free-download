@@ -227,6 +227,8 @@ function onOptionChange(option:MenuOption) {
 	if (option.data.get('id') == 'songOffset' && (option.parent.data.exists('base') && option.parent.data.get('base') == 'true'))
 		Conductor.songOffset = option.value;
 
+	if (option.data.get('id') == 'freeCURSOR') FlxG.mouse.useSystemCursor = option.value;
+
 	if (option.data.get('name') == "Edit Skins") {
 		persistentUpdate = !(persistentDraw = true);
 		openSubState(new ModSubState('skins/substates/CharacterSelect'));

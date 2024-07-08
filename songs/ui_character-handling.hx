@@ -38,10 +38,6 @@ function onGamePause(event) {
 
 function postUpdate(elapsed:Float) {
 	for (sl in strumLines.members) {
-		for (note in sl.notes.members)
-			if (note.isSustainNote)
-				note.y -= 24;
-
 		for (character in sl.characters) {
 			var fpsDivideVal:Float = switch(character.getAnimName()) {
 				default:
