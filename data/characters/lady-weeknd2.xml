@@ -1,0 +1,5 @@
+<!DOCTYPE codename-engine-character>
+<character antialiasing="false" holdTime="8" camx="-74" camy="63" isPlayer="false" flipX="false" isGF="true">
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_ladyidleleftw2" name="danceLeft"/>
+	<anim x="-4" loop="false" y="0" fps="12" anim="spr_ladyidlerightw2" name="danceRight"/>
+</character>

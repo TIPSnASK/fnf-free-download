@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character>
-<character antialiasing="false" holdTime="8" camx="-74" camy="63" isPlayer="false" flipX="false">
+<character x="5" y="15" antialiasing="false" holdTime="8" camx="-74" camy="63" isPlayer="false" flipX="false">
 	<anim x="0" loop="false" y="0" fps="12" anim="spr_cyanidle" name="idle"/>
 	<anim x="10" loop="false" y="-22" fps="12" anim="spr_cyanleft_" name="singLEFT"/>
 	<anim x="43" loop="false" y="-45" fps="12" anim="spr_cyandown_" name="singDOWN"/>

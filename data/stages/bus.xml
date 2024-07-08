@@ -1,0 +1,13 @@
+<!DOCTYPE codename-engine-stage>
+<stage zoom="1" name="gaw" folder="game/stages/bus/">
+	<combo x="-2147483647"/>
+
+	<sprite name="busback" x="64" y="-24" sprite="busback" antialiasing="false"/>
+	<sprite name="buspeople" x="64" y="-24" sprite="buspeople" antialiasing="false"/>
+
+	<girlfriend x="418" y="107" scroll="1"/>
+	<sprite name="busow" x="368" y="224" sprite="busow" antialiasing="false"/>
+
+	<dad x="283" y="75"/>
+	<boyfriend x="515" y="177"/>
+</stage>
