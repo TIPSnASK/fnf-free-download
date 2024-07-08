@@ -24,9 +24,9 @@ var modeText:FunkinText;
 var curSelected:Int = 0;
 var camY:Float = 0;
 
-var normalFormat:FlxTextFormat = new FlxTextFormat(0xFF00FF62, true);
+var normalFormat:FlxTextFormat = new FlxTextFormat(getFavColor('dude'), true);
 var opponentModeFormat:FlxTextFormat = new FlxTextFormat(0xFFFF0055, true);
-var coopModeFormat:FlxTextFormat = new FlxTextFormat(0xFF0099FF, true);
+var coopModeFormat:FlxTextFormat = new FlxTextFormat(getFavColor('lady'), true);
 
 var markupRules:Array<FlxTextFormatMarkerPair> = [
 	new FlxTextFormatMarkerPair(normalFormat, "$"),
@@ -46,7 +46,8 @@ function create() {
 	for (weekndIndex => weekndNode in weeknds) {
 		for (songIndex => songNode in [for (_i in weekndNode.elementsNamed('song')) _i]) {
 			if (!_songsFolder.contains(songNode.get('name'))) continue;
-			var text:FunkinText = new FunkinText(32, (40 * (weekndIndex + songIndex)), 0, songNode.exists('display') ? songNode.get('display') : songNode.get('name'), 16, true);
+			var _mainIndex:Int = ((weekndIndex > 1 ? weekndIndex + 1 : weekndIndex)+songIndex);
+			var text:FunkinText = new FunkinText(32, (40 * _mainIndex), 0, songNode.exists('display') ? songNode.get('display') : songNode.get('name'), 16, true);
 			text.antialiasing = false;
 			// lunarcleint figured this out thank you lunar holy shit 🙏
 			text.textField.antiAliasType = 0; // advanced
@@ -59,7 +60,7 @@ function create() {
 			var meta:Json = Json.parse(Assets.getText(Paths.file('songs/${songNode.get('name')}/meta.json')));
 			var icon:FunkinSprite = new FunkinSprite(FlxG.width - 175).loadGraphic(Assets.exists(Paths.image('menus/freeplay/characters/${meta.icon}')) ? Paths.image('menus/freeplay/characters/${meta.icon}') : Paths.image('menus/freeplay/characters/strad'));
 			icon.scrollFactor.set(1, 5);
-			icon.y = (-icon.height - 52) - 630 + (202 * (weekndIndex+songIndex));
+			icon.y = (-icon.height - 52) - 630 + (202 * _mainIndex);
 			add(icon);
 			_iconArray.push(icon);
 
@@ -80,7 +81,7 @@ function create() {
 			icon.onDraw = text.onDraw = info.onDraw = (spr:FlxSprite) -> {
 				_timer += FlxG.elapsed;
 				if (spr == info) {
-					spr.y = icon.y + icon.height + 2 + (Math.sin(_timer+(weekndIndex+songIndex)) + 1) * 1.5; // tank you wizard 🙏
+					spr.y = icon.y + icon.height + 2 + (Math.sin(_timer+_mainIndex) + 1) * 1.5; // tank you wizard 🙏
 				}
 				
 				spr.colorTransform.color = 0xFF000000;
@@ -94,7 +95,7 @@ function create() {
 					spr.setGraphicSize(spr.width - 2, spr.height - 2);
 				}
 
-				var mult:Float = curSelected == weekndIndex+songIndex ? 1 : 0.75;
+				var mult:Float = curSelected == _mainIndex ? 1 : 0.75;
 				spr.setColorTransform(mult, mult, mult);
 				spr.offset.set();
 				spr.draw();

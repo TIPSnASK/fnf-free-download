@@ -1,7 +1,9 @@
+import haxe.io.Path;
 import funkin.backend.MusicBeatState;
 
 function create() {
-	var splash:FunkinSprite = new FunkinSprite().loadGraphic(Paths.image('splash'));
+	var _splashList:Array<String> = [for (_i in Paths.getFolderContent('images/splash-screens')) Path.withoutExtension(_i)];
+	var splash:FunkinSprite = new FunkinSprite().loadGraphic(Paths.image('splash-screens/${_splashList[FlxG.random.int(0, _splashList.length-1)]}'));
 	add(splash);
 
 	new FlxTimer().start(2, function() {
