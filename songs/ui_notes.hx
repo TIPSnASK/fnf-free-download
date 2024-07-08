@@ -58,7 +58,7 @@ function onNoteCreation(event) {
 	event.cancel();
 	
 	var note = event.note;
-	note.frames = Paths.getFrames('game/notes/free-${noteskin}');
+	note.frames = Paths.getFrames('game/notes/free-${(noteskin == null ? 'default' : noteskin)}');
 	switch noteskin {
 		default:
 			if (!note.isSustainNote)
@@ -92,7 +92,7 @@ function onStrumCreation(event) {
 	event.cancel();
 	
 	var strum = event.strum;
-	strum.frames = Paths.getFrames('game/notes/free-${noteskin}');
+	strum.frames = Paths.getFrames('game/notes/free-${(noteskin == null ? 'default' : noteskin)}');
 	strum.animation.addByPrefix('static', event.animPrefix, 0, true);
 	strum.animation.addByPrefix('pressed', event.animPrefix, 0, true); // so it'll stop tracing stupid shit
 
