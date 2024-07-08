@@ -75,6 +75,7 @@ function update(elapsed:Float) {
 
 	if (controls.ACCEPT || FlxG.mouse.justPressed) {
 		FlxG.sound.play(Paths.sound("menus/snd_josh")).persist = true;
+		currentEditor = options[curSelected].name;
 		FlxG.switchState(Type.createInstance(options[curSelected].state, options[curSelected].state == UIState ? [true, 'editors/${options[curSelected].name}/state'] : []));
 	}
 }

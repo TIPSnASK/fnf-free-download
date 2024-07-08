@@ -76,6 +76,7 @@ function create() {
 	character.fixChar();
 	character.cameras = [charcam];
 	character.screenCenter();
+	character.debugMode = true;
 	add(character);
 
 	ghostCharacter = new Character(0, 0, currentCharacter);

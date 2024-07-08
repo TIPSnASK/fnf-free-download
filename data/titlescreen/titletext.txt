@@ -1,0 +1,2 @@
+you can pull request--stuff to put in data/titlescreen/titletext.txt
+i--got nothin

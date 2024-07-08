@@ -1,8 +1,8 @@
 var _speed:Float = 1;
 
 function create() {
-	// if (playCutscenes)
-	// 	cutscene = Paths.script('data/scripts/cutscene');
+	if (playCutscenes)
+		cutscene = Paths.script('data/scripts/cutscene');
 }
 
 function postCreate() {

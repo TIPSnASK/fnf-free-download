@@ -29,6 +29,8 @@ static var noteskin:String = "default";
 static var editingSkinType:String = "lady";
 static var currentSkinToEdit:String = "default";
 
+static var currentEditor:String = '';
+
 static var redirectStates:Map<FlxState, String> = [
 	MainMenuState => 'MainMenu',
 	StoryMenuState => 'menus/StoryMenu',

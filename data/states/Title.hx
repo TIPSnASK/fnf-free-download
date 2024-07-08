@@ -15,12 +15,8 @@ var transitioning:Bool = false;
 
 var splashText:FunkinText;
 
-var dxFormat:FlxTextFormat = new FlxTextFormat(0xFFFF9100, true);
-var freemixFormat:FlxTextFormat = new FlxTextFormat(0xFFFF0095, true);
-
 var markupRules:Array<FlxTextFormatMarkerPair> = [
-	new FlxTextFormatMarkerPair(dxFormat, "||"),
-	new FlxTextFormatMarkerPair(freemixFormat, "_+_"),
+	new FlxTextFormatMarkerPair(new FlxTextFormat(0xFFFF9100, true), "||") // dx format
 ];
 
 function create() {
@@ -47,7 +43,7 @@ function create() {
 	add(titleGroup);
 	add(textGroup);
 
-	var stupidArray:Array<String> = CoolUtil.coolTextFile(Paths.txt('titlescreen/introText'));
+	var stupidArray:Array<String> = CoolUtil.coolTextFile(Paths.txt('titlescreen/titletext'));
 	if (stupidArray.contains('')) stupidArray.remove('');
 	curWacky = stupidArray[FlxG.random.int(0, stupidArray.length-1)].split('--');
 
