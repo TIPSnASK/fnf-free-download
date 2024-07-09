@@ -184,6 +184,8 @@ function new() {
 	if (FlxG.save.data.freeAUTOHIDEFPS == null) FlxG.save.data.freeAUTOHIDEFPS = true;
 	if (FlxG.save.data.freeDXSTRUMS == null) FlxG.save.data.freeDXSTRUMS = false;
 	if (FlxG.save.data.freeBOTPLAY == null) FlxG.save.data.freeBOTPLAY = false;
+	if (FlxG.save.data.freeNOTESKIN == null) FlxG.save.data.freeNOTESKIN = 'default';
+	noteskin = FlxG.save.data.freeNOTESKIN;
 
 	if (!FileSystem.exists('mods/fnffdcne-data.xml'))
 		File.saveContent('mods/fnffdcne-data.xml', '<data>\n\t<skins selecteddude="default" selectedlady="default"></skins>\n\t<identities dudename="Dude" dudeprns="He/Him/His" ladyname="Lady" ladyprns="She/Her/Hers"/>\n</data>');

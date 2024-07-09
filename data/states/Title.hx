@@ -137,11 +137,11 @@ function beatHit() {
 
 	if (!finished) {
 		switch(curBeat) {
-			case 1: line(['TIPSnASK']);
+			case 1: line(['HAVEN']);
 			case 2: line(['PRESENTS']);
 
 			case 4: line(['IN ASSOCIATION WITH']);
-			case 6: newLine(['WizardMantis441']);
+			case 6: newLine(['listen i\'ll get to the credits menu soon okay dude please just trust me']);
 
 			case 8: line([curWacky[0]]);
 			case 10: newLine([curWacky[1]]);
