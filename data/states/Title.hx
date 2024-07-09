@@ -146,9 +146,9 @@ function beatHit() {
 			case 8: line([curWacky[0]]);
 			case 10: newLine([curWacky[1]]);
 
-			case 12: line(['FNF']);
-			case 14: newLine(['FREE']);
-			case 15: newLine(['DOWNLOAD']);
+			case 12: line(['FNFFD']);
+			case 14: newLine(['CODENAME']);
+			case 15: newLine(['PORT']);
 
 			case 16: finishIntro();
 		}
