@@ -7,6 +7,7 @@
 	<menu name="Gameplay" desc="Stuff like botplay, DX strums, etc.">
 		<checkbox id="freeBOTPLAY" name="Botplay" desc="Enable this if you just wanna watch the game play itself."/>
 		<checkbox id="freeDXSTRUMS" name="Free Download DX Strums" desc="Enable this if you prefer the way the strums look in FNFFD:DX."/>
+		<checkbox id="freeSHOWACCURACY" name="Show Accuracy" desc="Enable this if you want to include accuracy with your song info."/>
 	</menu>
 
 	<menu name="Appearance" desc="Stuff like hiding fps, mouse cursor, etc.">

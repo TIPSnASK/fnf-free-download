@@ -61,7 +61,9 @@ function create() {
 		FlxTween.tween(retryText, {alpha: 1}, 1.5, {ease: FlxEase.quadOut});
 		FlxTween.tween(dude, {alpha: 1}, 1.5, {ease: FlxEase.quadOut});
 		FlxTween.tween(faker, {alpha: 0}, 1.5, {ease: FlxEase.quadOut});
-		CoolUtil.playMusic(Paths.music("mus_gameover"));
+		if (FlxG.state == PlayState.instance) {
+			CoolUtil.playMusic(Paths.music("mus_gameover"));
+		}
 		_canPressEnter = true;
 	});
 

@@ -42,7 +42,6 @@ function onSongStart() {
 	canPause = true;
 }
 
-// WON'T WORK IF YOU GOT CODENAME THROUGH ACTION BUILDS!!
 var outlineColor:FlxColor = 0xFF000000;
 function outlineDraw(spr:FlxSprite) {
 	var w:Int = 2;
@@ -76,7 +75,6 @@ function postCreate() {
 	healthBar.cameras = [camHUD];
 	healthBar.screenCenter(FlxAxes.X);
 
-	// WON'T WORK IF YOU GOT CODENAME THROUGH ACTION BUILDS!!
 	healthBar.onDraw = outlineDraw;
 
 	add(healthBar);
@@ -87,12 +85,11 @@ function postCreate() {
 	flowBar.cameras = [camHUD];
 	flowBar.screenCenter(FlxAxes.X);
 
-	// WON'T WORK IF YOU GOT CODENAME THROUGH ACTION BUILDS!!
 	flowBar.onDraw = outlineDraw;
 
 	add(flowBar);
 
-	scoreTxt = new FunkinText(10, healthBar.y + healthBar.height + 2, FlxG.width-20, 'score: 0 | misses: 0', 16, true);
+	scoreTxt = new FunkinText(10, healthBar.y + healthBar.height + 2, FlxG.width-20, 'score: 0 | misses: 0 | accuracy: N/A', 16, true);
 	scoreTxt.alignment = 'center';
 	scoreTxt.antialiasing = false;
 	scoreTxt.scrollFactor.set();
@@ -100,7 +97,6 @@ function postCreate() {
 	scoreTxt.cameras = [camHUD];
 	scoreTxt.font = Paths.font("Pixellari.ttf");
 
-	// WON'T WORK IF YOU GOT CODENAME THROUGH ACTION BUILDS!!
 	scoreTxt.onDraw = (spr:FunkinText) -> {
 		spr.colorTransform.color = outlineColor;
 		spr.offset.set(-2, -2);
@@ -174,7 +170,7 @@ var timer:Float = 0;
 function postUpdate(elapsed:Float) {
 	timer += elapsed;
 
-	scoreTxt.text = 'score: ${songScore} | misses: ${misses}';
+	scoreTxt.text = 'score: ${songScore} | misses: ${misses}${FlxG.save.data.freeSHOWACCURACY ? ' | accuracy: ${accuracy < 0 ? "N/A" : '${CoolUtil.quantize(accuracy * 100, 100)}%'}' : ''}';
 
 	flowBar.y = Std.int((healthBar.y - 18) + (Math.sin(timer * 4.5) + 1) * 1.25); // tank you wizard 🙏
 
