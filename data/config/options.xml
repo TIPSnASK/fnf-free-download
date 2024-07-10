@@ -1,7 +1,8 @@
 <!DOCTYPE codename-mod-options>
 <menu name="FNF Free Download Port" desc="Change options for the port here!">
 	<menu name="Accessibility" desc="YOU SHOULD PROBABLY LOOK HERE FIRST!!">
-		<checkbox id="freeFLASH" name="Flashing Lights" desc="Disable this if you want to turn off flashing lights!"/>
+		<checkbox id="freeFLASH" name="Flashing Lights" desc="Disable this if you want to turn off flashing lights! (will also disable the intro countdown visuals)"/>
+		<checkbox id="freeCOLORCHANGING" name="Color-changing Lights" desc="Disable this if you want to turn off color-changing lights!"/>
 	</menu>
 
 	<menu name="Gameplay" desc="Stuff like botplay, DX strums, etc.">

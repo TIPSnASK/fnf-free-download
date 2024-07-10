@@ -10,12 +10,12 @@ var skin:CustomShader;
 function postCreate() {
 	ladySpeaker = new FunkinSprite();
 	ladySpeaker.frames = Paths.getFrames("game/stages/speaker");
-	ladySpeaker.animation.add("hi", [0, 1, 2, 3], 0, true, false, false);
+	ladySpeaker.animation.add("hi", FlxG.save.data.freeCOLORCHANGING ? [0, 1, 2, 3] : [0], 0, true, false, false);
 	ladySpeaker.playAnim("hi", true);
 
 	speakerLightSpr = new FunkinSprite();
 	speakerLightSpr.frames = Paths.getFrames("game/stages/speaker-lights");
-	speakerLightSpr.animation.add("hi", [0, 3, 2, 1], 0, true, false, false);
+	speakerLightSpr.animation.add("hi", FlxG.save.data.freeCOLORCHANGING ? [0, 3, 2, 1] : [0], 0, true, false, false);
 	speakerLightSpr.playAnim("hi", true);
 
 	shader = skin = new CustomShader("lady-colorswap");

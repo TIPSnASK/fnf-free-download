@@ -27,6 +27,7 @@ function onCountdown(event) {
 function onPostCountdown(event) {
 	if (event.sprite != null) {
 		var spr = event.sprite;
+		if (!FlxG.save.data.freeFLASH) spr.visible = false;
 		spr.antialiasing = false;
 		FlxTween.cancelTweensOf(spr);
 		FlxTween.tween(spr, {alpha: 0}, Conductor.crochet / 1000, {

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="lady-dance.png" width="316" height="646">
+	<SubTexture name="spr_ladydancedown_0" x="110" y="163" width="98" height="158" frameX="-10" frameY="-3" frameWidth="108" frameHeight="161"/>
+	<SubTexture name="spr_ladydancedown_1" x="1" y="1" width="104" height="160" frameX="-3" frameY="-1" frameWidth="108" frameHeight="161"/>
+	<SubTexture name="spr_ladydancedown_2" x="108" y="1" width="105" height="159" frameX="-3" frameY="-2" frameWidth="108" frameHeight="161"/>
+	<SubTexture name="spr_ladydancedown_3" x="1" y="164" width="106" height="159" frameX="-2" frameY="-2" frameWidth="108" frameHeight="161"/>
+	<SubTexture name="spr_ladydancedown_4" x="1" y="326" width="106" height="158" frameX="-2" frameY="-3" frameWidth="108" frameHeight="161"/>
+	<SubTexture name="spr_ladydanceup_0" x="110" y="324" width="96" height="158" frameX="-10" frameY="-1" frameWidth="106" frameHeight="159"/>
+	<SubTexture name="spr_ladydanceup_1" x="209" y="324" width="105" height="157" frameX="-1" frameY="-2" frameWidth="106" frameHeight="159"/>
+	<SubTexture name="spr_ladydanceup_2" x="211" y="163" width="104" height="157" frameX="-2" frameY="-2" frameWidth="106" frameHeight="159"/>
+	<SubTexture name="spr_ladydanceup_3" x="1" y="487" width="105" height="158" frameX="-1" frameY="-1" frameWidth="106" frameHeight="159"/>
+	<SubTexture name="spr_ladydanceup_4" x="109" y="487" width="104" height="158" frameX="-2" frameY="-1" frameWidth="106" frameHeight="159"/>
+</TextureAtlas>

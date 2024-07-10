@@ -31,7 +31,7 @@ function postCreate() {
 
 		insert(5, houseLights = new FunkinSprite());
 		houseLights.loadSprite(Paths.image("game/stages/house/lights"));
-		houseLights.animation.add("lights", [0,1,2,3], 0, true, false, false);
+		houseLights.animation.add("lights", FlxG.save.data.freeCOLORCHANGING ? [0,1,2,3] : [0], 0, true, false, false);
 		houseLights.playAnim("lights", true);
 
 		insert(6, cyan = new FunkinSprite(95, 104).loadGraphic(Paths.image("game/stages/house/cyan")));
