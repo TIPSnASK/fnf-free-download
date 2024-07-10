@@ -1,1 +1,1 @@
-- preload ayy sounds
+- remove blog from main menu i am not doing that lol
