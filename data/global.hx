@@ -12,6 +12,10 @@ import openfl.system.Capabilities;
 import flixel.ui.FlxBar;
 import flixel.ui.FlxBar.FlxBarFillDirection;
 import flixel.group.FlxSpriteGroup;
+import funkin.backend.system.Controls.Control;
+import flixel.input.gamepad.FlxGamepad;
+import flixel.input.gamepad.FlxGamepad.FlxGamepadModel;
+import funkin.backend.utils.IniUtil;
 
 import karaoke.backend.util.FlxColorHelper;
 
@@ -30,6 +34,8 @@ static var editingSkinType:String = "lady";
 static var currentSkinToEdit:String = "default";
 
 static var currentEditor:String = '';
+
+static var gamepad:FlxGamepad = null;
 
 static var redirectStates:Map<FlxState, String> = [
 	MainMenuState => 'MainMenu',
@@ -173,6 +179,37 @@ static function playMenuMusic() {
 	}
 }
 
+static function updateGamepadBinds(?binds:Map<String, String>) {
+	if (FlxG.state.controls != null && FlxG.gamepads.firstActive != null) {
+		if (gamepad != null) FlxG.state.controls.removeGamepad(gamepad.id);
+		gamepad = FlxG.gamepads.firstActive;
+		gamepad.model = FlxGamepadModel.XINPUT;
+		var _controllerBinds:Map<String, String> = binds == null ? IniUtil.parseString(File.getContent('mods/fnffdcne-controller.ini')) : binds;
+
+		function getKeybinds(control:String) {
+			return [for (i in [for (_i in _controllerBinds[control].split(',')) Std.parseInt(_i)]) i];
+		}
+
+		FlxG.state.controls.addGamepadLiteral(gamepad.id, [
+			Control.NOTE_LEFT => getKeybinds('NoteLeft'),
+			Control.NOTE_DOWN => getKeybinds('NoteDown'),
+			Control.NOTE_UP => getKeybinds('NoteUp'),
+			Control.NOTE_RIGHT => getKeybinds('NoteRight'),
+
+			Control.ACCEPT => getKeybinds('Accept'),
+			Control.BACK => getKeybinds('Back'),
+			Control.UP => getKeybinds('Up'),
+			Control.DOWN => getKeybinds('Down'),
+			Control.LEFT => getKeybinds('Left'),
+			Control.RIGHT => getKeybinds('Right'),
+			Control.PAUSE => getKeybinds('Pause'),
+			Control.RESET => getKeybinds('Reset')
+
+			Control.SWITCHMOD => getKeybinds('SwitchMod')
+		]);
+	}
+}
+
 function new() {
 	if (FlxG.camera != null)
 		FlxG.camera.bgColor = 0xFF000000;
@@ -190,6 +227,9 @@ function new() {
 
 	if (!FileSystem.exists('mods/fnffdcne-data.xml'))
 		File.saveContent('mods/fnffdcne-data.xml', '<data>\n\t<skins selecteddude="default" selectedlady="default"></skins>\n\t<identities dudename="Dude" dudeprns="He/Him/His" ladyname="Lady" ladyprns="She/Her/Hers"/>\n</data>');
+
+	if (!FileSystem.exists('mods/fnffdcne-controller.ini'))
+		File.saveContent('mods/fnffdcne-controller.ini', 'NoteLeft = "13,37"\nNoteDown = "12,36"\nNoteUp = "11,34"\nNoteRight = "14,35"\n\nAccept = "0"\nBack = "1"\nUp = "11,34"\nDown = "12,36"\nLeft = "13,37"\nRight = "14,35"\nPause = "7"\nReset = "3"\n\nSwitchMod= "3"');
 
 	window.title = "Made with FNF: Codename Engine";
 	changeWindowIcon("default");
@@ -272,6 +312,8 @@ function postStateSwitch() {
 	_hideSTTimer = new FlxTimer();
 
 	FlxG.mouse.useSystemCursor = FlxG.save.data.freeCURSOR;
+
+	updateGamepadBinds();
 }
 
 function soundTray(volume:Float) {
@@ -301,7 +343,7 @@ function update(elapsed:Float) {
 }
 
 function destroy() {
-	initialized = fromGame = noteskin = editingSkinType = currentSkinToEdit = null;
+	initialized = fromGame = noteskin = editingSkinType = currentSkinToEdit = gamepad = null;
 	FlxG.width = FlxG.initialWidth = 1280;
 	FlxG.height = FlxG.initialHeight = 720;
 	window.resize(FlxG.width, FlxG.height);

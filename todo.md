@@ -1,1 +1,2 @@
-- remove blog from main menu i am not doing that lol
+- change blog to update log
+- add support for p1 and p2 gamepad controls for coop. playing with two controllers

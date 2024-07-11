@@ -232,8 +232,11 @@ function onOptionChange(option:MenuOption) {
 	if (option.data.get('name') == "Edit Skins") {
 		persistentUpdate = !(persistentDraw = true);
 		openSubState(new ModSubState('skins/substates/CharacterSelect'));
-	} else if (option.data.get('name') == "Controls") {
+	} else if (option.data.get('name') == "Keyboard Controls") {
 		persistentUpdate = !(persistentDraw = true);
 		openSubState(new ModSubState('substates/options/SetKeybinds'));
+	} else if (option.data.get('name') == "Gamepad Controls") {
+		persistentUpdate = !(persistentDraw = true);
+		openSubState(new ModSubState('substates/options/SetButtonBinds'));
 	}
 }
