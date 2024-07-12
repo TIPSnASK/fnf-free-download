@@ -190,7 +190,7 @@ static function updateGamepadBinds(?binds:Map<String, String>) {
 			return [for (i in [for (_i in _controllerBinds[control].split(',')) Std.parseInt(_i)]) i];
 		}
 
-		FlxG.state.controls.addGamepadLiteral(gamepad.id, [
+		FlxG.state.controls.addGamepad(gamepad.id, [
 			Control.NOTE_LEFT => getKeybinds('NoteLeft'),
 			Control.NOTE_DOWN => getKeybinds('NoteDown'),
 			Control.NOTE_UP => getKeybinds('NoteUp'),

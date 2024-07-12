@@ -109,12 +109,12 @@ var _editing:Bool = false;
 var _dontAutoGoBackFFS:FlxTimer = new FlxTimer().start(0.25);
 function update(e:Float) {
 	if (_frame1Fix) {
-		if (!_editing) {
-			if (controls.BACK && _dontAutoGoBackFFS.finished) close();
+		if (!_editing && _dontAutoGoBackFFS.finished) {
+			if (controls.BACK) close();
 
 			if (controls.DOWN_P || controls.UP_P) curSelected = FlxMath.wrap(curSelected + (controls.DOWN_P ? 1 : -1), 0, _options.length-1);
 
-			if (controls.ACCEPT && _dontAutoGoBackFFS.finished) {
+			if (controls.ACCEPT) {
 				_editing = true;
 				controlList[curSelected].spr.text = '${_optionsDisplay[curSelected]}: WAITING FOR INPUT...';
 				controlList[curSelected].spr.applyMarkup(controlList[curSelected].spr.text, markupRules);
