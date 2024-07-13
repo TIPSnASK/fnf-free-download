@@ -76,10 +76,13 @@ function select(index:Int) {
 }
 
 function updateSkinName() {
-	skinName.text = '<             ${skins[curSelected].get('name')}             >\n${(skins[curSelected].get('name') == skinsXml.get('selected${editingSkinType}') ? '$[SELECTED]$' : '%[UNSELECTED]%')}';
-	skinName.applyMarkup(skinName.text, markupRules);
+	if (skinName != null) {
+		skinName.text = '<             ${skins[curSelected].get('name')}             >\n${(skins[curSelected].get('name') == skinsXml.get('selected${editingSkinType}') ? '$[SELECTED]$' : '%[UNSELECTED]%')}';
+		skinName.applyMarkup(skinName.text, markupRules);
+	}
 }
 
+var _isDeleting:Bool = false;
 function postCreate() {
 	playMenuMusic();
 
@@ -124,8 +127,6 @@ function postCreate() {
 	pronouns.label.size = 16;
 	pronouns.label.borderSize = 2;
 	add(pronouns);
-
-	var _isDeleting:Bool = false;
 
 	editButton = new UIButton(pronouns.x + pronouns.bWidth + 5, pronouns.y, 'edit', () -> {
 		if (!_isDeleting) {
@@ -187,15 +188,7 @@ function postCreate() {
 	deleteButton.field.borderSize = 2;
 	add(deleteButton);
 
-	acceptButton = new UIButton(name.x + name.bWidth + 5, name.y, 'select', () -> {
-		if (!_isDeleting) {
-			skinsXml.set('selected${editingSkinType}', skins[curSelected].get('name'));
-			File.saveContent('mods/fnffdcne-data.xml', xml.toString());
-			FlxG.camera.zoom = 1.05;
-			updateSkinName();
-			FlxG.sound.play(Paths.sound('gameplay/ayy/${editingSkinType}'));
-		}
-	}, name.bWidth + 41, name.bHeight);
+	acceptButton = new UIButton(name.x + name.bWidth + 5, name.y, 'select', accept(), name.bWidth + 41, name.bHeight);
 	acceptButton.cameras = [camUI];
 	acceptButton.color = 0xFF00FF00;
 	acceptButton.field.antialiasing = false;
@@ -224,11 +217,25 @@ function postCreate() {
 			select(_index);
 }
 
+function accept() {
+	if (!_isDeleting) {
+		skinsXml.set('selected${editingSkinType}', skins[curSelected].get('name'));
+		File.saveContent('mods/fnffdcne-data.xml', xml.toString());
+		FlxG.camera.zoom = 1.05;
+		updateSkinName();
+		FlxG.sound.play(Paths.sound('gameplay/ayy/${editingSkinType}'));
+	}
+}
+
 var _timer:Float = 0.0;
 function update(e:Float) {
 	_timer += e;
 
 	if (!name.focused && !pronouns.focused) {
+		if (controls.ACCEPT) {
+			accept();
+		}
+
 		if (controls.BACK) {
 			FlxG.mouse.visible = false;
 			FlxG.switchState(new ModState('menus/Settings'));
