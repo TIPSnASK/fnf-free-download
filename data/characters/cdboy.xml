@@ -1,0 +1,13 @@
+<!DOCTYPE codename-engine-character>
+<character antialiasing="false" holdTime="8" flipX="false" isPlayer="false">
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_cdboyidle_" name="idle"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_cdboyleft_" name="singLEFT"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_cdboydown_" name="singDOWN"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_cdboyup_" name="singUP"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_cdboyright_" name="singRIGHT"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_cdboypause_" name="singLEFT-alt"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_cdboypause_" name="singDOWN-alt"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_cdboypause_" name="singUP-alt"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_cdboypause_" name="singRIGHT-alt"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="spr_cdboypause_" name="paused"/>
+</character>

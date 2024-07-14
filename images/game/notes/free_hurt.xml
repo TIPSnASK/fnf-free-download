@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="cdboy.png" width="62" height="65">
+	<SubTexture name="purple" x="1" y="1" width="30" height="27" frameX="-0" frameY="-0" frameWidth="30" frameHeight="27"/>
+	<SubTexture name="blue" x="1" y="31" width="30" height="27" rotated="true" frameX="-0" frameY="-0" frameWidth="27" frameHeight="30"/>
+	<SubTexture name="green" x="34" y="1" width="27" height="30" frameX="-0" frameY="-0" frameWidth="27" frameHeight="30"/>
+	<SubTexture name="red" x="34" y="34" width="27" height="30" rotated="true" frameX="-0" frameY="-0" frameWidth="30" frameHeight="27"/>
+</TextureAtlas>
