@@ -2,6 +2,7 @@ var ladyDance:FunkinSprite;
 var dudeDance:FunkinSprite;
 
 var danceBreak:FunkinSprite;
+var tunnel:FunkinSprite;
 
 function postCreate() {
 	ladyDance = new FunkinSprite(boyfriend.x - 50, boyfriend.y - 65);
@@ -35,18 +36,34 @@ function postCreate() {
 		spr.offset.set(0, (-2) + (Math.sin(timer * 4.5) + 1) * 2);
 		spr.draw();
 	}
+	
+	tunnel = new FunkinSprite(650, 66);
+	tunnel.loadSprite(Paths.image('game/stages/bus/girl-next-door/bigfuckintunnel'));
+	insert(5, tunnel);
 }
 
 var timer:Float = 0;
 function update(e:Float) {
 	timer += e;
+
+	if (_scrollTunnel) tunnel.x -= 175 * e; // because changing tunnel.velocity.x does nothing fsr
 }
 
+var _scrollTunnel:Bool = false;
 function stepHit(s) {
 	switch s {
 		case 128:
 			ladyDance.visible = dudeDance.visible = danceBreak.visible = !(boyfriend.visible = gf.visible = false);
+			flash(camGame, {color: 0xFFFFFFFF, time: 0.1, force: true}, null);
 		case 192:
 			ladyDance.visible = dudeDance.visible = danceBreak.visible = !(boyfriend.visible = gf.visible = true);
+			flash(camGame, {color: 0xFFFFFFFF, time: 0.1, force: true}, null);
+		case 444:
+			_scrollTunnel = true;
+		case 576:
+			flash(camGame, {color: 0xFFFFFFFF, time: 0.1, force: true}, null);
+			if (FlxG.save.data.freeFLASH) tunnel.visible = _scrollTunnel = false;
+		case 624:
+			if (!FlxG.save.data.freeFLASH) tunnel.visible = _scrollTunnel = false;
 	}
 }

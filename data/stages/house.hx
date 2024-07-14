@@ -260,7 +260,7 @@ function stepHit(s) {
 					dumbCircle.alpha = (theStupidThing1.alpha = theStupidThing2.alpha = 1) * 0.5;
 
 					flash(camGame, {color: 0xFFFFFFFF, time: 0.1, force: true}, null);
-				case 528, 544: flash(camGame, {color: 0xFFFFFFFF, time: 0.1, force: true}, null);
+				case 528: flash(camGame, {color: 0xFFFFFFFF, time: 0.1, force: true}, null);
 				case 576:
 					gf.visible = false;
 					dad.x += 40;

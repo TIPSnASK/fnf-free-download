@@ -46,7 +46,7 @@ function postUpdate(elapsed:Float) {
 			if (note.isSustainNote)
 				note.y -= 24;
 			else
-				note.y -= 5;
+				note.y -= 0;
 	}
 }
 
