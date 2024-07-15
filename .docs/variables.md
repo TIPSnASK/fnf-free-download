@@ -1,6 +1,4 @@
-quick info - i'm gonna put variables here under links to what script they come from
-
-### [songs/ui_camera.hx](../../songs/ui_camera.hx) (SONG/STAGE SCRIPTS ONLY)
+## [songs/ui_camera.hx](../../songs/ui_camera.hx) (SONG/STAGE SCRIPTS ONLY)
 
 the camera positions are no longer tied to your character, but are instead tied to the stage
 
@@ -31,8 +29,7 @@ this lets you do `camera.pos[index].x` and `camera.pos[index].y` respectively to
 ----
 `_lockPos` - a table that lets you do `_lockPos.x` and `_lockPos.y` to get the current `x` and `y` positions of the locked camera
 
-## hud
-### [songs/ui_hud.hx](../../songs/ui_hud.hx)
+## [songs/ui_hud.hx](../../songs/ui_hud.hx) (SONG/STAGE SCRIPTS ONLY)
 `uiskin` - a `String` that's pretty much only there for a [switch statement in the hud script](https://github.com/TIPSnASK/fnf-free-download/blob/26e9a8eaef432c5febc7302ba0ead928452d23c4/songs/ui_hud.hx#L147)
 
 if you change this in your scripts, you'll need to add a new case to the switch statement and change ui stuff there
