@@ -13,11 +13,13 @@ if you're making a new weeknd, this is how it should be formatted:
 </week>
 ```
 
+---
 ### `week` node
 the `name` variable is self explanatory so i'll just skip over explaining that
 
 `rating` - your weeknd's difficulty rating (this will be the difficulty you'll have to name your chart files in order for it to work correctly!!)
 
+---
 ### `banner` node
 normally you'd have only one of these nodes here but if you're *sPeCiAL* like weeknd 2, then you'd have one for dude, before playing, and after playing
 
@@ -27,6 +29,7 @@ i'd explain how that works, but the system isn't implemented yet so just ignore 
 
 weeknd 2 has files in there all called `2.png`, `2_pre.png` and `2_post.png` but the last two are for the un-implemented system i was talking about earlier, so you don't need to worry about those
 
+---
 ### `song` node
 `name` - this is the name of your song folder (song folders go in [songs/](../../songs/))
 
