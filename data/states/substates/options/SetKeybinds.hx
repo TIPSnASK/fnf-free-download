@@ -116,6 +116,10 @@ function update(e:Float) {
 				controlList[curSelected].spr.text = '${_optionsDisplay[curSelected]}: WAITING FOR INPUT...';
 				controlList[curSelected].spr.applyMarkup(controlList[curSelected].spr.text, markupRules);
 			}
+
+			if (controls.SWITCHMOD) {
+				openSubState(new ModSubState('substates/options/SetButtonBinds'));
+			}
 		} else {
 			var _theFuckingKey:Int = FlxG.keys.firstJustPressed();
 			if (_theFuckingKey != -1) {

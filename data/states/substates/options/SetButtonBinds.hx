@@ -49,6 +49,8 @@ function create() {
 	titleText.cameras = [subCam];
 	add(titleText);
 
+	// if (gamepad == null) close();
+
 	setup();
 }
 

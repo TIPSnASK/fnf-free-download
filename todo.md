@@ -1,6 +1,5 @@
 - change blog to update log
 - add support for p1 and p2 gamepad controls for coop. playing with two controllers
 - maybe figure out a way to have skin editor and selector work with gamepad? but probably not
-- switching between keyboard controls and gamepad controls menu via switchmod keybind or something like psych's controls menu
 - MAKE THE FUCKING CREDITS MENU
 - rewrite docs
