@@ -77,7 +77,7 @@ function select(index:Int) {
 
 function updateSkinName() {
 	if (skinName != null) {
-		skinName.text = '<             ${skins[curSelected].get('name')}             >\n${(skins[curSelected].get('name') == skinsXml.get('selected${editingSkinType}') ? '$[SELECTED]$' : '%[UNSELECTED]%')}';
+		skinName.text = '${skins[curSelected].get('name')}\n<             ${(skins[curSelected].get('name') == skinsXml.get('selected${editingSkinType}') ? '$[SELECTED]$' : '%[UNSELECTED]%')}             >';
 		skinName.applyMarkup(skinName.text, markupRules);
 	}
 }
@@ -188,7 +188,7 @@ function postCreate() {
 	deleteButton.field.borderSize = 2;
 	add(deleteButton);
 
-	acceptButton = new UIButton(name.x + name.bWidth + 5, name.y, 'select', accept(), name.bWidth + 41, name.bHeight);
+	acceptButton = new UIButton(name.x + name.bWidth + 5, name.y, 'select', accept, name.bWidth + 41, name.bHeight);
 	acceptButton.cameras = [camUI];
 	acceptButton.color = 0xFF00FF00;
 	acceptButton.field.antialiasing = false;
@@ -231,7 +231,7 @@ var _timer:Float = 0.0;
 function update(e:Float) {
 	_timer += e;
 
-	if (!name.focused && !pronouns.focused) {
+	if (!name.focused && !pronouns.focused && !name.hovered && !pronouns.hovered && !acceptButton.hovered && !editButton.hovered && !deleteButton.hovered) {
 		if (controls.ACCEPT) {
 			accept();
 		}
@@ -245,6 +245,14 @@ function update(e:Float) {
 			var _val:Int = (controls.LEFT_P ? -1 : 1);
 			FlxG.camera.scroll.x = _val * -10;
 			select(FlxMath.wrap(curSelected + _val, 0, skins.length-1));
+		}
+
+		if (FlxG.mouse.justPressed) {
+			var _val:Int = (FlxG.mouse.x < (FlxG.width/3) ? -1 : (FlxG.mouse.x > ((FlxG.width/3)*2) ? 1 : 0));
+			if (_val != 0) {
+				FlxG.camera.scroll.x = _val * -10;
+				select(FlxMath.wrap(curSelected + _val, 0, skins.length-1));
+			}
 		}
 	}
 

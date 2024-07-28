@@ -3,4 +3,4 @@
 - maybe figure out a way to have skin editor and selector work with gamepad? but probably not
 - switching between keyboard controls and gamepad controls menu via switchmod keybind or something like psych's controls menu
 - MAKE THE FUCKING CREDITS MENU
-- MAKE THE DOCUMENTATION MORE FUCKING READABLE
+- rewrite docs
